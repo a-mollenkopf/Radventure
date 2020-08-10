@@ -53,12 +53,10 @@ class Map extends Component {
   render() {
     return (
       <div>
-        <h4 className="mr-4">
-          <button className="btn btn-dark" onClick={this.saveTrip}>
-            Save Trip
-          </button>
-        </h4>
         <div id="map"></div>
+        {/* <button className="btn btn-dark" onClick={this.saveTrip}>
+          Save Trip
+        </button> */}
       </div>
     );
   }
