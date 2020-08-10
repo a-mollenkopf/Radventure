@@ -15,7 +15,6 @@ function App() {
   return (
     <Router>
       <Header />
-      <Map />
       <Switch>
         <Route
           exact
