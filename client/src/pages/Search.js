@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import Map from "../components/Map/Map"
 
 const Search = () => {
     return (
         <div className="container">
-           <h1>This is my Search page</h1> 
+           <Map />
            <Link class="waves-effect waves-light btn" to="/">Back</Link>
         </div>
     );
