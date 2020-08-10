@@ -1,26 +1,58 @@
-import React, { Component } from "react";
+import React, { useEffect, useContext } from "react";
+import { MapContext } from "../../contexts/MapProvider";
+import API from "../../utils/API";
 
 import "./Map.css";
 
-class Map extends Component {
-  state = {};
+export default function Map() {
+  const { map, setMap } = useContext(MapContext);
+  // const { message, setMessage } = useState({
+  //   message:"",
+  // });
 
-  componentDidMount() {
-    //  window.L.mapquest.key = process.env.client_API_KEY;
-    window.L.mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
+  const saveTrip = () => {
+    const address = map.directionsControl.directions.directionsRequest;
+    const startStreet = address.locations[0].street;
+    const startCity = address.locations[0].adminArea5;
+    const startState = address.locations[0].adminArea3;
+    const startPostalCode = address.locations[0].postalCode;
+    const destinationStreet = address.locations[1].street;
+    const destinationCity = address.locations[1].adminArea5;
+    const destinationState = address.locations[1].adminArea3;
+    const destinationPostalCode = address.locations[1].postalCode;
 
-    var map = window.L.mapquest.map("map", {
-      center: [33.749, 84.388],
-      layers: window.L.mapquest.tileLayer("map"),
-      zoom: 12,
+    // const [start, destionation] = map.directionsControl.directions.directionsRequest.locations;
+    const savedTrip = {
+      startCity: startCity,
+      destinationCity: destinationCity,
+      destinationState: destinationState,
+      startState: startState,
+      startStreet: startStreet,
+      destinationStreet: destinationStreet,
+      startPostalCode: startPostalCode,
+      destinationPostalCode: destinationPostalCode,
+    };
+    console.log(savedTrip);
+
+    API.saveTrip(savedTrip)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("this is error message  " + err);
+      });
+  };
+
+  useEffect(() => {
+    const mapquest = window.L.mapquest;
+    mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
+    const _map = mapquest.map("map", {
+      center: [41.850033, -87.6500523],
+      layers: mapquest.tileLayer("map"),
+      zoom: 4,
     });
 
-    window.L.mapquest.directions().route({
-      start: "Atlanta, GA",
-      end: "Denver, CO",
-    });
-
-    window.L.mapquest
+    mapquest
       .directionsControl({
         routeSummary: {
           enabled: false,
@@ -30,36 +62,25 @@ class Map extends Component {
           compactResults: false,
         },
       })
-      .addTo(map);
+      .addTo(_map);
 
-    window.L.mapquest.geocodingControl().addTo(map);
+    mapquest.geocodingControl().addTo(_map);
 
-    map.addControl(window.L.mapquest.control());
-  }
+    _map.addControl(mapquest.control());
 
-  saveTrip() {
-    //Starting Point Field Value
-    console.log(
-      window.map.children[1].children[0].children[2].children[0]
-        .children[0].children[0].children[0][0].value
-    );
-    //Destination Field Value
-    console.log(
-      window.map.children[1].children[0].children[2].children[1]
-        .children[0].children[0].children[0][0].value
-    );
-  }
+    setMap(_map);
+  }, []);
 
-  render() {
-    return (
-      <div>
+  return (
+    <div>
+      <nav className="navbar links">
+        <h4 className="mr-4">
+          <button className="btn btn-dark" onClick={(e) => saveTrip(e)}>
+            Save Trip
+          </button>
+        </h4>
         <div id="map"></div>
-        {/* <button className="btn btn-dark" onClick={this.saveTrip}>
-          Save Trip
-        </button> */}
-      </div>
-    );
-  }
+      </nav>
+    </div>
+  );
 }
-
-export default Map;

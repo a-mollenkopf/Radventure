@@ -5,7 +5,7 @@ const PastTrips = () => {
     return (
         <div className="container">
             <h1>This is my PastTrips page</h1>
-            <Link class="waves-effect waves-light btn" to="/">Back</Link>
+            <Link className="waves-effect waves-light btn" to="/">Back</Link>
         </div>
     );
 };
