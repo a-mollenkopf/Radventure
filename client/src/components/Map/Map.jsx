@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+
 import "./Map.css";
 
 class Map extends Component {
   state = {};
 
   componentDidMount() {
-//      window.L.mapquest.key = process.env.client_API_KEY;
+    //  window.L.mapquest.key = process.env.client_API_KEY;
       window.L.mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
 
       var map = window.L.mapquest.map('map', {
