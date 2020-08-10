@@ -9,7 +9,6 @@ import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
 import PastTrips from "./pages/PastTrips";
 import Header from "./components/Appbar/AppBar";
-import Map from "./components/Map/Map";
 
 function App() {
   return (
