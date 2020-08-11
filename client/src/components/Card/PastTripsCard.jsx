@@ -1,24 +1,25 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import "../Card/Card.css";
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 1500,
     marginLeft: 200,
-    marginTop: 40,
-    backgroundColor: "#255D42",
+    marginTop: 20,
+    backgroundColor: fade("#255D42", 0.94),
     height: 600,
   },
   bullet: {
     display: "inline-block",
     margin: "0 2px",
     transform: "scale(0.8)",
+    
   },
   title: {
     fontSize: 70,
@@ -30,8 +31,8 @@ const useStyles = makeStyles({
 
 const styles = {
   ButtonsStyle: {
-    background: "#02361C",
-    color: "white",
+    background: "#FFC107",
+    color: "black",
     justifyContent: "center",
     marginTop: 400,
   },
