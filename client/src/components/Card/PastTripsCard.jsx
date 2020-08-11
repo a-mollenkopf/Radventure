@@ -5,6 +5,9 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import PastTrip from "../PastTrip/PastTrip";
+
+
 import "../Card/Card.css";
 
 const useStyles = makeStyles({
@@ -50,6 +53,7 @@ export default function SimpleCard() {
           component="h2"
         >
           Past Trips
+          <PastTrip/>
         </Typography>
       </CardContent>
       <Button size="large" href="/" style={styles.ButtonsStyle}>
