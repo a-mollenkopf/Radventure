@@ -65,11 +65,20 @@ export default function Map() {
   useEffect(() => {
     const mapquest = window.L.mapquest;
     mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
-    const _map = mapquest.map("map", {
-      center: [41.850033, -87.6500523],
-      layers: mapquest.tileLayer("map"),
-      zoom: 4,
+    var baseLayer = window.L.mapquest.tileLayer('map');
+    var map = window.L.mapquest.map('map', {
+      center: [33.753746, -84.386330],
+      layers: baseLayer,
+      zoom: 12
     });
+
+    window.L.control.layers({
+      'Map': baseLayer,
+      'Hybrid': window.L.mapquest.tileLayer('hybrid'),
+      'Satellite': window.L.mapquest.tileLayer('satellite'),
+      'Light': window.L.mapquest.tileLayer('light'),
+      'Dark': window.L.mapquest.tileLayer('dark')
+    }).addTo(map);
 
     mapquest
       .directionsControl({
@@ -81,13 +90,13 @@ export default function Map() {
           compactResults: false,
         },
       })
-      .addTo(_map);
+      .addTo(map);
 
-    mapquest.geocodingControl().addTo(_map);
+    mapquest.geocodingControl().addTo(map);
 
-    _map.addControl(mapquest.control());
+    map.addControl(mapquest.control());
 
-    setMap(_map);
+    setMap(map);
   }, []);
 
   return (
