@@ -44,3 +44,10 @@
 h1 {
   text-align: center;
 }
+
+body {
+  background-image: url("https://i.imgur.com/KcAdLGD.jpg");
+  background-size: cover;
+}
+
+

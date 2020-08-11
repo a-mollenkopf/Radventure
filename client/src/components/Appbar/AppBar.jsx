@@ -53,10 +53,6 @@ const Header = (props) => {
 
   const menuItems = [
     {
-      menuTitle: "Home",
-      pageURL: "/",
-    },
-    {
       menuTitle: "Search",
       pageURL: "/Search",
     },
@@ -118,12 +114,6 @@ const Header = (props) => {
                 onClick={() => handleButtonClick("/")}
               >
                 HOME
-              </Button>
-              <Button
-                variant="contained"
-                onClick={() => handleButtonClick("/Search")}
-              >
-                SEARCH
               </Button>
               <Button
                 variant="contained"
