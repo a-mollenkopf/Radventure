@@ -10,9 +10,14 @@ import Search from "./pages/Search";
 import Header from "./components/Appbar/AppBar";
 import PastTrips from "./pages/PastTrips";
 import Map from "./components/Map/Map";
+import { MapProvider } from "./contexts/MapProvider";
+
+
 
 function App() {
   return (
+    <MapProvider>
+
     <Router>
       <Header />
       <Map />
@@ -34,6 +39,8 @@ function App() {
         />
       </Switch>
     </Router>
+    </MapProvider>
+
   );
 }
 

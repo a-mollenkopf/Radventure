@@ -15,15 +15,15 @@ module.exports = {
       .then((dbTrip) => res.json(dbTrip))
       .catch((err) => console.log(err));
   },
-  // update: (req, res) => {
-  //   db.Trip.findOneAndUpdate({ _id: req.params.id }, req.body)
-  //     .then((dbTrip) => res.json(dbTrip))
-  //     .catch((err) => console.log(err));
-  // },
-  // remove: (req, res) => {
-  //   db.Trip.findById({ _id: req.params.id })
-  //     .then((dbTrip) => dbTrip.remove())
-  //     .then((dbTrip) => res.json(dbTrip))
-  //     .catch((err) => console.log(err));
-  // },
+  update: (req, res) => {
+    db.Trip.findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then((dbTrip) => res.json(dbTrip))
+      .catch((err) => console.log(err));
+  },
+  remove: (req, res) => {
+    db.Trip.findById({ _id: req.params.id })
+      .then((dbTrip) => dbTrip.remove())
+      .then((dbTrip) => res.json(dbTrip))
+      .catch((err) => console.log(err));
+  },
 };
