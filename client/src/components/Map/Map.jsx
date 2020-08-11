@@ -1,17 +1,36 @@
 import React, { useEffect, useContext } from "react";
 import { MapContext } from "../../contexts/MapProvider";
 import API from "../../utils/API";
-
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
+import Fab from "@material-ui/core/Fab";
+import NavigationIcon from "@material-ui/icons/Navigation";
 import "./Map.css";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justify: "center",
+    "& > *": {
+      margin: theme.spacing(2, "auto"),
+      width: theme.spacing(145),
+      height: theme.spacing(70, "auto"),
+    },
+  },
+}));
+
 export default function Map() {
+  const classes = useStyles();
   const { map, setMap } = useContext(MapContext);
   // const { message, setMessage } = useState({
   //   message:"",
   // });
 
   const saveTrip = () => {
-    const address = map.directionsControl.directions.directionsRequest;
+    const address =
+      map.directionsControl.directions.directionsRequest;
     const startStreet = address.locations[0].street;
     const startCity = address.locations[0].adminArea5;
     const startState = address.locations[0].adminArea3;
@@ -72,15 +91,23 @@ export default function Map() {
   }, []);
 
   return (
-    <div>
-      <nav className="navbar links">
-        <h4 className="mr-4">
-          <button className="btn btn-dark" onClick={(e) => saveTrip(e)}>
-            Save Trip
-          </button>
-        </h4>
+    <div className={classes.root}>
+      <Paper elevation={3}>
         <div id="map"></div>
-      </nav>
+      </Paper>
+      <Box display="flex" justifyContent="center">
+        <Fab
+          variant="extended"
+          size="medium"
+          color="primary"
+          aria-label="add"
+          className={classes.margin}
+          onClick={(e) => saveTrip(e)}
+        >
+          <NavigationIcon />
+          Save Search
+        </Fab>
+      </Box>
     </div>
   );
 }
