@@ -1,13 +1,16 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React from "react";
+import Button from '@material-ui/core/Button';
+
 
 const PastTrips = () => {
-    return (
-        <div className="container">
-            <h1>This is my PastTrips page</h1>
-            <Link class="waves-effect waves-light btn" to="/">Back</Link>
-        </div>
-    );
+  return (
+    <div className="container">
+      <h1>This is my PastTrips page</h1>
+      <Button variant="contained" color="primary" href="/">
+        Back
+      </Button>
+    </div>
+  );
 };
 
 export default PastTrips;
