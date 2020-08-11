@@ -1,5 +1,9 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  useTheme,
+  styled,
+} from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -8,9 +12,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { withRouter } from "react-router-dom";
 
+
+// STYLING FOR THE APPBAR 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -29,6 +36,24 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-evenly",
   },
 }));
+
+const MyAppBar = styled(AppBar)({
+  position: "static",
+  backgroundColor: fade("#3f50b5", 0.7),
+});
+
+// NOTE: THIS IS FOR COLLAPSE ON MOBILE
+const MyIconButton = styled(IconButton)({
+  edge: "start",
+  color: "inherit",
+});
+
+const MyButton = styled(Button)({
+  variant:"contained",
+  backgroundColor: "#ffc107",
+});
+// END OF STYLING FOR APPBAR 
+
 
 const Header = (props) => {
   const { history } = props;
@@ -64,22 +89,22 @@ const Header = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <MyAppBar>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             RADventure
           </Typography>
           {isMobile ? (
+            // THIS CHECKS TO SEE WHETHER THE SCREEN IS MOBILE OR NOT. REFER
+            // LINE 64 MEDIA QUERY
             <>
-              <IconButton
-                edge="start"
+              <MyIconButton
                 className={classes.menuButton}
-                color="inherit"
                 aria-label="menu"
                 onClick={handleMenu}
               >
                 <MenuIcon />
-              </IconButton>
+              </MyIconButton>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -108,23 +133,22 @@ const Header = (props) => {
               </Menu>
             </>
           ) : (
+            // THIS IS DISPLAYED WHEN THE SCREEN IS NOT MOBILE
             <div className={classes.headerOptions}>
-              <Button
-                variant="contained"
+              <MyButton
                 onClick={() => handleButtonClick("/")}
               >
                 HOME
-              </Button>
-              <Button
-                variant="contained"
+              </MyButton>
+              <MyButton
                 onClick={() => handleButtonClick("/PastTrips")}
               >
                 TRIPS
-              </Button>
+              </MyButton>
             </div>
           )}
         </Toolbar>
-      </AppBar>
+      </MyAppBar>
     </div>
   );
 };
