@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { MapContext } from "../../contexts/MapProvider";
 import API from "../../utils/API";
 import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
@@ -94,20 +95,19 @@ export default function Map() {
       <Paper elevation={3}>
         <div id="map"></div>
       </Paper>
-      <Fab
-        variant="extended"
-        size="medium"
-        color="primary"
-        aria-label="add"
-        className={classes.margin}
-      >
-        <NavigationIcon />
-        Save Search
-      </Fab>
-      {/* MOVED SAVE BUTTON TO SEARCH.JS  */}
-      {/* <button className="btn btn-dark" onClick={(e) => saveTrip(e)}>
-        Save Trip
-      </button> */}
+      <Box display="flex" justifyContent="center">
+        <Fab
+          variant="extended"
+          size="medium"
+          color="primary"
+          aria-label="add"
+          className={classes.margin}
+          onClick={(e) => saveTrip(e)}
+        >
+          <NavigationIcon />
+          Save Search
+        </Fab>
+      </Box>
     </div>
   );
 }
