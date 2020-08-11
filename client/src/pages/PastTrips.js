@@ -1,14 +1,11 @@
 import React from "react";
-import Button from '@material-ui/core/Button';
+import PastTripsCard from "../components/Card/PastTripsCard";
 
 
 const PastTrips = () => {
   return (
     <div className="container">
-      <h1>This is my PastTrips page</h1>
-      <Button variant="contained" color="primary" href="/">
-        Back
-      </Button>
+    <PastTripsCard />
     </div>
   );
 };

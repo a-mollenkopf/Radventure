@@ -5,11 +5,9 @@ import {
   Route,
 } from "react-router-dom";
 import "./App.css";
-import Homepage from "./pages/Homepage";
 import Search from "./pages/Search";
 import Header from "./components/Appbar/AppBar";
 import PastTrips from "./pages/PastTrips";
-import Map from "./components/Map/Map";
 import { MapProvider } from "./contexts/MapProvider";
 
 
@@ -20,16 +18,10 @@ function App() {
 
     <Router>
       <Header />
-      <Map />
       <Switch>
         <Route
           exact
-          from="/"
-          render={(props) => <Homepage {...props} />}
-        />
-        <Route
-          exact
-          path="/Search"
+          path="/"
           render={(props) => <Search {...props} />}
         />
         <Route

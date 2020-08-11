@@ -45,8 +45,9 @@ h1 {
   text-align: center;
 }
 
-img {
-  padding-top: 40px;
+body {
+  background-image: url("https://i.imgur.com/KcAdLGD.jpg");
+  background-size: cover;
 }
 
 

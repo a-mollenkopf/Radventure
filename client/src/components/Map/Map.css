@@ -16,3 +16,7 @@
 .leaflet-control-mapquest-directions {
   height: auto;
 }
+
+button {
+  margin-left: 20px;
+}
