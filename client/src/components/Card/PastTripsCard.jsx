@@ -52,9 +52,9 @@ export default function SimpleCard() {
           component="h2"
         >
           Past Trips
-          <PastTrip/>
         </Typography>
       </CardContent>
+      <PastTrip />
       <Button size="large" href="/" style={styles.ButtonsStyle}>
         Back
       </Button>
