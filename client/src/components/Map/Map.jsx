@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { MapContext } from "../../contexts/MapProvider";
 import API from "../../utils/API";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, styled } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
@@ -20,6 +20,21 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+// STYLING
+const MyPaper = styled(Paper)({
+  elevation: 3,
+});
+
+const MyBox = styled(Box)({
+  display: "flex",
+  justifyContent: "center",
+});
+
+const MyFab = styled(Fab)({
+  backgroundColor: "#FFC107",
+});
+// END OF STYLING
 
 export default function Map() {
   const classes = useStyles();
@@ -101,14 +116,13 @@ export default function Map() {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3}>
+      <MyPaper>
         <div id="map"></div>
-      </Paper>
-      <Box display="flex" justifyContent="center">
-        <Fab
+      </MyPaper>
+      <MyBox>
+        <MyFab
           variant="extended"
           size="medium"
-          color="primary"
           aria-label="add"
           className={classes.margin}
           onClick={(e) => saveTrip(e)}
@@ -116,8 +130,8 @@ export default function Map() {
         >
           <NavigationIcon />
           Save Search
-        </Fab>
-      </Box>
+        </MyFab>
+      </MyBox>
     </div>
   );
 }
