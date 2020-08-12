@@ -40,11 +40,11 @@ const PastTrip = () => {
         return (
           <div key={trip._id} className="container">
             <h2> Destination Information</h2>
-            <h4>
+            <h3>
               {" "}
               Address: {trip.destinationStreet}, {trip.destinationCity},{" "}
               {trip.destinationState} {trip.destinationPostalCode}
-            </h4>
+            </h3>
             <Button size="large" href={`/PastTrips/${trip._id}`} style={styles.ButtonsStyle}>
               View Trip
             </Button>
