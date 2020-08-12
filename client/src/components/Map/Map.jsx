@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { MapContext } from "../../contexts/MapProvider";
 import API from "../../utils/API";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, styled } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
@@ -20,6 +20,21 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
+// STYLING
+const MyPaper = styled(Paper)({
+  elevation: 3,
+});
+
+const MyBox = styled(Box)({
+  display: "flex",
+  justifyContent: "center",
+});
+
+const MyFab = styled(Fab)({
+  backgroundColor: "#FFC107",
+});
+// END OF STYLING
 
 export default function Map() {
   const classes = useStyles();
@@ -65,20 +80,22 @@ export default function Map() {
   useEffect(() => {
     const mapquest = window.L.mapquest;
     mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
-    var baseLayer = window.L.mapquest.tileLayer('map');
-    var map = window.L.mapquest.map('map', {
-      center: [33.753746, -84.386330],
+    var baseLayer = window.L.mapquest.tileLayer("map");
+    var map = window.L.mapquest.map("map", {
+      center: [33.753746, -84.38633],
       layers: baseLayer,
-      zoom: 12
+      zoom: 12,
     });
 
-    window.L.control.layers({
-      'Map': baseLayer,
-      'Hybrid': window.L.mapquest.tileLayer('hybrid'),
-      'Satellite': window.L.mapquest.tileLayer('satellite'),
-      'Light': window.L.mapquest.tileLayer('light'),
-      'Dark': window.L.mapquest.tileLayer('dark')
-    }).addTo(map);
+    window.L.control
+      .layers({
+        Map: baseLayer,
+        Hybrid: window.L.mapquest.tileLayer("hybrid"),
+        Satellite: window.L.mapquest.tileLayer("satellite"),
+        Light: window.L.mapquest.tileLayer("light"),
+        Dark: window.L.mapquest.tileLayer("dark"),
+      })
+      .addTo(map);
 
     mapquest
       .directionsControl({
@@ -101,22 +118,21 @@ export default function Map() {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3}>
+      <MyPaper>
         <div id="map"></div>
-      </Paper>
-      <Box display="flex" justifyContent="center">
-        <Fab
+      </MyPaper>
+      <MyBox>
+        <MyFab
           variant="extended"
           size="medium"
-          color="primary"
           aria-label="add"
           className={classes.margin}
           onClick={(e) => saveTrip(e)}
         >
           <NavigationIcon />
           Save Search
-        </Fab>
-      </Box>
+        </MyFab>
+      </MyBox>
     </div>
   );
 }

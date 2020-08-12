@@ -79,7 +79,7 @@ const Header = (props) => {
   const menuItems = [
     {
       menuTitle: "Search",
-      pageURL: "/Search",
+      pageURL: "/",
     },
     {
       menuTitle: "Trips",
