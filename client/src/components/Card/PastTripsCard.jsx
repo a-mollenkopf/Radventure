@@ -3,13 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import PastTrip from "../PastTrip/PastTrip";
 import "../Card/Card.css";
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 1500,
     marginLeft: 200,
     marginTop: 40,
-    backgroundColor: "#255D42",
+    backgroundColor: fade("#255D42", 0.8),
     height: 600,
     overflow: "auto"
   },
