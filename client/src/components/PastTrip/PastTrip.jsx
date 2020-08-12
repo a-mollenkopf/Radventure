@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 import Button from "@material-ui/core/Button";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const styles = {
   ButtonsStyle: {
     background: "#02361C",
@@ -12,8 +13,11 @@ const styles = {
     fontSize: 50,
   },
   hrStyle: {
-    width: 1000
-  }
+    width: 1000,
+  },
+  DeleteButtonStyle: {
+    background: "red",
+  },
 };
 
 const PastTrip = () => {
@@ -22,11 +26,17 @@ const PastTrip = () => {
   useEffect(() => {
     API.getAllTrips().then((res) => {
       setTripInfoState(res.data);
-      console.log(res.data);
-      console.log("InfoTrip State:");
-      console.log(tripInfoState);
     });
   }, []);
+  const handleDelete = (id) => {
+    API.deleteTrip(id)
+      .then((_) => {
+        // this.useEffect();
+        toast.success("You trip is successfully deleted !");
+        setTimeout(() => window.location.reload(), 2000);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return tripInfoState.length === 0 ? (
     <div className="container">
@@ -34,21 +44,37 @@ const PastTrip = () => {
     </div>
   ) : (
     <div>
-      <h1 className="text-center welcome" style={styles.h1Style}>Your saved trips!</h1>
+      <h1 className="text-center welcome" style={styles.h1Style}>
+        Your saved trips!
+      </h1>
 
       {tripInfoState.map((trip) => {
         return (
           <div key={trip._id} className="container">
             <h2> Destination Information</h2>
             <h3>
-              {" "}
-              Address: {trip.destinationStreet}, {trip.destinationCity},{" "}
+              Address: {trip.destinationStreet}, {trip.destinationCity},
               {trip.destinationState} {trip.destinationPostalCode}
             </h3>
-            <Button size="large" href={`/PastTrips/${trip._id}`} style={styles.ButtonsStyle}>
-              View Trip
-            </Button>
-            <hr style={styles.hrStyle}></hr>
+            <div>
+              <Button
+                id={trip._id}
+                onClick={() => handleDelete(trip._id)}
+                size="large"
+                style={styles.DeleteButtonStyle}
+              >
+                Delete
+              </Button>
+              <Button
+                size="large"
+                href={`/PastTrips/${trip._id}`}
+                style={styles.ButtonsStyle}
+              >
+                View Trip
+              </Button>
+              <ToastContainer />
+              <hr style={styles.hrStyle}></hr>
+            </div>
           </div>
         );
       })}

@@ -2,6 +2,9 @@ import React, { useEffect, useContext } from "react";
 import { MapContext } from "../../contexts/MapProvider";
 import API from "../../utils/API";
 import { makeStyles, styled } from "@material-ui/core/styles";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
@@ -39,9 +42,6 @@ const MyFab = styled(Fab)({
 export default function Map() {
   const classes = useStyles();
   const { map, setMap } = useContext(MapContext);
-  // const { message, setMessage } = useState({
-  //   message:"",
-  // });
 
   const saveTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
@@ -64,14 +64,32 @@ export default function Map() {
       startPostalCode: startPostalCode,
       destinationPostalCode: destinationPostalCode,
     };
-    console.log(savedTrip);
+    // if(startCity==undefined||startState==undefined||startStreet==undefined){
+    //   toast.error ("You should enter at least two states with cities !");
+
+    // }else{
+    //   API.saveTrip(savedTrip)
+    //   .then((res) => {
+    //     console.log(res);
+    //     toast.success("You trip is successfully saved !");
+    //     setTimeout(() => window.location.replace('/PastTrips'), 2000);
+
+    //   })
+    //   .catch((err) => {
+    //     console.log("this is error message  " + err);
+    //     toast.error ("You should enter at least two states with cities !");
+
+    //   });
+    // }
 
     API.saveTrip(savedTrip)
       .then((res) => {
-        console.log(res);
+        toast.success("You trip is successfully saved !");
+        setTimeout(() => window.location.replace("/PastTrips"), 2000);
       })
       .catch((err) => {
         console.log("this is error message  " + err);
+        toast.error("You should enter at least two states with cities !");
       });
   };
 
@@ -120,17 +138,19 @@ export default function Map() {
         <div id="map"></div>
       </MyPaper>
       <MyBox>
-        <MyFab
-          variant="extended"
-          size="medium"
-          aria-label="add"
-          className={classes.margin}
-          onClick={(e) => saveTrip(e)}
-          href="/PastTrips"
-        >
-          <NavigationIcon />
-          Save Search
-        </MyFab>
+        <div>
+          <MyFab
+            variant="extended"
+            size="medium"
+            aria-label="add"
+            className={classes.margin}
+            onClick={(e) => saveTrip(e)}
+          >
+            <NavigationIcon />
+            Save Search
+          </MyFab>
+          <ToastContainer />
+        </div>
       </MyBox>
     </div>
   );
