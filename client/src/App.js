@@ -7,6 +7,7 @@ import PastTrips from "./pages/PastTrips";
 import ViewOneTrip from "./components/ViewOneTrip/ViewOneTrip";
 import EditTrip from "./components/EditTrip/EditTrip";
 import { MapProvider } from "./contexts/MapProvider";
+import HomepageCard from "./components/Card/HomepageCard";
 
 function App() {
   return (
@@ -14,7 +15,16 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route exact path="/" render={(props) => <Search {...props} />} />
+          <Route
+            exact
+            path="/"
+            render={(props) => <HomepageCard {...props} />}
+          />
+          <Route
+            exact
+            path="/search"
+            render={(props) => <Search {...props} />}
+          />
           <Route
             exact
             path="/PastTrips"
@@ -22,7 +32,6 @@ function App() {
           />
           <Route exact path="/PastTrips/:id" component={ViewOneTrip} />
           <Route exact path="/PastTrips/:id/edit" component={EditTrip} />
-
         </Switch>
       </Router>
     </MapProvider>

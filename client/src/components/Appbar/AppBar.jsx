@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const MyAppBar = styled(AppBar)({
   position: "static",
   backgroundColor: fade("#3f50b5", 0.7),
-  height: 140
+  height: 120,
 });
 
 // NOTE: THIS IS FOR COLLAPSE ON MOBILE
@@ -53,9 +53,13 @@ const MyButton = styled(Button)({
 
 const styles = {
   img: {
-    height: 170,
-    paddingTop: 20
+    height: 800,
+    paddingBottom: 200,
+    marginLeft: -30
   },
+  brandNoLogo: {
+    height: 110
+  }
 };
 // END OF STYLING FOR APPBAR
 
@@ -95,8 +99,9 @@ const Header = (props) => {
     <div className={classes.root}>
       <MyAppBar>
         <Toolbar>
+          <img src="https://i.imgur.com/flaLNZU.png" className="brandNoLogo" style={styles.brandNoLogo}></img>
           <img
-            src="https://i.imgur.com/AewRuxP.png"
+            src="https://i.imgur.com/YDtpJUO.png"
             className="logo"
             style={styles.img}
           />
@@ -139,8 +144,11 @@ const Header = (props) => {
           ) : (
             // THIS IS DISPLAYED WHEN THE SCREEN IS NOT MOBILE
             <div className={classes.headerOptions}>
-              <MyButton size="large" onClick={() => handleButtonClick("/")}>
-                HOME
+              <MyButton
+                size="large"
+                onClick={() => handleButtonClick("/search")}
+              >
+                Search
               </MyButton>
               <MyButton
                 size="large"
