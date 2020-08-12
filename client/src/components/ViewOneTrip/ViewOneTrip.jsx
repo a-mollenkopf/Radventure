@@ -15,10 +15,16 @@ const styles = {
   CardStyles: {
     maxWidth: 1500,
     marginLeft: 200,
-    marginTop: 40,
+    marginTop: 20,
     backgroundColor: fade("#255D42", 0.8),
     height: 600,
   },
+  DeleteButtonStyle: {
+    background: "red"
+  },
+  UpdateButtonStyle: {
+    background: "#FFC107"
+  }
 };
 
 const ViewOneTrip = () => {
@@ -64,7 +70,7 @@ const ViewOneTrip = () => {
                   type="submit"
                   onClick={() => handleDelete(oneTripState._id)}
                   size="large"
-                  style={styles.ButtonsStyle}
+                  style={styles.DeleteButtonStyle}
                   href="/PastTrips"
                 >
                   Delete
@@ -74,7 +80,7 @@ const ViewOneTrip = () => {
                     id={oneTripState._id}
                     type="submit"
                     size="large"
-                    style={styles.ButtonsStyle}
+                    style={styles.UpdateButtonStyle}
                   >
                     Update
                   </Button>

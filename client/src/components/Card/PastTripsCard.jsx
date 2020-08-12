@@ -9,7 +9,7 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 1500,
     marginLeft: 200,
-    marginTop: 40,
+    marginTop: 20,
     backgroundColor: fade("#255D42", 0.8),
     height: 600,
     overflow: "auto"
