@@ -5,6 +5,7 @@ import Search from "./pages/Search";
 import Header from "./components/Appbar/AppBar";
 import PastTrips from "./pages/PastTrips";
 import ViewOneTrip from "./components/ViewOneTrip/ViewOneTrip";
+import EditTrip from "./components/EditTrip/EditTrip";
 import { MapProvider } from "./contexts/MapProvider";
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
             render={(props) => <PastTrips {...props} />}
           />
           <Route exact path="/PastTrips/:id" component={ViewOneTrip} />
+          <Route exact path="/PastTrips/:id/edit" component={EditTrip} />
+
         </Switch>
       </Router>
     </MapProvider>
