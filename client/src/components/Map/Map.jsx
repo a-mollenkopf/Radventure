@@ -29,8 +29,7 @@ export default function Map() {
   // });
 
   const saveTrip = () => {
-    const address =
-      map.directionsControl.directions.directionsRequest;
+    const address = map.directionsControl.directions.directionsRequest;
     const startStreet = address.locations[0].street;
     const startCity = address.locations[0].adminArea5;
     const startState = address.locations[0].adminArea3;
@@ -40,7 +39,6 @@ export default function Map() {
     const destinationState = address.locations[1].adminArea3;
     const destinationPostalCode = address.locations[1].postalCode;
 
-    // const [start, destionation] = map.directionsControl.directions.directionsRequest.locations;
     const savedTrip = {
       startCity: startCity,
       destinationCity: destinationCity,
@@ -65,20 +63,22 @@ export default function Map() {
   useEffect(() => {
     const mapquest = window.L.mapquest;
     mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
-    var baseLayer = window.L.mapquest.tileLayer('map');
-    var map = window.L.mapquest.map('map', {
-      center: [33.753746, -84.386330],
+    var baseLayer = window.L.mapquest.tileLayer("map");
+    var map = window.L.mapquest.map("map", {
+      center: [33.753746, -84.38633],
       layers: baseLayer,
-      zoom: 12
+      zoom: 12,
     });
 
-    window.L.control.layers({
-      'Map': baseLayer,
-      'Hybrid': window.L.mapquest.tileLayer('hybrid'),
-      'Satellite': window.L.mapquest.tileLayer('satellite'),
-      'Light': window.L.mapquest.tileLayer('light'),
-      'Dark': window.L.mapquest.tileLayer('dark')
-    }).addTo(map);
+    window.L.control
+      .layers({
+        Map: baseLayer,
+        Hybrid: window.L.mapquest.tileLayer("hybrid"),
+        Satellite: window.L.mapquest.tileLayer("satellite"),
+        Light: window.L.mapquest.tileLayer("light"),
+        Dark: window.L.mapquest.tileLayer("dark"),
+      })
+      .addTo(map);
 
     mapquest
       .directionsControl({
@@ -112,6 +112,7 @@ export default function Map() {
           aria-label="add"
           className={classes.margin}
           onClick={(e) => saveTrip(e)}
+          href="/PastTrips"
         >
           <NavigationIcon />
           Save Search

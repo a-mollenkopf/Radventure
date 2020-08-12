@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import PastTrip from "../PastTrip/PastTrip";
 
-
 import "../Card/Card.css";
 
 const useStyles = makeStyles({
@@ -44,7 +43,6 @@ export default function SimpleCard() {
   const classes = useStyles();
 
   return (
-    
     <Card className={classes.root}>
       <CardContent>
         <Typography
@@ -54,11 +52,9 @@ export default function SimpleCard() {
           component="h2"
         >
           Past Trips
-          
         </Typography>
       </CardContent>
-      <PastTrip/>
-
+      <PastTrip />
       <Button size="large" href="/" style={styles.ButtonsStyle}>
         Back
       </Button>
