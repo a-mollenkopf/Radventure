@@ -4,9 +4,10 @@ import {
   useTheme,
   styled,
 } from "@material-ui/core/styles";
+import Logo from "./Assets/logo192.png";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import Avatar from '@material-ui/core/Avatar';
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -16,8 +17,7 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { withRouter } from "react-router-dom";
 
-
-// STYLING FOR THE APPBAR 
+// STYLING FOR THE APPBAR
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -45,15 +45,15 @@ const MyAppBar = styled(AppBar)({
 // NOTE: THIS IS FOR COLLAPSE ON MOBILE
 const MyIconButton = styled(IconButton)({
   edge: "start",
+  marginLeft: "auto",
   color: "inherit",
 });
 
 const MyButton = styled(Button)({
-  variant:"contained",
+  variant: "contained",
   backgroundColor: "#ffc107",
 });
-// END OF STYLING FOR APPBAR 
-
+// END OF STYLING FOR APPBAR
 
 const Header = (props) => {
   const { history } = props;
@@ -91,9 +91,8 @@ const Header = (props) => {
     <div className={classes.root}>
       <MyAppBar>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            RADventure
-          </Typography>
+        <Avatar alt="Brand Logo" src={Logo} />
+       
           {isMobile ? (
             // THIS CHECKS TO SEE WHETHER THE SCREEN IS MOBILE OR NOT. REFER
             // LINE 64 MEDIA QUERY
@@ -135,9 +134,7 @@ const Header = (props) => {
           ) : (
             // THIS IS DISPLAYED WHEN THE SCREEN IS NOT MOBILE
             <div className={classes.headerOptions}>
-              <MyButton
-                onClick={() => handleButtonClick("/")}
-              >
+              <MyButton onClick={() => handleButtonClick("/")}>
                 HOME
               </MyButton>
               <MyButton
