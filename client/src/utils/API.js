@@ -15,8 +15,8 @@ export default {
   },
 
   // Will be used to update  one trip with the given id
-  updateOneTrip: (id) => {
-    return axios.put(`/api/trips/${id}`);
+  updateOneTrip: (id, data) => {
+    return axios.put(`/api/trips/${id}`,{data});
   },
   //Will be used to delete a book from the db by id.
   deleteTrip: (id) => {
