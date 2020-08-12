@@ -69,7 +69,7 @@ const ViewOneTrip = () => {
                 >
                   Delete
                 </Button>
-              <Link to="">
+              <Link to={`/PastTrips/${oneTripState._id}/edit`}>
                 <Button
                   id={oneTripState._id}
                   type="submit"
