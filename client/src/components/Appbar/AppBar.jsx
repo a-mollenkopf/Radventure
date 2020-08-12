@@ -1,13 +1,9 @@
 import React from "react";
-import {
-  makeStyles,
-  useTheme,
-  styled,
-} from "@material-ui/core/styles";
+import { makeStyles, useTheme, styled } from "@material-ui/core/styles";
 import Logo from "./Assets/logo192.png";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -40,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 const MyAppBar = styled(AppBar)({
   position: "static",
   backgroundColor: fade("#3f50b5", 0.7),
+  height: 120,
 });
 
 // NOTE: THIS IS FOR COLLAPSE ON MOBILE
@@ -53,6 +50,17 @@ const MyButton = styled(Button)({
   variant: "contained",
   backgroundColor: "#ffc107",
 });
+
+const styles = {
+  img: {
+    height: 800,
+    paddingBottom: 200,
+    marginLeft: -30
+  },
+  brandNoLogo: {
+    height: 110
+  }
+};
 // END OF STYLING FOR APPBAR
 
 const Header = (props) => {
@@ -91,8 +99,12 @@ const Header = (props) => {
     <div className={classes.root}>
       <MyAppBar>
         <Toolbar>
-        <Avatar alt="Brand Logo" src={Logo} />
-       
+          <img src="https://i.imgur.com/flaLNZU.png" className="brandNoLogo" style={styles.brandNoLogo}></img>
+          <img
+            src="https://i.imgur.com/YDtpJUO.png"
+            className="logo"
+            style={styles.img}
+          />
           {isMobile ? (
             // THIS CHECKS TO SEE WHETHER THE SCREEN IS MOBILE OR NOT. REFER
             // LINE 64 MEDIA QUERY
@@ -122,9 +134,7 @@ const Header = (props) => {
                 {menuItems.map((menuItem) => {
                   const { menuTitle, pageURL } = menuItem;
                   return (
-                    <MenuItem
-                      onClick={() => handleMenuClick(pageURL)}
-                    >
+                    <MenuItem onClick={() => handleMenuClick(pageURL)}>
                       {menuTitle}
                     </MenuItem>
                   );
@@ -134,10 +144,14 @@ const Header = (props) => {
           ) : (
             // THIS IS DISPLAYED WHEN THE SCREEN IS NOT MOBILE
             <div className={classes.headerOptions}>
-              <MyButton onClick={() => handleButtonClick("/")}>
-                HOME
+              <MyButton
+                size="large"
+                onClick={() => handleButtonClick("/search")}
+              >
+                Search
               </MyButton>
               <MyButton
+                size="large"
                 onClick={() => handleButtonClick("/PastTrips")}
               >
                 TRIPS
