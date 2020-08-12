@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import Button from "@material-ui/core/Button";
 const styles = {
+  ButtonsStyle: {
+    backgroundColor: "red",
+    color: "white",
+    justifyContent: "center",
+    marginTop: 400,
+  },
   ViewTripButtonStyle: {
     backgroundColor: "blue",
     color: "white",
@@ -25,14 +31,21 @@ const ViewOneTrip = () => {
       console.log(oneTripState);
     });
   }, []);
+  const handleDelete = (id) => {
+    API.deleteTrip(id)
+      .then((_) => {
+        this.useEffect();
+        window.location.reload();
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
-
       <div key={oneTripState._id}>
         <form>
           <div className="container">
-          <h1 className="text-center welcome">Details of Your Trip !</h1>
+            <h1 className="text-center welcome">Details of Your Trip !</h1>
 
             <h3> Start City Information</h3>
             <h4> Street: {oneTripState.startStreet}</h4>
@@ -46,6 +59,16 @@ const ViewOneTrip = () => {
             <h4> State: {oneTripState.destinationState}</h4>
             <h4> Postal Code: {oneTripState.destinationPostalCode}</h4>
             <div>
+                <Button
+                  id={oneTripState._id}
+                  type="submit"
+                  onClick={() => handleDelete(oneTripState._id)}
+                  size="large"
+                  style={styles.ButtonsStyle}
+                  href="/PastTrips"
+                >
+                  Delete
+                </Button>
               <Link to="">
                 <Button
                   id={oneTripState._id}
