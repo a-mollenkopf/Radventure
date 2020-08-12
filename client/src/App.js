@@ -6,8 +6,6 @@ import Header from "./components/Appbar/AppBar";
 import PastTrips from "./pages/PastTrips";
 import ViewOneTrip from "./components/ViewOneTrip/ViewOneTrip";
 import EditTrip from "./components/EditTrip/EditTrip";
-
-
 import { MapProvider } from "./contexts/MapProvider";
 
 function App() {

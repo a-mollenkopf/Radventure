@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
-import { Link } from "react-router-dom";
-import API from "../../utils/API";
 import Button from "@material-ui/core/Button";
+import API from "../../utils/API";
+import Card from "@material-ui/core/Card";
+
 const styles = {
   ButtonsStyle: {
-    backgroundColor: "red",
+    background: "#02361C",
     color: "white",
     justifyContent: "center",
     marginTop: 400,
   },
-  ViewTripButtonStyle: {
-    backgroundColor: "blue",
-    color: "white",
-    justifyContent: "center",
-    marginTop: 400,
-  },
+  CardStyles: {
+    maxWidth: 1500,
+    marginLeft: 200,
+    marginTop: 40,
+    backgroundColor: "#255D42",
+    height: 600,
+  }
 };
+
 
 const ViewOneTrip = () => {
   const [oneTripState, setOneTripState] = useState([]);
@@ -26,9 +28,6 @@ const ViewOneTrip = () => {
   useEffect(() => {
     API.getOneTrip(id).then((res) => {
       setOneTripState(res.data);
-      console.log(res.data);
-      console.log("InfoTrip State:");
-      console.log(oneTripState);
     });
   }, []);
   const handleDelete = (id) => {
@@ -80,10 +79,10 @@ const ViewOneTrip = () => {
                 </Button>
               </Link>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
