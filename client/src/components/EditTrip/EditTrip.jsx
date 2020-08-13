@@ -1,4 +1,4 @@
-import React, { useEffect, useContext,useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MapContext } from "../../contexts/MapProvider";
 import API from "../../utils/API";
@@ -9,6 +9,8 @@ import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import "../Map/Map";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,9 +46,7 @@ export default function EditTrip() {
   const [oneTripState, setOneTripState] = useState([]);
   const { id } = useParams();
 
-
   useEffect(() => {
-
     const mapquest = window.L.mapquest;
     mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
     var baseLayer = window.L.mapquest.tileLayer("map");
@@ -59,12 +59,10 @@ export default function EditTrip() {
       setOneTripState(res.data);
       console.log(res.data);
       window.L.mapquest.directions().route({
-        start: `${res.data.startCity} ${res.data.startState}` ,
+        start: `${res.data.startCity} ${res.data.startState}`,
         end: `${res.data.destinationCity} ${res.data.destinationState}`,
-  
       });
     });
-    
 
     window.L.control
       .layers({
@@ -97,6 +95,10 @@ export default function EditTrip() {
 
   const updateTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
+    if (address === undefined) {
+      toast.error("You should enter at least two states with cities !");
+    } else {
+    const address = map.directionsControl.directions.directionsRequest;
     const startStreet = address.locations[0].street;
     const startCity = address.locations[0].adminArea5;
     const startState = address.locations[0].adminArea3;
@@ -108,17 +110,36 @@ export default function EditTrip() {
 
     // console.log("New Data:" + startStreet,startCity, startState,startPostalCode,destinationStreet,destinationCity,destinationState, destinationPostalCode );
 
- 
-setOneTripState(startStreet,startCity, startState,startPostalCode,destinationStreet,destinationCity,destinationState, destinationPostalCode )
+    setOneTripState(
+      startStreet,
+      startCity,
+      startState,
+      startPostalCode,
+      destinationStreet,
+      destinationCity,
+      destinationState,
+      destinationPostalCode
+    );
     axios
-      .put(`/api/trips/${id}`, { startStreet,startCity, startState,startPostalCode,destinationStreet,destinationCity,destinationState, destinationPostalCode })
+      .put(`/api/trips/${id}`, {
+        startStreet,
+        startCity,
+        startState,
+        startPostalCode,
+        destinationStreet,
+        destinationCity,
+        destinationState,
+        destinationPostalCode,
+      })
       .then((res) => {
-        console.log("Updated Info---"+JSON.stringify(res.data));
+        // console.log("Updated Info---"+JSON.stringify(res.data));
+        toast.success("You trip is successfully updated !");
+        setTimeout(() => window.location.replace("/PastTrips"), 2000);
       })
       .catch((err) => {
         console.log("this is error message  " + err);
       });
-
+    }
   };
 
   return (
@@ -133,11 +154,11 @@ setOneTripState(startStreet,startCity, startState,startPostalCode,destinationStr
           aria-label="add"
           className={classes.margin}
           onClick={(e) => updateTrip(e)}
-          href="/PastTrips"
         >
           <NavigationIcon />
           Save Updates
         </MyFab>
+        <ToastContainer />
       </MyBox>
     </div>
   );

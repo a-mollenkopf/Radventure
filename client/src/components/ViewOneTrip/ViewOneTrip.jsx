@@ -4,7 +4,10 @@ import Button from "@material-ui/core/Button";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
-import { fade } from '@material-ui/core/styles/colorManipulator';
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
 const styles = {
   ButtonsStyle: {
@@ -20,17 +23,28 @@ const styles = {
     height: 600,
   },
   DeleteButtonStyle: {
-    background: "red"
+    background: "red",
   },
   UpdateButtonStyle: {
-    background: "#FFC107"
-  }
+    background: "#FFC107",
+  },
 };
 
 const ViewOneTrip = () => {
   const [oneTripState, setOneTripState] = useState([]);
   const { id } = useParams();
+  const [open, setOpen] = React.useState(false);
+  const [activeTrip, setActiveTrip] = React.useState(null);
 
+  const handleOpen = () => {
+    setOpen(true);
+    setActiveTrip(id)
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setActiveTrip(null)
+  };
   useEffect(() => {
     API.getOneTrip(id).then((res) => {
       setOneTripState(res.data);
@@ -39,8 +53,9 @@ const ViewOneTrip = () => {
   const handleDelete = (id) => {
     API.deleteTrip(id)
       .then((_) => {
-        this.useEffect();
-        window.location.reload();
+        // this.useEffect();
+        toast.success("You trip is successfully deleted !");
+        setTimeout(() => window.location.replace("/PastTrips"), 2000);
       })
       .catch((err) => console.log(err));
   };
@@ -67,14 +82,13 @@ const ViewOneTrip = () => {
               <div>
                 <Button
                   id={oneTripState._id}
-                  type="submit"
-                  onClick={() => handleDelete(oneTripState._id)}
+                  onClick={() => handleOpen(oneTripState._id)}
                   size="large"
                   style={styles.DeleteButtonStyle}
-                  href="/PastTrips"
                 >
                   Delete
                 </Button>
+               
                 <Link to={`/PastTrips/${oneTripState._id}/edit`}>
                   <Button
                     id={oneTripState._id}
@@ -85,10 +99,22 @@ const ViewOneTrip = () => {
                     Update
                   </Button>
                 </Link>
-                <Button size="large" href="/pasttrips" style={styles.ButtonsStyle}>
+                <Button
+                  size="large"
+                  href="/pasttrips"
+                  style={styles.ButtonsStyle}
+                >
                   Back to Trips
                 </Button>
+                <ToastContainer />
               </div>
+              <ConfirmModal
+                open={open}
+                handleDelete={handleDelete}
+                handleClose={handleClose}
+                handleOpen={handleOpen}
+                id={ activeTrip}
+              />
             </div>
           </form>
         </div>
