@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(2, "auto"),
       width: theme.spacing(145),
       height: theme.spacing(70, "auto"),
+      overflow: "auto"
     },
   },
 }));
