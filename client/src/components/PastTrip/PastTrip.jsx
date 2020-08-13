@@ -69,6 +69,7 @@ const PastTrip = () => {
             <h3>
              {trip.startCity}, {trip.startState} - {trip.destinationCity}, {trip.destinationState}
             </h3>
+             <h4>Estimated Distance: {trip.distance} mi </h4>
             <div>
               <Button
                 id={trip._id}
