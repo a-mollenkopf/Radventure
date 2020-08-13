@@ -66,19 +66,13 @@ const ViewOneTrip = () => {
         <div key={oneTripState._id}>
           <form>
             <div className="container">
-              <h1 className="text-center welcome">Details of Your Trip !</h1>
+              <h1 className="text-center welcome">Details of Your Trip!</h1>
 
               <h2> Start City Information</h2>
-              <h3> Street: {oneTripState.startStreet}</h3>
-              <h3>City: {oneTripState.startCity}</h3>
-              <h3> State: {oneTripState.startState}</h3>
-              <h3> Postal Code: {oneTripState.startPostalCode}</h3>
+              <h3> <strong>Address:</strong>  {oneTripState.startStreet} {oneTripState.startCity}, {oneTripState.startState}, {oneTripState.startPostalCode}</h3>
               <h5>-------------------------------</h5>
               <h2> Destination City Information</h2>
-              <h3> Street: {oneTripState.destinationStreet}</h3>
-              <h3>City: {oneTripState.destinationCity}</h3>
-              <h3> State: {oneTripState.destinationState}</h3>
-              <h3> Postal Code: {oneTripState.destinationPostalCode}</h3>
+              <h3> <strong>Address:</strong>  {oneTripState.destinationStreet} {oneTripState.destinationCity}, {oneTripState.destinationState}, {oneTripState.destinationPostalCode}</h3>
               <div>
                 <Button
                   id={oneTripState._id}
