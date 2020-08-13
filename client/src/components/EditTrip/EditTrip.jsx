@@ -108,8 +108,6 @@ export default function EditTrip() {
     const destinationState = address.locations[1].adminArea3;
     const destinationPostalCode = address.locations[1].postalCode;
 
-    // console.log("New Data:" + startStreet,startCity, startState,startPostalCode,destinationStreet,destinationCity,destinationState, destinationPostalCode );
-
     setOneTripState(
       startStreet,
       startCity,
@@ -132,7 +130,6 @@ export default function EditTrip() {
         destinationPostalCode,
       })
       .then((res) => {
-        // console.log("Updated Info---"+JSON.stringify(res.data));
         toast.success("You trip is successfully updated !");
         setTimeout(() => window.location.replace("/PastTrips"), 2000);
       })

@@ -67,23 +67,6 @@ export default function Map() {
         startPostalCode: startPostalCode,
         destinationPostalCode: destinationPostalCode,
       };
-      // if(startCity==undefined||startState==undefined||startStreet==undefined){
-      //   toast.error ("You should enter at least two states with cities !");
-
-      // }else{
-      //   API.saveTrip(savedTrip)
-      //   .then((res) => {
-      //     console.log(res);
-      //     toast.success("You trip is successfully saved !");
-      //     setTimeout(() => window.location.replace('/PastTrips'), 2000);
-
-      //   })
-      //   .catch((err) => {
-      //     console.log("this is error message  " + err);
-      //     toast.error ("You should enter at least two states with cities !");
-
-      //   });
-      // }
 
       API.saveTrip(savedTrip)
         .then((res) => {
@@ -92,7 +75,7 @@ export default function Map() {
         })
         .catch((err) => {
           console.log("this is error message  " + err);
-          toast.error("You should enter at least two states with cities !");
+          toast.error("Sorry, error occurred! Try once more!");
         });
     }
   };
