@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 import Button from "@material-ui/core/Button";
+
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const styles = {
@@ -22,7 +25,18 @@ const styles = {
 
 const PastTrip = () => {
   const [tripInfoState, setTripInfoState] = useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [activeTrip, setActiveTrip] = React.useState(null);
 
+  const handleOpen = (id) => {
+    setOpen(true);
+    setActiveTrip(id)
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setActiveTrip(null)
+  };
   useEffect(() => {
     API.getAllTrips().then((res) => {
       setTripInfoState(res.data);
@@ -59,7 +73,7 @@ const PastTrip = () => {
             <div>
               <Button
                 id={trip._id}
-                onClick={() => handleDelete(trip._id)}
+                onClick={() => handleOpen(trip._id)}
                 size="large"
                 style={styles.DeleteButtonStyle}
               >
@@ -73,11 +87,19 @@ const PastTrip = () => {
                 View Trip
               </Button>
               <ToastContainer />
+              
               <hr style={styles.hrStyle}></hr>
             </div>
           </div>
         );
       })}
+      <ConfirmModal
+                open={open}
+                handleDelete={handleDelete}
+                handleClose={handleClose}
+                handleOpen={handleOpen}
+                id={ activeTrip}
+              />
     </div>
   );
 };

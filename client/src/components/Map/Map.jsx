@@ -45,52 +45,56 @@ export default function Map() {
 
   const saveTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
-    const startStreet = address.locations[0].street;
-    const startCity = address.locations[0].adminArea5;
-    const startState = address.locations[0].adminArea3;
-    const startPostalCode = address.locations[0].postalCode;
-    const destinationStreet = address.locations[1].street;
-    const destinationCity = address.locations[1].adminArea5;
-    const destinationState = address.locations[1].adminArea3;
-    const destinationPostalCode = address.locations[1].postalCode;
+    if (address === undefined) {
+      toast.error("You should enter at least two states with cities !");
+    } else {
+      const startStreet = address.locations[0].street;
+      const startCity = address.locations[0].adminArea5;
+      const startState = address.locations[0].adminArea3;
+      const startPostalCode = address.locations[0].postalCode;
+      const destinationStreet = address.locations[1].street;
+      const destinationCity = address.locations[1].adminArea5;
+      const destinationState = address.locations[1].adminArea3;
+      const destinationPostalCode = address.locations[1].postalCode;
 
-    const savedTrip = {
-      startCity: startCity,
-      destinationCity: destinationCity,
-      destinationState: destinationState,
-      startState: startState,
-      startStreet: startStreet,
-      destinationStreet: destinationStreet,
-      startPostalCode: startPostalCode,
-      destinationPostalCode: destinationPostalCode,
-    };
-    // if(startCity==undefined||startState==undefined||startStreet==undefined){
-    //   toast.error ("You should enter at least two states with cities !");
+      const savedTrip = {
+        startCity: startCity,
+        destinationCity: destinationCity,
+        destinationState: destinationState,
+        startState: startState,
+        startStreet: startStreet,
+        destinationStreet: destinationStreet,
+        startPostalCode: startPostalCode,
+        destinationPostalCode: destinationPostalCode,
+      };
+      // if(startCity==undefined||startState==undefined||startStreet==undefined){
+      //   toast.error ("You should enter at least two states with cities !");
 
-    // }else{
-    //   API.saveTrip(savedTrip)
-    //   .then((res) => {
-    //     console.log(res);
-    //     toast.success("You trip is successfully saved !");
-    //     setTimeout(() => window.location.replace('/PastTrips'), 2000);
+      // }else{
+      //   API.saveTrip(savedTrip)
+      //   .then((res) => {
+      //     console.log(res);
+      //     toast.success("You trip is successfully saved !");
+      //     setTimeout(() => window.location.replace('/PastTrips'), 2000);
 
-    //   })
-    //   .catch((err) => {
-    //     console.log("this is error message  " + err);
-    //     toast.error ("You should enter at least two states with cities !");
+      //   })
+      //   .catch((err) => {
+      //     console.log("this is error message  " + err);
+      //     toast.error ("You should enter at least two states with cities !");
 
-    //   });
-    // }
+      //   });
+      // }
 
-    API.saveTrip(savedTrip)
-      .then((res) => {
-        toast.success("You trip is successfully saved !");
-        setTimeout(() => window.location.replace("/PastTrips"), 2000);
-      })
-      .catch((err) => {
-        console.log("this is error message  " + err);
-        toast.error("You should enter at least two states with cities !");
-      });
+      API.saveTrip(savedTrip)
+        .then((res) => {
+          toast.success("You trip is successfully saved !");
+          setTimeout(() => window.location.replace("/PastTrips"), 2000);
+        })
+        .catch((err) => {
+          console.log("this is error message  " + err);
+          toast.error("You should enter at least two states with cities !");
+        });
+    }
   };
 
   useEffect(() => {
