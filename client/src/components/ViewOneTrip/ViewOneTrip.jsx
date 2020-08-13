@@ -7,6 +7,8 @@ import Card from "@material-ui/core/Card";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ConfirmModal from "../ConfirmModal/ConfirmModal";
+
 const styles = {
   ButtonsStyle: {
     background: "#02361C",
@@ -31,7 +33,18 @@ const styles = {
 const ViewOneTrip = () => {
   const [oneTripState, setOneTripState] = useState([]);
   const { id } = useParams();
+  const [open, setOpen] = React.useState(false);
+  const [activeTrip, setActiveTrip] = React.useState(null);
 
+  const handleOpen = () => {
+    setOpen(true);
+    setActiveTrip(id)
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setActiveTrip(null)
+  };
   useEffect(() => {
     API.getOneTrip(id).then((res) => {
       setOneTripState(res.data);
@@ -69,12 +82,13 @@ const ViewOneTrip = () => {
               <div>
                 <Button
                   id={oneTripState._id}
-                  onClick={() => handleDelete(oneTripState._id)}
+                  onClick={() => handleOpen(oneTripState._id)}
                   size="large"
                   style={styles.DeleteButtonStyle}
                 >
                   Delete
                 </Button>
+               
                 <Link to={`/PastTrips/${oneTripState._id}/edit`}>
                   <Button
                     id={oneTripState._id}
@@ -94,6 +108,13 @@ const ViewOneTrip = () => {
                 </Button>
                 <ToastContainer />
               </div>
+              <ConfirmModal
+                open={open}
+                handleDelete={handleDelete}
+                handleClose={handleClose}
+                handleOpen={handleOpen}
+                id={ activeTrip}
+              />
             </div>
           </form>
         </div>
