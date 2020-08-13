@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles, useTheme, styled } from "@material-ui/core/styles";
 import Logo from "./Assets/logo192.png";
+import LogoNoBrand from "./Assets/LogoNoBrand.png";
+import Brand from "./Assets/Brand.png";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Avatar from "@material-ui/core/Avatar";
@@ -51,16 +53,6 @@ const MyButton = styled(Button)({
   backgroundColor: "#ffc107",
 });
 
-const styles = {
-  img: {
-    height: 800,
-    paddingBottom: 200,
-    marginLeft: -30
-  },
-  brandNoLogo: {
-    height: 110
-  }
-};
 // END OF STYLING FOR APPBAR
 
 const Header = (props) => {
@@ -99,11 +91,10 @@ const Header = (props) => {
     <div className={classes.root}>
       <MyAppBar>
         <Toolbar>
-          <img src="https://i.imgur.com/flaLNZU.png" className="brandNoLogo" style={styles.brandNoLogo}></img>
+          <img src={LogoNoBrand} className="logoNoBrand"></img>
           <img
-            src="https://i.imgur.com/YDtpJUO.png"
-            className="logo"
-            style={styles.img}
+            src={Brand}
+            className="brand"
           />
           {isMobile ? (
             // THIS CHECKS TO SEE WHETHER THE SCREEN IS MOBILE OR NOT. REFER
