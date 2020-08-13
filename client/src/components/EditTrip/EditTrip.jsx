@@ -95,6 +95,10 @@ export default function EditTrip() {
 
   const updateTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
+    if (address === undefined) {
+      toast.error("You should enter at least two states with cities !");
+    } else {
+    const address = map.directionsControl.directions.directionsRequest;
     const startStreet = address.locations[0].street;
     const startCity = address.locations[0].adminArea5;
     const startState = address.locations[0].adminArea3;
@@ -135,6 +139,7 @@ export default function EditTrip() {
       .catch((err) => {
         console.log("this is error message  " + err);
       });
+    }
   };
 
   return (
