@@ -22,7 +22,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import PageviewIcon from "@material-ui/icons/Pageview";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-
+import './PastTrip.css'
 
 // ALERTS IMPORTS
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
@@ -159,7 +159,7 @@ const PastTrip = () => {
 
       {tripInfoState.map((trip) => {
         return (
-          <Card key={trip._id} className="container" style={styles.Card}>
+          <Card key={trip._id} className="container specialTrip" style={styles.Card}>
             <CardHeader
               titleTypographyProps={{ variant: "h4" }}
               title={`${trip.startCity}, ${trip.startState} - ${trip.destinationCity}, ${trip.destinationState}`}

@@ -1,0 +1,7 @@
+.specialTrip:hover {
+  transform: scale(1.1);
+}
+.specialTrip {
+  margin-left: 5%;
+  width: 90%;
+}
