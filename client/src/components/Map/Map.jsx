@@ -186,6 +186,7 @@ export default function Map() {
       })
       .addTo(map);
 
+      //Destination information
       if(startingPoint&&destinationPoint){
           window.L.mapquest.directions().route({
             start: startingPoint,
