@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 import Button from "@material-ui/core/Button";
-
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const styles = {
   ButtonsStyle: {
     background: "#02361C",

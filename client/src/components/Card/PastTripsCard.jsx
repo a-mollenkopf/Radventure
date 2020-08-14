@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import PastTrip from "../PastTrip/PastTrip";
 import "../Card/Card.css";
-import { fade } from '@material-ui/core/styles/colorManipulator';
+import { fade } from "@material-ui/core/styles/colorManipulator";
 
 const useStyles = makeStyles({
   root: {
@@ -27,20 +27,10 @@ const useStyles = makeStyles({
   },
 });
 
-const styles = {
-  ButtonsStyle: {
-    background: "#02361C",
-    color: "white",
-    justifyContent: "center",
-    marginTop: 400,
-  },
-};
-
 export default function SimpleCard() {
   const classes = useStyles();
 
   return (
-    
     <Card className={classes.root}>
       <PastTrip />
     </Card>
