@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
 import Button from "@material-ui/core/Button";
+
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const styles = {
   ButtonsStyle: {
     background: "#02361C",
@@ -40,10 +41,20 @@ const PastTrip = () => {
     API.getAllTrips().then((res) => {
       setTripInfoState(res.data);
     });
-    document.removeEventListener('keyup',(x)=>{
-      if(document.getElementsByClassName("form-wrap")[0].children[0].children[0]){
-          localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
-          localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
+    document.removeEventListener("keyup", (x) => {
+      if (
+        document.getElementsByClassName("form-wrap")[0].children[0].children[0]
+      ) {
+        localStorage.setItem(
+          "start",
+          document.getElementsByClassName("form-wrap")[0].children[0]
+            .children[0].value
+        );
+        localStorage.setItem(
+          "destination",
+          document.getElementsByClassName("form-wrap")[1].children[0]
+            .children[0].value
+        );
       }
     });
   }, []);
@@ -72,9 +83,10 @@ const PastTrip = () => {
           <div key={trip._id} className="container">
             <h2> Trip Information</h2>
             <h3>
-             {trip.startCity}, {trip.startState} - {trip.destinationCity}, {trip.destinationState}
+              {trip.startCity}, {trip.startState} - {trip.destinationCity},{" "}
+              {trip.destinationState}
             </h3>
-             <h4>Estimated Distance: {trip.distance} mi </h4>
+            <h4>Estimated Distance: {trip.distance} mi </h4>
             <div>
               <Button
                 id={trip._id}
