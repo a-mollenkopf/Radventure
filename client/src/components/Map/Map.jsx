@@ -46,6 +46,7 @@ export default function Map() {
 
   const saveTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
+
     if (address === undefined) {
       toast.error("You should enter at least two states with cities !");
     } else {
@@ -57,22 +58,44 @@ export default function Map() {
       const destinationCity = address.locations[1].adminArea5;
       const destinationState = address.locations[1].adminArea3;
       const destinationPostalCode = address.locations[1].postalCode;
+      const queryOne = `${startCity},+${startState}`;
+      const queryTwo = `${destinationCity},+${destinationState}`;
+      console.log(queryOne);
 
-      const savedTrip = {
-        startCity: startCity,
-        destinationCity: destinationCity,
-        destinationState: destinationState,
-        startState: startState,
-        startStreet: startStreet,
-        destinationStreet: destinationStreet,
-        startPostalCode: startPostalCode,
-        destinationPostalCode: destinationPostalCode,
-      };
+      API.getDirection(queryOne, queryTwo)
+        .then((response) => {
+          console.log(
+            "distance  " + JSON.stringify(response.data.route.distance)
+          );
+          console.log(
+            "time  " + JSON.stringify(response.data.route.formattedTime)
+          );
+          const distance = response.data.route.distance;
+          const time = response.data.route.formattedTime;
+          console.log(distance, time);
 
-      API.saveTrip(savedTrip)
-        .then((res) => {
-          toast.success("You trip is successfully saved !");
-          setTimeout(() => window.location.replace("/PastTrips"), 2000);
+          const savedTrip = {
+            time: time,
+            distance: distance,
+            startCity: startCity,
+            destinationCity: destinationCity,
+            destinationState: destinationState,
+            startState: startState,
+            startStreet: startStreet,
+            destinationStreet: destinationStreet,
+            startPostalCode: startPostalCode,
+            destinationPostalCode: destinationPostalCode,
+          };
+
+          API.saveTrip(savedTrip)
+            .then((res) => {
+              toast.success("You trip is successfully saved !");
+              setTimeout(() => window.location.replace("/PastTrips"), 2000);
+            })
+            .catch((err) => {
+              console.log("this is error message  " + err);
+              toast.error("Sorry, error occurred! Try once more!");
+            });
         })
         .catch((err) => {
           console.log("this is error message  " + err);
@@ -80,6 +103,46 @@ export default function Map() {
         });
     }
   };
+// DO NOT DELETE THIS CODE
+// ==========================================================================================
+  // const saveTrip = () => {
+  //   const address = map.directionsControl.directions.directionsRequest;
+  //   if (address === undefined) {
+  //     toast.error("You should enter at least two states with cities !");
+  //   } else {
+  //     const startStreet = address.locations[0].street;
+  //     const startCity = address.locations[0].adminArea5;
+  //     const startState = address.locations[0].adminArea3;
+  //     const startPostalCode = address.locations[0].postalCode;
+  //     const destinationStreet = address.locations[1].street;
+  //     const destinationCity = address.locations[1].adminArea5;
+  //     const destinationState = address.locations[1].adminArea3;
+  //     const destinationPostalCode = address.locations[1].postalCode;
+
+  //     const savedTrip = {
+  //       startCity: startCity,
+  //       destinationCity: destinationCity,
+  //       destinationState: destinationState,
+  //       startState: startState,
+  //       startStreet: startStreet,
+  //       destinationStreet: destinationStreet,
+  //       startPostalCode: startPostalCode,
+  //       destinationPostalCode: destinationPostalCode,
+  //     };
+
+  //     API.saveTrip(savedTrip)
+  //       .then((res) => {
+  //         toast.success("You trip is successfully saved !");
+  //         setTimeout(() => window.location.replace("/PastTrips"), 2000);
+  //       })
+  //       .catch((err) => {
+  //         console.log("this is error message  " + err);
+  //         toast.error("Sorry, error occurred! Try once more!");
+  //       });
+  //   }
+  // };
+  // ==========================================================================================
+
 
   useEffect(() => {
     const mapquest = window.L.mapquest;
