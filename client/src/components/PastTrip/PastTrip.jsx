@@ -21,17 +21,17 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import PageviewIcon from "@material-ui/icons/Pageview";
 
 // ALERTS IMPORTS
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// STYLES 
+// STYLES
 const styles = {
   ButtonsStyle: {
     background: "#02361C",
     color: "white",
-    justifyContent: "center",
   },
   h1Style: {
     fontSize: 50,
@@ -165,16 +165,18 @@ const PastTrip = () => {
                 <Divider variant="inset" />
                 <h4>Estimated Distance: {trip.distance} mi </h4>
               </CardContent>
-              <Divider variant="inset" />
+              {/* <Divider variant="inset" /> */}
               <CardActions disableSpacing>
-                <Button
+                <IconButton
                   id={trip._id}
                   onClick={() => handleOpen(trip._id)}
                   size="large"
                   style={styles.DeleteButtonStyle}
                 >
+                  {" "}
+                  <PageviewIcon />
                   Delete
-                </Button>
+                </IconButton>
                 <Button
                   size="large"
                   href={`/PastTrips/${trip._id}`}
