@@ -170,8 +170,6 @@ const PastTrip = () => {
                 <IconButton
                   id={trip._id}
                   onClick={() => handleOpen(trip._id)}
-                  size="large"
-                  style={styles.DeleteButtonStyle}
                 >
                   {" "}
                   <PageviewIcon />
@@ -185,8 +183,6 @@ const PastTrip = () => {
                   View Trip
                 </Button>
                 <ToastContainer />
-
-                <hr style={styles.hrStyle}></hr>
               </CardActions>
             </Collapse>
           </Card>
