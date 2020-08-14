@@ -223,6 +223,16 @@ export default function EditTrip() {
           <NavigationIcon />
           Save Updates
         </MyFab>
+        <MyFab
+          variant="extended"
+          size="medium"
+          aria-label="add"
+          className={classes.margin}
+          href="/PastTrips"
+        >
+          <NavigationIcon />
+          Cancel Updates
+        </MyFab>
         <ToastContainer />
       </MyBox>
     </div>
