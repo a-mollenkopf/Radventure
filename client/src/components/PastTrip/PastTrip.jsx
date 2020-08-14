@@ -126,7 +126,7 @@ const PastTrip = () => {
         title="You have no saved trips yet!"
         subheader="Time to start planning your next trip!"
       />
-      <IconButton aria-label="go back">
+      <IconButton href={/Search/} aria-label="go back">
         <ArrowBackIcon />
       </IconButton>
     </Card>
