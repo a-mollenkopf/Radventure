@@ -1,7 +1,6 @@
 import axios from "axios";
 const key = process.env.REACT_APP_API_KEY;
 
-   
 export default {
   //Should return current trip from api
   getDirection: (queryOne, queryTwo) => {

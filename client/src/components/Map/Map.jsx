@@ -201,6 +201,7 @@ export default function Map() {
 
     setMap(map);
 
+    //Return function
     return () => {
        window.removeEventListener('keyup', previousTrip);
     }
