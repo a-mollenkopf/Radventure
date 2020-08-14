@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(2, "auto"),
       width: theme.spacing(145),
       height: theme.spacing(70, "auto"),
-      overflow: "auto"
+      overflow: "auto",
     },
   },
 }));
@@ -39,23 +39,23 @@ const MyFab = styled(Fab)({
 });
 // END OF STYLING
 
-var startingPoint = localStorage.getItem('start');
-var destinationPoint = localStorage.getItem('destination');
+var startingPoint = localStorage.getItem("start");
+var destinationPoint = localStorage.getItem("destination");
 
 export default function Map() {
   const classes = useStyles();
   const { map, setMap } = useContext(MapContext);
   const [double, setDouble] = useState(false);
-  const heandler = ()=>{
+  const heandler = () => {
     setTimeout(() => setDouble(false), 5000);
     setDouble(true);
-  }
+  };
   const saveTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
 
     if (address === undefined) {
       toast.error("You should enter at least two states with cities !");
-      heandler()
+      heandler();
     } else {
       const startStreet = address.locations[0].street;
       const startCity = address.locations[0].adminArea5;
@@ -70,7 +70,8 @@ export default function Map() {
 
       API.getDirection(queryOne, queryTwo)
         .then((response) => {
-          const distance = response.data.route.distance;
+          const distance = Math.round(parseInt(response.data.route.distance));
+          console.log(distance);
           const time = response.data.route.formattedTime;
 
           const savedTrip = {
@@ -94,32 +95,52 @@ export default function Map() {
             })
             .catch((err) => {
               console.log("this is error message  " + err);
-              heandler()
+              heandler();
               toast.error("Sorry, error occurred! Try once more!");
             });
         })
         .catch((err) => {
           console.log("this is error message  " + err);
-          heandler()
+          heandler();
           toast.error("Sorry, error occurred! Try once more!");
         });
     }
   };
 
-  const previousTrip = () =>{
-    if(document.getElementsByClassName("form-wrap")[0].children[0].children[0].value){
-        localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
-        localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
+  const previousTrip = () => {
+    if (
+      document.getElementsByClassName("form-wrap")[0].children[0].children[0]
+        .value
+    ) {
+      localStorage.setItem(
+        "start",
+        document.getElementsByClassName("form-wrap")[0].children[0].children[0]
+          .value
+      );
+      localStorage.setItem(
+        "destination",
+        document.getElementsByClassName("form-wrap")[1].children[0].children[0]
+          .value
+      );
     }
-  }
+  };
 
   useEffect(() => {
-
-    document.addEventListener('keyup',(x)=>{
-        if(document.getElementsByClassName("form-wrap")[0].children[0].children[0]){
-            localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
-            localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
-        }
+    document.addEventListener("keyup", (x) => {
+      if (
+        document.getElementsByClassName("form-wrap")[0].children[0].children[0]
+      ) {
+        localStorage.setItem(
+          "start",
+          document.getElementsByClassName("form-wrap")[0].children[0]
+            .children[0].value
+        );
+        localStorage.setItem(
+          "destination",
+          document.getElementsByClassName("form-wrap")[1].children[0]
+            .children[0].value
+        );
+      }
     });
 
     const mapquest = window.L.mapquest;
@@ -153,16 +174,18 @@ export default function Map() {
       })
       .addTo(map);
 
-     
-
-      if(startingPoint&&destinationPoint){
-          window.L.mapquest.directions().route({
-            start: startingPoint,
-            end: destinationPoint
-          });
-          document.getElementsByClassName("form-wrap")[0].children[0].children[0].value = startingPoint;
-          document.getElementsByClassName("form-wrap")[1].children[0].children[0].value = destinationPoint;
-      }
+    if (startingPoint && destinationPoint) {
+      window.L.mapquest.directions().route({
+        start: startingPoint,
+        end: destinationPoint,
+      });
+      document.getElementsByClassName(
+        "form-wrap"
+      )[0].children[0].children[0].value = startingPoint;
+      document.getElementsByClassName(
+        "form-wrap"
+      )[1].children[0].children[0].value = destinationPoint;
+    }
 
     mapquest.geocodingControl().addTo(map);
 
@@ -172,8 +195,8 @@ export default function Map() {
 
     //Return function
     return () => {
-       window.removeEventListener('keyup', previousTrip);
-    }
+      window.removeEventListener("keyup", previousTrip);
+    };
   }, []);
 
   return (

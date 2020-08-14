@@ -118,7 +118,8 @@ export default function EditTrip() {
 
       API.getDirection(queryOne, queryTwo)
         .then((response) => {
-          const distance = response.data.route.distance;
+          const distance =Math.round( parseInt(response.data.route.distance));
+          console.log(distance)
           const time = response.data.route.formattedTime;
           console.log(distance, time);
           setOneTripState(
