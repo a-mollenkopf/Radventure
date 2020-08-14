@@ -40,6 +40,9 @@ const MyFab = styled(Fab)({
 });
 // END OF STYLING
 
+var startingPoint = localStorage.getItem('start');
+var destinationPoint = localStorage.getItem('destination');
+
 export default function Map() {
   const classes = useStyles();
   const { map, setMap } = useContext(MapContext);
@@ -145,8 +148,16 @@ export default function Map() {
 
 
   useEffect(() => {
+
+    document.addEventListener('keyup',(x)=>{
+        if(document.getElementsByClassName("form-wrap")[0].children[0].children[0].value){
+            localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
+            localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
+        }
+    });
+
     const mapquest = window.L.mapquest;
-    mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
+    mapquest.key = process.env.REACT_APP_API_KEY;
     var baseLayer = window.L.mapquest.tileLayer("map");
     var map = window.L.mapquest.map("map", {
       center: [33.753746, -84.38633],
@@ -175,6 +186,15 @@ export default function Map() {
         },
       })
       .addTo(map);
+
+      if(startingPoint&&destinationPoint){
+          window.L.mapquest.directions().route({
+            start: startingPoint,
+            end: destinationPoint
+          });
+          document.getElementsByClassName("form-wrap")[0].children[0].children[0].value = startingPoint;
+          document.getElementsByClassName("form-wrap")[1].children[0].children[0].value = destinationPoint;
+      }
 
     mapquest.geocodingControl().addTo(map);
 

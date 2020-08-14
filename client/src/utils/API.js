@@ -1,6 +1,5 @@
 import axios from "axios";
-const key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ"
-
+const key = process.env.REACT_APP_API_KEY;
    
 export default {
   //Should return current trip from api
