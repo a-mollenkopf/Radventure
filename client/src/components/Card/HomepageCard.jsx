@@ -7,12 +7,11 @@ import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
   root: {
-    // maxWidth: 1200,
-    // marginLeft: 400,
-    // marginTop: 20,
-    // backgroundColor: fade("#255D42", 0.8),
-    // height: 800,
-    // overflow: "auto",
+    maxWidth: 1200,
+    marginLeft: 400,
+    marginTop: 20,
+    backgroundColor: fade("#255D42", 0.8),
+    height: 800,
   },
   bullet: {
     display: "inline-block",
@@ -61,3 +60,4 @@ export default function SimpleCard() {
     </Card>
   );
 }
+

@@ -21,14 +21,16 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 import PageviewIcon from "@material-ui/icons/Pageview";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+
 
 // ALERTS IMPORTS
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// STYLES
+
 const styles = {
   ButtonsStyle: {
     background: "#02361C",
@@ -43,11 +45,24 @@ const styles = {
   DeleteButtonStyle: {
     background: "red",
   },
+  Card: {
+    backgroundColor: fade("#D2D6D6", 0.4),
+    marginTop: 10,
+  },
+  Typography: {
+    fontSize: 30,
+  },
+  distance: {
+    fontSize: 20
+  }
 };
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 360,
+
+    maxWidth: 345,
+    backgroundColor: fade("#D2D6D6", 0.4),
+    marginTop: 20,
   },
   media: {
     height: 0,
@@ -94,8 +109,7 @@ const PastTrip = () => {
     });
     document.removeEventListener("keyup", (x) => {
       if (
-        document.getElementsByClassName("form-wrap")[0].children[0]
-          .children[0]
+        document.getElementsByClassName("form-wrap")[0].children[0].children[0]
       ) {
         localStorage.setItem(
           "start",
@@ -133,13 +147,17 @@ const PastTrip = () => {
   ) : (
     <div>
       <Card className={classes.root}>
-        <CardHeader title="Your Saved Trips!" />
+        <CardHeader
+          titleTypographyProps={{ variant: "h4" }}
+          title="Your Saved Trips!"
+        />
       </Card>
 
       {tripInfoState.map((trip) => {
         return (
-          <Card key={trip._id} className="container">
+          <Card key={trip._id} className="container" style={styles.Card}>
             <CardHeader
+              titleTypographyProps={{ variant: "h4" }}
               title={`${trip.startCity}, ${trip.startState} - ${trip.destinationCity}, ${trip.destinationState}`}
             />
             <CardActions disableSpacing>
@@ -162,9 +180,11 @@ const PastTrip = () => {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
               <CardContent>
-                <Typography paragraph>Trip Details:</Typography>
+                <Typography paragraph style={styles.Typography}>
+                  Trip Details:
+                </Typography>
                 <Divider variant="inset" />
-                <Typography paragraph>
+                <Typography paragraph className="distance" style={styles.distance}>
                   Estimated Distance: {trip.distance} mi{" "}
                 </Typography>
               </CardContent>
