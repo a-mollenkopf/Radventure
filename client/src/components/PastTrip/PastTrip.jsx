@@ -41,6 +41,12 @@ const PastTrip = () => {
     API.getAllTrips().then((res) => {
       setTripInfoState(res.data);
     });
+    document.removeEventListener('keyup',(x)=>{
+      if(document.getElementsByClassName("form-wrap")[0].children[0].children[0]){
+          localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
+          localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
+      }
+    });
   }, []);
   const handleDelete = (id) => {
     API.deleteTrip(id)
@@ -50,12 +56,6 @@ const PastTrip = () => {
         setTimeout(() => window.location.reload(), 2000);
       })
       .catch((err) => console.log(err));
-      document.removeEventListener('keyup',(x)=>{
-          if(document.getElementsByClassName("form-wrap")[0].children[0].children[0]){
-              localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
-              localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
-          }
-      });
   };
 
   return tripInfoState.length === 0 ? (
