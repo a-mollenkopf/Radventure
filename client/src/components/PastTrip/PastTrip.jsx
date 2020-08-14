@@ -40,6 +40,12 @@ const PastTrip = () => {
     API.getAllTrips().then((res) => {
       setTripInfoState(res.data);
     });
+    document.removeEventListener('keyup',(x)=>{
+      if(document.getElementsByClassName("form-wrap")[0].children[0].children[0]){
+          localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
+          localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
+      }
+    });
   }, []);
   const handleDelete = (id) => {
     API.deleteTrip(id)
@@ -68,6 +74,7 @@ const PastTrip = () => {
             <h3>
              {trip.startCity}, {trip.startState} - {trip.destinationCity}, {trip.destinationState}
             </h3>
+             <h4>Estimated Distance: {trip.distance} mi </h4>
             <div>
               <Button
                 id={trip._id}
