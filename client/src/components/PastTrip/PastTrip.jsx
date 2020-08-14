@@ -20,6 +20,9 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import PageviewIcon from "@material-ui/icons/Pageview";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+
 
 // ALERTS IMPORTS
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
@@ -30,7 +33,6 @@ const styles = {
   ButtonsStyle: {
     background: "#02361C",
     color: "white",
-    justifyContent: "center",
   },
   h1Style: {
     fontSize: 50,
@@ -61,6 +63,7 @@ const styles = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
+
     maxWidth: 345,
     backgroundColor: fade("#D2D6D6", 0.4),
     marginTop: 20,
@@ -188,24 +191,17 @@ const PastTrip = () => {
               </CardContent>
               <Divider variant="inset" />
               <CardActions disableSpacing>
-                <Button
+                <IconButton
                   id={trip._id}
                   onClick={() => handleOpen(trip._id)}
-                  size="large"
-                  style={styles.DeleteButtonStyle}
                 >
-                  Delete
-                </Button>
-                <Button
-                  size="large"
-                  href={`/PastTrips/${trip._id}`}
-                  style={styles.ButtonsStyle}
-                >
-                  View Trip
-                </Button>
+                  {" "}
+                  <DeleteForeverIcon />
+                </IconButton>
+                <IconButton href={`/PastTrips/${trip._id}`}>
+                  <PageviewIcon />
+                </IconButton>
                 <ToastContainer />
-
-                <hr style={styles.hrStyle}></hr>
               </CardActions>
             </Collapse>
           </Card>
