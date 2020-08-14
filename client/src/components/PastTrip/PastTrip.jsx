@@ -1,11 +1,34 @@
 import React, { useState, useEffect } from "react";
 import API from "../../utils/API";
+
+// MATERIALUI IMPORTS
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { red } from "@material-ui/core/colors";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import { fade } from "@material-ui/core/styles/colorManipulator";
+import { createMuiTheme } from '@material-ui/core/styles';
 
+// ALERTS IMPORTS
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const styles = {
   ButtonsStyle: {
     background: "#02361C",
@@ -21,12 +44,53 @@ const styles = {
   DeleteButtonStyle: {
     background: "red",
   },
+  Card: {
+    backgroundColor: fade("#D2D6D6", 0.4),
+    marginTop: 10,
+  },
+  Typography: {
+    fontSize: 30,
+  },
+  distance: {
+    fontSize: 20
+  }
 };
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    maxWidth: 345,
+    backgroundColor: fade("#D2D6D6", 0.4),
+    marginTop: 20,
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%", // 16:9
+  },
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest,
+    }),
+  },
+  expandOpen: {
+    transform: "rotate(180deg)",
+  },
+  avatar: {
+    backgroundColor: red[500],
+  },
+}));
 
 const PastTrip = () => {
   const [tripInfoState, setTripInfoState] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [activeTrip, setActiveTrip] = React.useState(null);
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   const handleOpen = (id) => {
     setOpen(true);
@@ -69,26 +133,99 @@ const PastTrip = () => {
   };
 
   return tripInfoState.length === 0 ? (
-    <div className="container">
-      <h3 className="text-center welcome">There are no saved trips yet!</h3>
-    </div>
+    <Card className={classes.root}>
+      <CardHeader
+        title="You have no saved trips yet!"
+        subheader="Time to start planning your next trip!"
+      />
+      <IconButton aria-label="go back">
+        <ArrowBackIcon />
+      </IconButton>
+    </Card>
   ) : (
     <div>
-      <h2 className="text-center welcome" style={styles.h1Style}>
-        Your saved trips!
-      </h2>
+      <Card className={classes.root}>
+        <CardHeader
+          titleTypographyProps={{ variant: "h4" }}
+          title="Your Saved Trips!"
+        />
+      </Card>
 
       {tripInfoState.map((trip) => {
         return (
-          <div key={trip._id} className="container">
-            <h2> Trip Information</h2>
-            <h3>
-              {trip.startCity}, {trip.startState} - {trip.destinationCity},{" "}
-              {trip.destinationState}
-            </h3>
-            <h4>Estimated Distance: {trip.distance} mi </h4>
-            <div>
-              <Button
+          <Card key={trip._id} className="container" style={styles.Card}>
+            <CardHeader
+              titleTypographyProps={{ variant: "h4" }}
+              title={`${trip.startCity}, ${trip.startState} - ${trip.destinationCity}, ${trip.destinationState}`}
+            />
+            <CardActions disableSpacing>
+              <IconButton aria-label="add to favorites">
+                <FavoriteIcon />
+              </IconButton>
+              <IconButton aria-label="share">
+                <ShareIcon />
+              </IconButton>
+              <IconButton
+                className={clsx(classes.expand, {
+                  [classes.expandOpen]: expanded,
+                })}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+            </CardActions>
+            <Collapse in={expanded} timeout="auto" unmountOnExit>
+              <CardContent>
+                <Typography paragraph style={styles.Typography}>
+                  Trip Details:
+                </Typography>
+                <Divider variant="inset" />
+                <Typography paragraph className="distance" style={styles.distance}>
+                  Estimated Distance: {trip.distance} mi{" "}
+                </Typography>
+              </CardContent>
+              <Divider variant="inset" />
+              <CardActions disableSpacing>
+                <Button
+                  id={trip._id}
+                  onClick={() => handleOpen(trip._id)}
+                  size="large"
+                  style={styles.DeleteButtonStyle}
+                >
+                  Delete
+                </Button>
+                <Button
+                  size="large"
+                  href={`/PastTrips/${trip._id}`}
+                  style={styles.ButtonsStyle}
+                >
+                  View Trip
+                </Button>
+                <ToastContainer />
+
+                <hr style={styles.hrStyle}></hr>
+              </CardActions>
+            </Collapse>
+          </Card>
+        );
+      })}
+      <ConfirmModal
+        open={open}
+        handleDelete={handleDelete}
+        handleClose={handleClose}
+        handleOpen={handleOpen}
+        id={activeTrip}
+      />
+    </div>
+  );
+};
+
+export default PastTrip;
+
+{
+  /* <Button
                 id={trip._id}
                 onClick={() => handleOpen(trip._id)}
                 size="large"
@@ -105,20 +242,5 @@ const PastTrip = () => {
               </Button>
               <ToastContainer />
 
-              <hr style={styles.hrStyle}></hr>
-            </div>
-          </div>
-        );
-      })}
-      <ConfirmModal
-        open={open}
-        handleDelete={handleDelete}
-        handleClose={handleClose}
-        handleOpen={handleOpen}
-        id={activeTrip}
-      />
-    </div>
-  );
-};
-
-export default PastTrip;
+              <hr style={styles.hrStyle}></hr> */
+}
