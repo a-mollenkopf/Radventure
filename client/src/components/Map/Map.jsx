@@ -149,7 +149,7 @@ export default function Map() {
   useEffect(() => {
 
     document.addEventListener('keyup',(x)=>{
-        if(document.getElementsByClassName("form-wrap")[0].children[0].children[0].value){
+        if(document.getElementsByClassName("form-wrap")[0].children[0].children[0]){
             localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
             localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
         }
@@ -186,6 +186,7 @@ export default function Map() {
       })
       .addTo(map);
 
+      //Destination information
       if(startingPoint&&destinationPoint){
           window.L.mapquest.directions().route({
             start: startingPoint,
