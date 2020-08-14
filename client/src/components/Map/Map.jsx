@@ -145,6 +145,7 @@ export default function Map() {
   // };
   // ==========================================================================================
 
+
   const previousTrip = () =>{
     if(document.getElementsByClassName("form-wrap")[0].children[0].children[0].value){
         localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
@@ -152,8 +153,17 @@ export default function Map() {
     }
   }
 
+
+
   useEffect(() => {
-    document.addEventListener('keyup',previousTrip);
+
+    document.addEventListener('keyup',(x)=>{
+        if(document.getElementsByClassName("form-wrap")[0].children[0].children[0]){
+            localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
+            localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
+        }
+    });
+
 
     const mapquest = window.L.mapquest;
     mapquest.key = process.env.REACT_APP_API_KEY;
@@ -185,6 +195,10 @@ export default function Map() {
         },
       })
       .addTo(map);
+
+
+
+      //Destination information
 
       if(startingPoint&&destinationPoint){
           window.L.mapquest.directions().route({

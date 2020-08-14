@@ -35,10 +35,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const styles = {
+  Avatar: {
+    height: 130,
+    width: 150,
+  }
+}
+
 const MyAppBar = styled(AppBar)({
   position: "static",
   backgroundColor: fade("#3f50b5", 0.7),
-  height: 120,
+  height: 130,
 });
 
 // NOTE: THIS IS FOR COLLAPSE ON MOBILE
@@ -79,7 +86,7 @@ const Header = (props) => {
   const menuItems = [
     {
       menuTitle: "Search",
-      pageURL: "/",
+      pageURL: "/search",
     },
     {
       menuTitle: "Trips",
@@ -91,11 +98,7 @@ const Header = (props) => {
     <div className={classes.root}>
       <MyAppBar>
         <Toolbar>
-          <img src={LogoNoBrand} className="logoNoBrand"></img>
-          <img
-            src={Brand}
-            className="brand"
-          />
+         <Avatar src={Logo} style={styles.Avatar}/>
           {isMobile ? (
             // THIS CHECKS TO SEE WHETHER THE SCREEN IS MOBILE OR NOT. REFER
             // LINE 64 MEDIA QUERY

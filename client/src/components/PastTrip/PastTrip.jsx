@@ -30,16 +30,22 @@ const PastTrip = () => {
 
   const handleOpen = (id) => {
     setOpen(true);
-    setActiveTrip(id)
+    setActiveTrip(id);
   };
 
   const handleClose = () => {
     setOpen(false);
-    setActiveTrip(null)
+    setActiveTrip(null);
   };
   useEffect(() => {
     API.getAllTrips().then((res) => {
       setTripInfoState(res.data);
+    });
+    document.removeEventListener('keyup',(x)=>{
+      if(document.getElementsByClassName("form-wrap")[0].children[0].children[0]){
+          localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
+          localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
+      }
     });
   }, []);
   const handleDelete = (id) => {
@@ -58,18 +64,18 @@ const PastTrip = () => {
     </div>
   ) : (
     <div>
-      <h1 className="text-center welcome" style={styles.h1Style}>
+      <h2 className="text-center welcome" style={styles.h1Style}>
         Your saved trips!
-      </h1>
+      </h2>
 
       {tripInfoState.map((trip) => {
         return (
           <div key={trip._id} className="container">
-            <h2> Destination Information</h2>
+            <h2> Trip Information</h2>
             <h3>
-              Address: {trip.destinationStreet}, {trip.destinationCity},
-              {trip.destinationState} {trip.destinationPostalCode}
+             {trip.startCity}, {trip.startState} - {trip.destinationCity}, {trip.destinationState}
             </h3>
+             <h4>Estimated Distance: {trip.distance} mi </h4>
             <div>
               <Button
                 id={trip._id}
@@ -87,19 +93,19 @@ const PastTrip = () => {
                 View Trip
               </Button>
               <ToastContainer />
-              
+
               <hr style={styles.hrStyle}></hr>
             </div>
           </div>
         );
       })}
       <ConfirmModal
-                open={open}
-                handleDelete={handleDelete}
-                handleClose={handleClose}
-                handleOpen={handleOpen}
-                id={ activeTrip}
-              />
+        open={open}
+        handleDelete={handleDelete}
+        handleClose={handleClose}
+        handleOpen={handleOpen}
+        id={activeTrip}
+      />
     </div>
   );
 };
