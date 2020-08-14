@@ -145,15 +145,15 @@ export default function Map() {
   // };
   // ==========================================================================================
 
+  const previousTrip = () =>{
+    if(document.getElementsByClassName("form-wrap")[0].children[0].children[0].value){
+        localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
+        localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
+    }
+  }
 
   useEffect(() => {
-
-    document.addEventListener('keyup',(x)=>{
-        if(document.getElementsByClassName("form-wrap")[0].children[0].children[0].value){
-            localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
-            localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
-        }
-    });
+    document.addEventListener('keyup',previousTrip);
 
     const mapquest = window.L.mapquest;
     mapquest.key = process.env.REACT_APP_API_KEY;
@@ -200,6 +200,10 @@ export default function Map() {
     map.addControl(mapquest.control());
 
     setMap(map);
+
+    return () => {
+       window.removeEventListener('keyup', previousTrip);
+    }
   }, []);
 
   return (
