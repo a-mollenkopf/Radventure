@@ -13,7 +13,7 @@ function App() {
   return (
     <MapProvider>
       <Router>
-        <Header />
+        {/* <Header /> */}
         <Switch>
           <Route
             exact
