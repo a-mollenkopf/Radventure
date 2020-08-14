@@ -164,7 +164,9 @@ const PastTrip = () => {
               <CardContent>
                 <Typography paragraph>Trip Details:</Typography>
                 <Divider variant="inset" />
-                <h4>Estimated Distance: {trip.distance} mi </h4>
+                <Typography paragraph>
+                  Estimated Distance: {trip.distance} mi{" "}
+                </Typography>
               </CardContent>
               <Divider variant="inset" />
               <CardActions disableSpacing>
