@@ -166,7 +166,7 @@ const PastTrip = () => {
                 <Divider variant="inset" />
                 <h4>Estimated Distance: {trip.distance} mi </h4>
               </CardContent>
-              {/* <Divider variant="inset" /> */}
+              <Divider variant="inset" />
               <CardActions disableSpacing>
                 <IconButton
                   id={trip._id}
