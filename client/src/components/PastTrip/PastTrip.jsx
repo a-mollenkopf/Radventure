@@ -26,6 +26,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// STYLES 
 const styles = {
   ButtonsStyle: {
     background: "#02361C",
