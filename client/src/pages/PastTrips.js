@@ -1,12 +1,10 @@
 import React from "react";
-import PastTripsCard from "../components/Card/PastTripsCard";
+import PastTrip from "../components/PastTrip/PastTrip";
 
 
 const PastTrips = () => {
   return (
-    <div className="container">
-    <PastTripsCard />
-    </div>
+    <PastTrip />
   );
 };
 
