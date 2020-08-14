@@ -139,7 +139,7 @@ const PastTrip = () => {
         return (
           <Card key={trip._id} className="container">
             <CardHeader
-              title={`${trip.startCity}, ${trip.startState} -{" "} to ${trip.destinationState}, ${trip.destinationState}`}
+              title={`${trip.startCity}, ${trip.startState} - ${trip.destinationCity}, ${trip.destinationState}`}
             />
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
