@@ -4,7 +4,7 @@ const key = process.env.REACT_APP_API_KEY;
 export default {
   //Should return current trip from api
   getDirection: (queryOne, queryTwo) => {
-    return axios.get(`http://www.mapquestapi.com/directions/v2/route?key=${key}&from=${queryOne}&to=${queryTwo}`);
+    return axios.get(`https://www.mapquestapi.com/directions/v2/route?key=${key}&from=${queryOne}&to=${queryTwo}`);
   }, 
   //Should return all saved trips
   getAllTrips: () => {
