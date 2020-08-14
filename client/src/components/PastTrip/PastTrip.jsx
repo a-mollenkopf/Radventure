@@ -22,6 +22,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import PageviewIcon from "@material-ui/icons/Pageview";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 
 // ALERTS IMPORTS
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
@@ -172,16 +173,11 @@ const PastTrip = () => {
                   onClick={() => handleOpen(trip._id)}
                 >
                   {" "}
-                  <PageviewIcon />
-                  Delete
+                  <DeleteForeverIcon />
                 </IconButton>
-                <Button
-                  size="large"
-                  href={`/PastTrips/${trip._id}`}
-                  style={styles.ButtonsStyle}
-                >
-                  View Trip
-                </Button>
+                <IconButton href={`/PastTrips/${trip._id}`}>
+                  <PageviewIcon />
+                </IconButton>
                 <ToastContainer />
               </CardActions>
             </Collapse>
