@@ -146,6 +146,15 @@ export default function Map() {
   // ==========================================================================================
 
 
+  const previousTrip = () =>{
+    if(document.getElementsByClassName("form-wrap")[0].children[0].children[0].value){
+        localStorage.setItem('start', document.getElementsByClassName("form-wrap")[0].children[0].children[0].value);
+        localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
+    }
+  }
+
+
+
   useEffect(() => {
 
     document.addEventListener('keyup',(x)=>{
@@ -154,6 +163,7 @@ export default function Map() {
             localStorage.setItem('destination', document.getElementsByClassName("form-wrap")[1].children[0].children[0].value);
         }
     });
+
 
     const mapquest = window.L.mapquest;
     mapquest.key = process.env.REACT_APP_API_KEY;
@@ -186,7 +196,10 @@ export default function Map() {
       })
       .addTo(map);
 
+
+
       //Destination information
+
       if(startingPoint&&destinationPoint){
           window.L.mapquest.directions().route({
             start: startingPoint,
@@ -201,6 +214,11 @@ export default function Map() {
     map.addControl(mapquest.control());
 
     setMap(map);
+
+    //Return function
+    return () => {
+       window.removeEventListener('keyup', previousTrip);
+    }
   }, []);
 
   return (
