@@ -45,7 +45,11 @@ export default function EditTrip() {
   const { map, setMap } = useContext(MapContext);
   const [oneTripState, setOneTripState] = useState([]);
   const { id } = useParams();
-
+  const [double, setDouble] = useState(false);
+  const heandler = () => {
+    setTimeout(() => setDouble(false), 5000);
+    setDouble(true);
+  };
   useEffect(() => {
     const mapquest = window.L.mapquest;
     mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
@@ -98,6 +102,7 @@ export default function EditTrip() {
 
     if (address === undefined) {
       toast.error("You should enter at least two states with cities !");
+      heandler()
     } else {
       const startStreet = address.locations[0].street;
       const startCity = address.locations[0].adminArea5;
@@ -113,16 +118,12 @@ export default function EditTrip() {
 
       API.getDirection(queryOne, queryTwo)
         .then((response) => {
-          console.log(
-            "distance  " + JSON.stringify(response.data.route.distance)
-          );
-          console.log(
-            "time  " + JSON.stringify(response.data.route.formattedTime)
-          );
           const distance = response.data.route.distance;
           const time = response.data.route.formattedTime;
           console.log(distance, time);
           setOneTripState(
+            time,
+            distance,
             startStreet,
             startCity,
             startState,
@@ -146,66 +147,22 @@ export default function EditTrip() {
               destinationPostalCode,
             })
             .then((res) => {
+              setDouble(true);
               toast.success("You trip is successfully updated !");
               setTimeout(() => window.location.replace("/PastTrips"), 2000);
             })
             .catch((err) => {
+              heandler()
               console.log("this is error message  " + err);
             });
         })
         .catch((err) => {
+          heandler()
           console.log("this is error message  " + err);
           toast.error("Sorry, error occurred! Try once more!");
         });
     }
   };
-  // DO NOT DELETE THIS PART OF CODE
-// ==========================================================================================
-  // const updateTrip = () => {
-  //   const address = map.directionsControl.directions.directionsRequest;
-  //   if (address === undefined) {
-  //     toast.error("You should enter at least two states with cities !");
-  //   } else {
-  //   const address = map.directionsControl.directions.directionsRequest;
-  //   const startStreet = address.locations[0].street;
-  //   const startCity = address.locations[0].adminArea5;
-  //   const startState = address.locations[0].adminArea3;
-  //   const startPostalCode = address.locations[0].postalCode;
-  //   const destinationStreet = address.locations[1].street;
-  //   const destinationCity = address.locations[1].adminArea5;
-  //   const destinationState = address.locations[1].adminArea3;
-  //   const destinationPostalCode = address.locations[1].postalCode;
-
-  //   setOneTripState(
-  //     startStreet,
-  //     startCity,
-  //     startState,
-  //     startPostalCode,
-  //     destinationStreet,
-  //     destinationCity,
-  //     destinationState,
-  //     destinationPostalCode
-  //   );
-  //   axios
-  //     .put(`/api/trips/${id}`, {
-  //       startStreet,
-  //       startCity,
-  //       startState,
-  //       startPostalCode,
-  //       destinationStreet,
-  //       destinationCity,
-  //       destinationState,
-  //       destinationPostalCode,
-  //     })
-  //     .then((res) => {
-  //       toast.success("You trip is successfully updated !");
-  //       setTimeout(() => window.location.replace("/PastTrips"), 2000);
-  //     })
-  //     .catch((err) => {
-  //       console.log("this is error message  " + err);
-  //     });
-  //   }
-  // };
 
   return (
     <div className={classes.root}>
@@ -214,6 +171,7 @@ export default function EditTrip() {
       </MyPaper>
       <MyBox>
         <MyFab
+          disabled={double}
           variant="extended"
           size="medium"
           aria-label="add"
