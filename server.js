@@ -55,7 +55,6 @@ app.post('/login',
 );
 
 app.post('/signup',(req, res) =>{
-      // const newUser = new db();
       db.User.create(req.body)
       .then((dbUsers) => res.json(dbUsers))
       .catch((err) => console.log(err));
@@ -70,13 +69,8 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
-//Passport
+////Passport
 
-// app.get("/api/config", (req, res) => {
-//   res.json({
-//     success: true,
-//   });
-// });
 app.use(routes)
 
 app.get("*", (req, res) => {
@@ -95,7 +89,7 @@ mongoose
     console.log("Unable to connect to database.");
     console.log(err);
   });
-// Start the API server
+
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
