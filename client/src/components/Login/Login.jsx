@@ -8,7 +8,6 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-<<<<<<< HEAD
 
 const Login = () => {
   return (
@@ -29,7 +28,7 @@ const Login = () => {
       <a href="/signup"><button>Sign Up</button></a>
     </div>
 );
-=======
+
 import Container from "@material-ui/core/Container";
 import CardContent from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
@@ -86,13 +85,6 @@ const Login = () => {
 
     </Container>
   );
->>>>>>> 37b8109fa873bf05400fd2f8d215b87fe41123cb
 };
 
 export default Login;
-
-
-
-
-
-
