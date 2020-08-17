@@ -38,8 +38,9 @@ const styles = {
 const Login = () => {
   return (
     <Container maxWidth="sm">
-      <Card style={styles.Card} action="/login" method="post">
+      <Card style={styles.Card} >
         <CardContent style={styles.CardContent}>
+          <form action="/login" method="post">
           <Typography>Email:</Typography>
           <TextField type="text" name="username" />
           <Typography>Password:</Typography>
@@ -55,6 +56,7 @@ const Login = () => {
           <Typography style={styles.Typography}>
             Don't have an account? Sign up<Button href="/Signup" style={styles.Button}>Here</Button>
           </Typography>
+          </form>
         </CardContent>
       </Card>
     </Container>
