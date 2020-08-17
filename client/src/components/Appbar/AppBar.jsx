@@ -17,6 +17,7 @@ import Button from "@material-ui/core/Button";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { withRouter } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
 
 // STYLING FOR THE APPBAR
 const useStyles = makeStyles((theme) => ({
@@ -144,21 +145,21 @@ const Header = (props) => {
             // THIS IS DISPLAYED WHEN THE SCREEN IS NOT MOBILE
             <div>
                 <Avatar src={Logo} style={styles.Avatar} />
-              <div className={classes.headerOptions}>
-                <MyButton
-                  size="large"
-                  onClick={() => handleButtonClick("/search")}
-                >
-                  Search
-                </MyButton>
+                <div className={classes.headerOptions}>
+                  <MyButton
+                    size="large"
+                    onClick={() => handleButtonClick("/search")}
+                  >
+                    Search
+                  </MyButton>
 
-                <MyButton
-                  size="large"
-                  onClick={() => handleButtonClick("/PastTrips")}
-                >
-                  TRIPS
-                </MyButton>
-              </div>
+                  <MyButton
+                    size="large"
+                    onClick={() => handleButtonClick("/PastTrips")}
+                  >
+                    TRIPS
+                  </MyButton>
+                </div>
             </div>
           )}
         </Toolbar>

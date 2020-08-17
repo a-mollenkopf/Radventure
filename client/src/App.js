@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Search from "./pages/Search";
-import Header from "./components/Appbar/AppBar";
 import PastTrips from "./pages/PastTrips";
 import ViewOneTrip from "./components/ViewOneTrip/ViewOneTrip";
 import EditTrip from "./components/EditTrip/EditTrip";
