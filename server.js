@@ -1,6 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+//Passport
+const passport = require('passport')
+, LocalStrategy = require('passport-local').Strategy;
+const session = require("express-session");
+const flash = require('connect-flash');
+const db = require("./models/Users.js");
+////Passport
 
 const app = express();
 
@@ -12,13 +19,65 @@ const routes= require ("./routes")
 
 app.use(express.static("client/build"));
 
+//Passport
+app.use(session({
+    cookie: {maxAge:40000},
+    secret: 'something',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy({
+ passReqToCallback : true
+}, function(req, usernameInput, passwordInput, done) {
+    db.findOne({ username: usernameInput }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validatePassword(passwordInput)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+app.post('/login',
+  passport.authenticate('local',
+    { successRedirect: '/search',
+      failureRedirect: '/login',
+      failureFlash: 'Invalid username or password.'
+    })
+);
+
+app.post('/signup',(req, res) =>{
+      const newUser = new db();
+      db.create(req.body)
+      .then((dbUsers) => res.json(dbUsers))
+      .catch((err) => console.log(err));
+});
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  db.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+////Passport
+
 // app.get("/api/config", (req, res) => {
 //   res.json({
 //     success: true,
 //   });
 // });
 app.use(routes)
-
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
