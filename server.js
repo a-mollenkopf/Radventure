@@ -16,9 +16,7 @@ const PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const routes = require("./routes");
-
 app.use(express.static("client/build"));
-
 //Passport
 app.use(
   session({
