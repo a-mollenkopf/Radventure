@@ -1,10 +1,13 @@
 import React from "react";
 import PastTrip from "../components/PastTrip/PastTrip";
-
+import Header from "../components/Appbar/AppBar";
 
 const PastTrips = () => {
   return (
-    <PastTrip />
+    <div>
+      <Header />
+      <PastTrip />
+    </div>
   );
 };
 

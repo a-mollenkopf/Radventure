@@ -1,63 +1,53 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
-import { fade } from "@material-ui/core/styles/colorManipulator";
-import { Typography } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 1200,
-    marginLeft: 400,
-    marginTop: 20,
-    backgroundColor: fade("#255D42", 0.8),
-    height: 800,
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
-  title: {
-    fontSize: 70,
-  },
-  pos: {
-    marginBottom: 12,
+    marginTop: "20%",
+    backgroundColor: "transparent",
+    boxShadow: "none",
+    textAlign: "center",
   },
 });
 
 const styles = {
   ButtonsStyle: {
-    background: "#02361C",
-    color: "white",
-    justifyContent: "center",
-    marginTop: 45,
-    marginLeft: 500
+    background: "#ffc107",
+    marginTop: "45px",
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   img: {
-    height: 550,
-    marginLeft: 270,
-    paddingTop: 20
+    height: "100%",
+    width: "100%",
   },
-  Typography: {
-    fontSize: 80,
-    marginLeft: 150,
-    fontWeight: "bold",
-    color: "white"
-  }
 };
 
 export default function SimpleCard() {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <img src="https://i.imgur.com/AewRuxP.png" style={styles.img}></img>
-      <Typography style={styles.Typography}>Welcome to Radventure!</Typography>
-      <Button size="large" href="/search" style={styles.ButtonsStyle}>
-        Get started
-      </Button>
-    </Card>
+    <Container maxWidth="sm">
+      <Card className={classes.root}>
+        <img
+          src="https://i.imgur.com/AewRuxP.png"
+          style={styles.img}
+        ></img>
+        <CardContent className={classes.root}>
+          <Button
+            size="large"
+            href="/search"
+            style={styles.ButtonsStyle}
+          >
+            Get started
+          </Button>
+        </CardContent>
+      </Card>
+    </Container>
   );
 }
 
