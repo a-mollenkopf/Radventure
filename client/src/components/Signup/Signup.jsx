@@ -32,6 +32,7 @@ const styles = {
 const Signup = () => {
   return (
     <Container maxWidth="sm">
+
       <Card style={styles.Card}>
         <CardContent style={styles.CardContent}>
         <form  action="/signup" method="post" >
@@ -48,6 +49,7 @@ const Signup = () => {
           </form>
         </CardContent>
       </Card>
+
     </Container>
   );
 };

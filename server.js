@@ -75,6 +75,7 @@ app.post("/signup", (req, res) => {
         });
           })
     .catch((err) => console.log(err));
+
 });
 
 passport.serializeUser(function (user, done) {
@@ -87,7 +88,9 @@ passport.deserializeUser(function (id, done) {
   });
 });
 
-app.use(routes);
+////Passport
+
+app.use(routes)
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
@@ -105,7 +108,7 @@ mongoose
     console.log("Unable to connect to database.");
     console.log(err);
   });
-// Start the API server
+
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
