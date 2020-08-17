@@ -8,19 +8,21 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import Container from "@material-ui/core/Container";
+import { CardContent } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: fade("#D2D6D6", 0.5),
+  },
+});
 
 const styles = {
   ButtonsStyle: {
     background: "#02361C",
     color: "white",
     justifyContent: "center",
-  },
-  CardStyles: {
-    backgroundColor: fade("#D2D6D6", 0.5),
-    maxWidth: 1200,
-    marginLeft: 400,
-    marginTop: 20,
-    height: 450, 
   },
   DeleteButtonStyle: {
     background: "red",
@@ -30,12 +32,12 @@ const styles = {
   },
 };
 
-
 const ViewOneTrip = () => {
   const [oneTripState, setOneTripState] = useState([]);
   const { id } = useParams();
   const [open, setOpen] = React.useState(false);
   const [activeTrip, setActiveTrip] = React.useState(null);
+  const classes = useStyles();
 
   const handleOpen = () => {
     setOpen(true);
@@ -62,72 +64,77 @@ const ViewOneTrip = () => {
   };
 
   return (
-    <Card style={styles.CardStyles}>
-      <div>
-        <div key={oneTripState._id}>
-          <form>
-            <div className="container">
-              <h1 className="text-center welcome">Details of Your Trip!</h1>
+    <Container maxWidth="sm">
+      <Card className={classes.root}>
+        <CardContent>
+          <div>
+            <div key={oneTripState._id}>
+              <form>
+                <div className="container">
+                  <h1 className="text-center welcome">Details of Your Trip!</h1>
 
-              <h2> Start City Information</h2>
-              <h3>
-                {" "}
-                <strong>Address:</strong> {oneTripState.startStreet}{" "}
-                {oneTripState.startCity}, {oneTripState.startState},{" "}
-                {oneTripState.startPostalCode}
-              </h3>
-              <h2> Destination City Information</h2>
-              <h3>
-                {" "}
-                <strong>Address:</strong> {oneTripState.destinationStreet}{" "}
-                {oneTripState.destinationCity}, {oneTripState.destinationState},{" "}
-                {oneTripState.destinationPostalCode}
-              </h3>
-              <h5>-------------------------------</h5>
-              <h4>Estimated Distance: {oneTripState.distance} mi </h4>
-              <h4>Estimated Time: {oneTripState.time}  </h4>
+                  <h2> Start City Information</h2>
+                  <h3>
+                    {" "}
+                    <strong>Address:</strong> {oneTripState.startStreet}{" "}
+                    {oneTripState.startCity}, {oneTripState.startState},{" "}
+                    {oneTripState.startPostalCode}
+                  </h3>
+                  <h2> Destination City Information</h2>
+                  <h3>
+                    {" "}
+                    <strong>Address:</strong> {oneTripState.destinationStreet}{" "}
+                    {oneTripState.destinationCity},{" "}
+                    {oneTripState.destinationState},{" "}
+                    {oneTripState.destinationPostalCode}
+                  </h3>
+                  <h5>-------------------------------</h5>
+                  <h4>Estimated Distance: {oneTripState.distance} mi </h4>
+                  <h4>Estimated Time: {oneTripState.time} </h4>
 
-              <div>
-                <Button
-                  id={oneTripState._id}
-                  onClick={() => handleOpen(oneTripState._id)}
-                  size="large"
-                  style={styles.DeleteButtonStyle}
-                >
-                  Delete
-                </Button>
+                  <div>
+                    <Button
+                      id={oneTripState._id}
+                      onClick={() => handleOpen(oneTripState._id)}
+                      size="large"
+                      style={styles.DeleteButtonStyle}
+                    >
+                      Delete
+                    </Button>
 
-                <Link to={`/PastTrips/${oneTripState._id}/edit`}>
-                  <Button
-                    id={oneTripState._id}
-                    type="submit"
-                    size="large"
-                    style={styles.UpdateButtonStyle}
-                  >
-                    Update
-                  </Button>
-                </Link>
-                <Button
-                  size="large"
-                  href="/pasttrips"
-                  style={styles.ButtonsStyle}
-                >
-                  Back to Trips
-                </Button>
-                <ToastContainer />
-              </div>
-              <ConfirmModal
-                open={open}
-                handleDelete={handleDelete}
-                handleClose={handleClose}
-                handleOpen={handleOpen}
-                id={activeTrip}
-              />
+                    <Link to={`/PastTrips/${oneTripState._id}/edit`}>
+                      <Button
+                        id={oneTripState._id}
+                        type="submit"
+                        size="large"
+                        style={styles.UpdateButtonStyle}
+                      >
+                        Update
+                      </Button>
+                    </Link>
+                    <Button
+                      size="large"
+                      href="/pasttrips"
+                      style={styles.ButtonsStyle}
+                    >
+                      Back to Trips
+                    </Button>
+                    <ToastContainer />
+                  </div>
+                  <ConfirmModal
+                    open={open}
+                    handleDelete={handleDelete}
+                    handleClose={handleClose}
+                    handleOpen={handleOpen}
+                    id={activeTrip}
+                  />
+                </div>
+              </form>
             </div>
-          </form>
-        </div>
-      </div>
-    </Card>
+          </div>
+        </CardContent>
+      </Card>
+    </Container>
   );
 };
 
