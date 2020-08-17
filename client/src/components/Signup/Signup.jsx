@@ -32,17 +32,20 @@ const styles = {
 const Signup = () => {
   return (
     <Container maxWidth="sm">
-      <Card style={styles.Card} action="/Signup" method="post">
+      <Card style={styles.Card}>
         <CardContent style={styles.CardContent}>
+        <form  action="/signup" method="post" >
+
           <Typography>Email:</Typography>
           <TextField type="text" name="username" />
           <Typography>Password:</Typography>
           <TextField type="password" name="password" />
           <Typography>Confirm Password:</Typography>
-          <TextField type="text" name="confirmPassword" />
-          <Button className="Signup" size="large" style={styles.ButtonsStyle}>
+          <TextField type="password" name="confirmPassword" />
+          <Button className="Signup" type="submit" value="signup" size="large" style={styles.ButtonsStyle}>
             Sign Up
           </Button>
+          </form>
         </CardContent>
       </Card>
     </Container>
