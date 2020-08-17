@@ -6,7 +6,7 @@ const passport = require('passport')
 , LocalStrategy = require('passport-local').Strategy;
 const session = require("express-session");
 const flash = require('connect-flash');
-const db = require("./models/Users.js");
+const db = require("./models");
 ////Passport
 
 const app = express();
@@ -33,7 +33,7 @@ app.use(passport.session());
 passport.use(new LocalStrategy({
  passReqToCallback : true
 }, function(req, usernameInput, passwordInput, done) {
-    db.findOne({ username: usernameInput }, function (err, user) {
+    db.User.findOne({ username: usernameInput }, function (err, user) {
       if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
@@ -55,8 +55,8 @@ app.post('/login',
 );
 
 app.post('/signup',(req, res) =>{
-      const newUser = new db();
-      db.create(req.body)
+      // const newUser = new db();
+      db.User.create(req.body)
       .then((dbUsers) => res.json(dbUsers))
       .catch((err) => console.log(err));
 });
@@ -66,11 +66,11 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  db.findById(id, function(err, user) {
+  db.User.findById(id, function(err, user) {
     done(err, user);
   });
 });
-////Passport
+//Passport
 
 // app.get("/api/config", (req, res) => {
 //   res.json({
