@@ -18,7 +18,7 @@ const styles = {
     background: "#ffc107",
     marginTop: 45,
     marginBottom: 10,
-    marginLeft: 50
+    marginLeft: 50,
   },
   Card: {
     backgroundColor: fade("#D2D6D6", 0.5),
@@ -28,34 +28,39 @@ const styles = {
     paddingTop: 10,
   },
   Typography: {
-    textAlign: "center"
+    textAlign: "center",
   },
   Button: {
-    color: "blue"
-  }
+    color: "blue",
+  },
 };
 
 const Login = () => {
   return (
     <Container maxWidth="sm">
-      <Card style={styles.Card} action="/login" method="post">
-        <CardContent style={styles.CardContent}>
-          <Typography>Email:</Typography>
-          <TextField type="text" name="username" />
-          <Typography>Password:</Typography>
-          <TextField type="password" name="password" />
-          <Button
-            size="large"
-            type="submit"
-            value="login"
-            style={styles.ButtonsStyle}
-          >
-            Login
-          </Button>
-          <Typography style={styles.Typography}>
-            Don't have an account? Sign up<Button href="/Signup" style={styles.Button}>Here</Button>
-          </Typography>
-        </CardContent>
+      <Card style={styles.Card}>
+        <form action="/login" method="post">
+          <CardContent style={styles.CardContent}>
+            <Typography>Email:</Typography>
+            <TextField type="text" name="username" />
+            <Typography>Password:</Typography>
+            <TextField type="password" name="password" />
+            <Button
+              size="large"
+              type="submit"
+              value="login"
+              style={styles.ButtonsStyle}
+            >
+              Login
+            </Button>
+            <Typography style={styles.Typography}>
+              Don't have an account? Sign up
+              <Button href="/Signup" style={styles.Button}>
+                Here
+              </Button>
+            </Typography>
+          </CardContent>
+        </form>
       </Card>
     </Container>
   );
