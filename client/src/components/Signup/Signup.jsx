@@ -8,8 +8,8 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-const Signup = () => {
-<<<<<<< HEAD
+
+const Signup = () => {    
 return (
     <div class="container">
       <form action="/Signup" method="post">
@@ -31,7 +31,7 @@ return (
       </form>
     </div>
 );
-=======
+    
   return (
     <Container maxWidth="sm">
 
@@ -54,11 +54,6 @@ return (
 
     </Container>
   );
-  
->>>>>>> 37b8109fa873bf05400fd2f8d215b87fe41123cb
 };
 
 export default Signup;
-
-
-
