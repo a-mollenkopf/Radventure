@@ -9,7 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
-return (
+const Login = () => {
+  return (
     <div class="container">
       <form action="/login" method="post">
         <div>
@@ -27,5 +28,12 @@ return (
       <a href="/signup"><button>Sign Up</button></a>
     </div>
 );
+};
 
 export default Login;
+
+
+
+
+
+
