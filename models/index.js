@@ -1,3 +1,5 @@
 module.exports = {
-    Trip: require("./Trip")
+    Trip: require("./Trip"),
+    Users: require("./Users")
+
   };
