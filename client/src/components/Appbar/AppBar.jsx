@@ -17,6 +17,7 @@ import Button from "@material-ui/core/Button";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { withRouter } from "react-router-dom";
+import "../Appbar/Appbar.css";
 
 // STYLING FOR THE APPBAR
 const useStyles = makeStyles((theme) => ({
@@ -34,20 +35,26 @@ const useStyles = makeStyles((theme) => ({
   headerOptions: {
     display: "flex",
     flex: 1,
-    justifyContent: "space-evenly",
+    justifyContent: "flex-end",
   },
 }));
 
 const styles = {
   Avatar: {
+    height: "6rem",
+    width: "6rem",
+  },
+  AvatarMobile: {
     height: "60%",
-    width: "60%",
+    width: "40%",
   },
 };
 
 const MyAppBar = styled(AppBar)({
   position: "static",
   backgroundColor: fade("#3f50b5", 0.7),
+
+
 });
 
 // NOTE: THIS IS FOR COLLAPSE ON MOBILE
@@ -60,6 +67,7 @@ const MyIconButton = styled(IconButton)({
 const MyButton = styled(Button)({
   variant: "contained",
   backgroundColor: "#ffc107",
+  marginRight: '1rem',
 });
 
 // END OF STYLING FOR APPBAR
@@ -105,7 +113,7 @@ const Header = (props) => {
             // THIS CHECKS TO SEE WHETHER THE SCREEN IS MOBILE OR NOT. REFER
             // LINE 64 MEDIA QUERY
             <>
-              <img src={Brand} style={styles.Avatar} />
+              <img src={Brand} style={styles.AvatarMobile} />
 
               <MyIconButton
                 className={classes.menuButton}
@@ -143,7 +151,7 @@ const Header = (props) => {
             </>
           ) : (
             // THIS IS DISPLAYED WHEN THE SCREEN IS NOT MOBILE
-            <div>
+            <>
               <Avatar src={Logo} style={styles.Avatar} />
               <div className={classes.headerOptions}>
                 <MyButton
@@ -160,7 +168,7 @@ const Header = (props) => {
                   TRIPS
                 </MyButton>
               </div>
-            </div>
+            </>
           )}
         </Toolbar>
       </MyAppBar>

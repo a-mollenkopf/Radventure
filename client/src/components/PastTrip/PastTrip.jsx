@@ -22,7 +22,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import PageviewIcon from "@material-ui/icons/Pageview";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import './PastTrip.css'
+import "./PastTrip.css";
 
 // ALERTS IMPORTS
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
@@ -51,19 +51,19 @@ const styles = {
     fontSize: 30,
   },
   distance: {
-    fontSize: 20
+    fontSize: 20,
   },
   FavoriteIcon: {
-    color: "red"
+    color: "red",
   },
   ShareIcon: {
-    color: "#0658D1"
-  }
+    color: "#0658D1",
+  },
 };
 
 const useStyles = makeStyles((theme) => ({
   root: {
-
+    textAlign: "center",
     maxWidth: 345,
     backgroundColor: fade("#D2D6D6", 0.4),
     marginTop: 20,
@@ -94,8 +94,10 @@ const PastTrip = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleExpandClick = (id) => {
+    const tripEx = {...expanded};
+tripEx[id] = !tripEx[id]
+    setExpanded(tripEx);
   };
 
   const handleOpen = (id) => {
@@ -110,10 +112,16 @@ const PastTrip = () => {
   useEffect(() => {
     API.getAllTrips().then((res) => {
       setTripInfoState(res.data);
+      res.data.map(el => {
+        const tripEx = {...expanded};
+        tripEx[el._id] = false;
+        setExpanded(tripEx);
+      }) 
     });
     document.removeEventListener("keyup", (x) => {
       if (
-        document.getElementsByClassName("form-wrap")[0].children[0].children[0]
+        document.getElementsByClassName("form-wrap")[0].children[0]
+          .children[0]
       ) {
         localStorage.setItem(
           "start",
@@ -159,33 +167,47 @@ const PastTrip = () => {
 
       {tripInfoState.map((trip) => {
         return (
-          <Card key={trip._id} className="container specialTrip" style={styles.Card}>
+          <Card
+            key={trip._id}
+            className="container specialTrip"
+            style={styles.Card}
+          >
             <CardHeader
               titleTypographyProps={{ variant: "h4" }}
               title={`${trip.startCity}, ${trip.startState} - ${trip.destinationCity}, ${trip.destinationState}`}
             />
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
-                <FavoriteIcon style={styles.FavoriteIcon} fontSize="large"/>
+                <FavoriteIcon
+                  style={styles.FavoriteIcon}
+                  fontSize="large"
+                />
               </IconButton>
               <IconButton aria-label="share">
-                <ShareIcon style={styles.ShareIcon} fontSize="large"/>
+                <ShareIcon
+                  style={styles.ShareIcon}
+                  fontSize="large"
+                />
               </IconButton>
               <IconButton
                 className={clsx(classes.expand, {
-                  [classes.expandOpen]: expanded,
+                  [classes.expandOpen]: expanded[trip._id],
                 })}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
+                onClick= {() => handleExpandClick(trip._id)}
+                aria-expanded={expanded[trip._id]}
                 aria-label="show more"
               >
                 <ExpandMoreIcon />
               </IconButton>
             </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Collapse in={expanded[trip._id]} timeout="auto" unmountOnExit>
               <CardContent>
                 <Divider variant="inset" />
-                <Typography paragraph className="distance" style={styles.distance}>
+                <Typography
+                  paragraph
+                  className="distance"
+                  style={styles.distance}
+                >
                   Estimated Distance: {trip.distance} mi{" "}
                 </Typography>
               </CardContent>

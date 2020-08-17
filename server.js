@@ -1,5 +1,3 @@
-
-
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -7,6 +5,8 @@ const path = require("path");
 const passport = require("passport"),
   LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
+const flash = require('connect-flash');
+const db = require("./models/Users.js");
 const flash = require("connect-flash");
 const db = require("./models");
 ////Passport
@@ -32,39 +32,31 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(
-  new LocalStrategy(
-    {
-      passReqToCallback: true,
-    },
-    function (req, usernameInput, passwordInput, done) {
-      db.User.findOne({ username: usernameInput }, function (err, user) {
-        if (err) {
-          return done(err);
-        }
-        if (!user) {
-          return done(null, false, { message: "Incorrect username." });
-        }
-        if (!user.validatePassword(passwordInput)) {
-          return done(null, false, { message: "Incorrect password." });
-        }
-        return done(null, user);
-      });
-    }
-  )
-);
+passport.use(new LocalStrategy({
+ passReqToCallback : true
+}, function(req, usernameInput, passwordInput, done) {
+    db.findOne({ username: usernameInput }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validatePassword(passwordInput)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/search",
-    failureRedirect: "/login",
-    failureFlash: "Invalid username or password.",
-  })
+app.post('/login',
+  passport.authenticate('local',
+    { successRedirect: '/search',
+      failureRedirect: '/login',
+      failureFlash: 'Invalid username or password.'
+    })
 );
 
 app.post("/signup", (req, res) => {
-  // const newUser = new db();
   db.User.create(req.body)
     .then((dbUsers) => {
         req.login(dbUsers, function(err) {
@@ -75,20 +67,17 @@ app.post("/signup", (req, res) => {
         });
           })
     .catch((err) => console.log(err));
-
 });
 
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
-  db.User.findById(id, function (err, user) {
+passport.deserializeUser(function(id, done) {
+  db.findById(id, function(err, user) {
     done(err, user);
   });
 });
-
-////Passport
 
 app.use(routes)
 
