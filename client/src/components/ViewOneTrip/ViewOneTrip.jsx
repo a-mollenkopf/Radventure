@@ -16,6 +16,11 @@ const styles = {
     justifyContent: "center",
   },
   CardStyles: {
+    backgroundColor: fade("#D2D6D6", 0.5),
+    maxWidth: 1200,
+    marginLeft: 400,
+    marginTop: 20,
+    height: 450, 
   },
   DeleteButtonStyle: {
     background: "red",
@@ -24,6 +29,7 @@ const styles = {
     background: "#FFC107",
   },
 };
+
 
 const ViewOneTrip = () => {
   const [oneTripState, setOneTripState] = useState([]);
