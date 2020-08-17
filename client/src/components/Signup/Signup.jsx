@@ -8,7 +8,7 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-
+const Signup = () => {
 return (
     <div class="container">
       <form action="/Signup" method="post">
@@ -30,5 +30,9 @@ return (
       </form>
     </div>
 );
+};
 
 export default Signup;
+
+
+
