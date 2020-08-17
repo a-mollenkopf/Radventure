@@ -94,8 +94,9 @@ const PastTrip = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
+  const handleExpandClick = (id) => {
     setExpanded(!expanded);
+    setActiveTrip(id);
   };
 
   const handleOpen = (id) => {
