@@ -1,5 +1,9 @@
 import React from "react";
-import { makeStyles, useTheme, styled } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  useTheme,
+  styled,
+} from "@material-ui/core/styles";
 import Logo from "./Assets/logo192.png";
 import LogoNoBrand from "./Assets/LogoNoBrand.png";
 import Brand from "./Assets/Brand.png";
@@ -37,15 +41,14 @@ const useStyles = makeStyles((theme) => ({
 
 const styles = {
   Avatar: {
-    height: 130,
-    width: 150,
-  }
-}
+    height: "60%",
+    width: "60%",
+  },
+};
 
 const MyAppBar = styled(AppBar)({
   position: "static",
   backgroundColor: fade("#3f50b5", 0.7),
-  height: 130,
 });
 
 // NOTE: THIS IS FOR COLLAPSE ON MOBILE
@@ -98,11 +101,12 @@ const Header = (props) => {
     <div className={classes.root}>
       <MyAppBar>
         <Toolbar>
-         <Avatar src={Logo} style={styles.Avatar}/>
+          {/* <img src={Brand} style={styles.Avatar}/> */}
           {isMobile ? (
             // THIS CHECKS TO SEE WHETHER THE SCREEN IS MOBILE OR NOT. REFER
             // LINE 64 MEDIA QUERY
             <>
+              <img src={Brand} style={styles.Avatar} />
               <MyIconButton
                 className={classes.menuButton}
                 aria-label="menu"
@@ -128,7 +132,9 @@ const Header = (props) => {
                 {menuItems.map((menuItem) => {
                   const { menuTitle, pageURL } = menuItem;
                   return (
-                    <MenuItem onClick={() => handleMenuClick(pageURL)}>
+                    <MenuItem
+                      onClick={() => handleMenuClick(pageURL)}
+                    >
                       {menuTitle}
                     </MenuItem>
                   );
@@ -137,19 +143,23 @@ const Header = (props) => {
             </>
           ) : (
             // THIS IS DISPLAYED WHEN THE SCREEN IS NOT MOBILE
-            <div className={classes.headerOptions}>
-              <MyButton
-                size="large"
-                onClick={() => handleButtonClick("/search")}
-              >
-                Search
-              </MyButton>
-              <MyButton
-                size="large"
-                onClick={() => handleButtonClick("/PastTrips")}
-              >
-                TRIPS
-              </MyButton>
+            <div>
+                <Avatar src={Logo} style={styles.Avatar} />
+              <div className={classes.headerOptions}>
+                <MyButton
+                  size="large"
+                  onClick={() => handleButtonClick("/search")}
+                >
+                  Search
+                </MyButton>
+
+                <MyButton
+                  size="large"
+                  onClick={() => handleButtonClick("/PastTrips")}
+                >
+                  TRIPS
+                </MyButton>
+              </div>
             </div>
           )}
         </Toolbar>
