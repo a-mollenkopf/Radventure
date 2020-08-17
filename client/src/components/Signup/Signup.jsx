@@ -52,6 +52,7 @@ const Signup = () => {
 
     </Container>
   );
+  
 };
 
 export default Signup;
