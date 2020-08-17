@@ -17,6 +17,11 @@
   height: auto;
 }
 
+.leaflet-control-mapquest-navigation {
+  background: none;
+  box-shadow: none;
+}
+
 button {
   margin-left: 20px;
 }

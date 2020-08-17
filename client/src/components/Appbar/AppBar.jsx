@@ -106,6 +106,7 @@ const Header = (props) => {
             // LINE 64 MEDIA QUERY
             <>
               <img src={Brand} style={styles.Avatar} />
+
               <MyIconButton
                 className={classes.menuButton}
                 aria-label="menu"
@@ -143,7 +144,7 @@ const Header = (props) => {
           ) : (
             // THIS IS DISPLAYED WHEN THE SCREEN IS NOT MOBILE
             <div>
-                <Avatar src={Logo} style={styles.Avatar} />
+              <Avatar src={Logo} style={styles.Avatar} />
               <div className={classes.headerOptions}>
                 <MyButton
                   size="large"
