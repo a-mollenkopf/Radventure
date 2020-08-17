@@ -18,7 +18,7 @@ const styles = {
   ButtonsStyle: {
     background: "#ffc107",
     marginTop: "45px",
-    marginLeft: 'auto',
+    marginLeft: '25px',
     marginRight: 'auto',
   },
   img: {
@@ -43,7 +43,14 @@ export default function SimpleCard() {
             href="/search"
             style={styles.ButtonsStyle}
           >
-            Get started
+            Get started without Account
+          </Button>
+          <Button
+            size="large"
+            href="/login"
+            style={styles.ButtonsStyle}
+          >
+            Get started with Account
           </Button>
         </CardContent>
       </Card>

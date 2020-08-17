@@ -1,12 +1,19 @@
+
+
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 //Passport
-const passport = require('passport')
-, LocalStrategy = require('passport-local').Strategy;
+const passport = require("passport"),
+  LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
+<<<<<<< HEAD
 const flash = require('connect-flash');
 const db = require("./models/Users.js");
+=======
+const flash = require("connect-flash");
+const db = require("./models");
+>>>>>>> 37b8109fa873bf05400fd2f8d215b87fe41123cb
 ////Passport
 
 const app = express();
@@ -15,21 +22,22 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const routes= require ("./routes")
-
+const routes = require("./routes");
 app.use(express.static("client/build"));
-
 //Passport
-app.use(session({
-    cookie: {maxAge:40000},
-    secret: 'something',
+app.use(
+  session({
+    cookie: { maxAge: 40000 },
+    secret: "something",
     resave: false,
-    saveUninitialized: false
-}));
+    saveUninitialized: false,
+  })
+);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+<<<<<<< HEAD
 passport.use(new LocalStrategy({
  passReqToCallback : true
 }, function(req, usernameInput, passwordInput, done) {
@@ -59,24 +67,75 @@ app.post('/signup',(req, res) =>{
       db.create(req.body)
       .then((dbUsers) => res.json(dbUsers))
       .catch((err) => console.log(err));
+=======
+passport.use(
+  new LocalStrategy(
+    {
+      passReqToCallback: true,
+    },
+    function (req, usernameInput, passwordInput, done) {
+      db.User.findOne({ username: usernameInput }, function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false, { message: "Incorrect username." });
+        }
+        if (!user.validatePassword(passwordInput)) {
+          return done(null, false, { message: "Incorrect password." });
+        }
+        return done(null, user);
+      });
+    }
+  )
+);
+
+app.post(
+  "/login",
+  passport.authenticate("local", {
+    successRedirect: "/search",
+    failureRedirect: "/login",
+    failureFlash: "Invalid username or password.",
+  })
+);
+
+app.post("/signup", (req, res) => {
+  // const newUser = new db();
+  db.User.create(req.body)
+    .then((dbUsers) => {
+        req.login(dbUsers, function(err) {
+          if (err) {
+            console.log(err);
+          }
+          return res.redirect('/search');
+        });
+          })
+    .catch((err) => console.log(err));
+
+>>>>>>> 37b8109fa873bf05400fd2f8d215b87fe41123cb
 });
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
+<<<<<<< HEAD
 passport.deserializeUser(function(id, done) {
   db.findById(id, function(err, user) {
     done(err, user);
   });
 });
 ////Passport
+=======
+passport.deserializeUser(function (id, done) {
+  db.User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
+>>>>>>> 37b8109fa873bf05400fd2f8d215b87fe41123cb
 
-// app.get("/api/config", (req, res) => {
-//   res.json({
-//     success: true,
-//   });
-// });
+////Passport
+
 app.use(routes)
 
 app.get("*", (req, res) => {
@@ -95,7 +154,7 @@ mongoose
     console.log("Unable to connect to database.");
     console.log(err);
   });
-// Start the API server
+
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

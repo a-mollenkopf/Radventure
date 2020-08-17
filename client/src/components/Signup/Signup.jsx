@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 const Signup = () => {
+<<<<<<< HEAD
 return (
     <div class="container">
       <form action="/Signup" method="post">
@@ -30,6 +31,31 @@ return (
       </form>
     </div>
 );
+=======
+  return (
+    <Container maxWidth="sm">
+
+      <Card style={styles.Card}>
+        <CardContent style={styles.CardContent}>
+        <form  action="/signup" method="post" >
+
+          <Typography>Email:</Typography>
+          <TextField type="text" name="username" />
+          <Typography>Password:</Typography>
+          <TextField type="password" name="password" />
+          <Typography>Confirm Password:</Typography>
+          <TextField type="password" name="confirmPassword" />
+          <Button className="Signup" type="submit" value="signup" size="large" style={styles.ButtonsStyle}>
+            Sign Up
+          </Button>
+          </form>
+        </CardContent>
+      </Card>
+
+    </Container>
+  );
+  
+>>>>>>> 37b8109fa873bf05400fd2f8d215b87fe41123cb
 };
 
 export default Signup;

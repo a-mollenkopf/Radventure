@@ -223,12 +223,12 @@ tripEx[id] = !tripEx[id]
                 <IconButton href={`/PastTrips/${trip._id}`}>
                   <PageviewIcon />
                 </IconButton>
-                <ToastContainer />
               </CardActions>
             </Collapse>
           </Card>
         );
       })}
+      <ToastContainer />
       <ConfirmModal
         open={open}
         handleDelete={handleDelete}
