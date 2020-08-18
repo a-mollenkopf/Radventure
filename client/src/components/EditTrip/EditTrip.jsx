@@ -43,7 +43,7 @@ const MyFab = styled(Fab)({
 export default function EditTrip() {
   const classes = useStyles();
   const { map, setMap } = useContext(MapContext);
-  const [oneTripState, setOneTripState] = useState([]);
+  const [setOneTripState] = useState([]);
   const { id } = useParams();
   const [double, setDouble] = useState(false);
   const heandler = () => {
@@ -95,7 +95,7 @@ export default function EditTrip() {
     map.addControl(mapquest.control());
 
     setMap(map);
-  }, []);
+  }, [id, setMap, setOneTripState]);
 
   const updateTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;

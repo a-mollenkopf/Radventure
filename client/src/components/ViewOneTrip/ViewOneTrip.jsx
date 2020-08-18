@@ -52,7 +52,7 @@ const ViewOneTrip = () => {
     API.getOneTrip(id).then((res) => {
       setOneTripState(res.data);
     });
-  }, []);
+  }, [id]);
   const handleDelete = (id) => {
     API.deleteTrip(id)
       .then((_) => {

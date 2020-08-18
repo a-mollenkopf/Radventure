@@ -113,7 +113,7 @@ const Header = (props) => {
             // THIS CHECKS TO SEE WHETHER THE SCREEN IS MOBILE OR NOT. REFER
             // LINE 64 MEDIA QUERY
             <>
-              <img src={Brand} style={styles.AvatarMobile} />
+              <img src={Brand} style={styles.AvatarMobile} alt="Radventure Logo" />
 
               <MyIconButton
                 className={classes.menuButton}

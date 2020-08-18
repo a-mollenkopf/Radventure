@@ -197,7 +197,7 @@ export default function Map() {
     return () => {
       window.removeEventListener("keyup", previousTrip);
     };
-  }, []);
+  }, [setMap]);
 
   return (
     <div className={classes.root}>
