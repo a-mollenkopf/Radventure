@@ -9,36 +9,34 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
 
+const styles = {
+  ButtonsStyle: {
+    background: "#ffc107",
+    marginTop: 45,
+    marginBottom: 10,
+    marginLeft: 50,
+  },
+  Card: {
+    backgroundColor: fade("#D2D6D6", 0.5),
+  },
+  CardContent: {
+    paddingLeft: 20,
+    paddingTop: 10,
+  },
+  Typography: {
+    textAlign: "center",
+  },
+  Button: {
+    color: "blue",
+  },
+};
+
 const Signup = () => {    
-return (
-    <div class="container">
-      <form action="/Signup" method="post">
-        <div>
-          <label>Email:</label>
-          <input type="text" name="username"/>
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" name="password"/>
-        </div>
-        <div>
-          <label>Confirm Password:</label>
-          <input type="confirmPassword" name="confirmPassword"/>
-        </div>
-        <div>
-          <input type="submit" value="signup"/>
-        </div>
-      </form>
-    </div>
-);
-    
   return (
     <Container maxWidth="sm">
-
       <Card style={styles.Card}>
         <CardContent style={styles.CardContent}>
         <form  action="/signup" method="post" >
-
           <Typography>Email:</Typography>
           <TextField type="text" name="username" />
           <Typography>Password:</Typography>
@@ -51,7 +49,6 @@ return (
           </form>
         </CardContent>
       </Card>
-
     </Container>
   );
 };
