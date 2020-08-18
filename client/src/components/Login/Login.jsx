@@ -12,7 +12,6 @@ import Container from "@material-ui/core/Container";
 import CardContent from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import Form from "react";
 
 const styles = {
   ButtonsStyle: {
@@ -39,30 +38,29 @@ const styles = {
 const Login = () => {
   return (
     <Container maxWidth="sm">
-        <form action="/login" method="post">
-          <Card style={styles.Card}>
-              <CardContent style={styles.CardContent}>
-                <Typography>Email:</Typography>
-                <TextField type="text" name="username" />
-                <Typography>Password:</Typography>
-                <TextField type="password" name="password" />
-                <Button
-                  size="large"
-                  type="submit"
-                  value="login"
-                  style={styles.ButtonsStyle}
-                >
-                  Login
-                </Button>
-                <Typography style={styles.Typography}>
-                  Don't have an account? Sign up
-                  <Button href="/Signup" style={styles.Button}>
-                    Here
-                  </Button>
-                </Typography>
-              </CardContent>
-          </Card>
-        </form>
+
+      <Card style={styles.Card} >
+        <CardContent style={styles.CardContent}>
+          <form action="/login" method="post">
+          <Typography>Email:</Typography>
+          <TextField type="text" name="username" />
+          <Typography>Password:</Typography>
+          <TextField type="password" name="password" />
+          <Button
+            size="large"
+            type="submit"
+            value="login"
+            style={styles.ButtonsStyle}
+          >
+            Login
+          </Button>
+          <Typography style={styles.Typography}>
+            Don't have an account? Sign up<Button href="/Signup" style={styles.Button}>Here</Button>
+          </Typography>
+          </form>
+        </CardContent>
+      </Card>
+
     </Container>
   );
 };

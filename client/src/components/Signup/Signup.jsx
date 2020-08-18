@@ -17,8 +17,8 @@ const styles = {
   ButtonsStyle: {
     background: "#ffc107",
     marginTop: 45,
-    marginLeft: 30,
     marginBottom: 10,
+    marginLeft: 50,
   },
   Card: {
     backgroundColor: fade("#D2D6D6", 0.5),
@@ -27,26 +27,36 @@ const styles = {
     paddingLeft: 20,
     paddingTop: 10,
   },
+  Typography: {
+    textAlign: "center",
+  },
+  Button: {
+    color: "blue",
+  },
 };
 
 const Signup = () => {
+    
   return (
     <Container maxWidth="sm">
-        <form action="/Signup" method="post">
-            <Card style={styles.Card}>
-              <CardContent style={styles.CardContent}>
-                <Typography>Email:</Typography>
-                <TextField type="text" name="username" />
-                <Typography>Password:</Typography>
-                <TextField type="password" name="password" />
-                <Typography>Confirm Password:</Typography>
-                <TextField type="text" name="confirmPassword" />
-                <Button className="Signup" size="large" style={styles.ButtonsStyle}>
-                  Sign Up
-                </Button>
-              </CardContent>
-            </Card>
-        </form>
+
+      <Card style={styles.Card}>
+        <CardContent style={styles.CardContent}>
+        <form  action="/signup" method="post" >
+
+          <Typography>Email:</Typography>
+          <TextField type="text" name="username" />
+          <Typography>Password:</Typography>
+          <TextField type="password" name="password" />
+          <Typography>Confirm Password:</Typography>
+          <TextField type="password" name="confirmPassword" />
+          <Button className="Signup" type="submit" value="signup" size="large" style={styles.ButtonsStyle}>
+            Sign Up
+          </Button>
+          </form>
+        </CardContent>
+      </Card>
+
     </Container>
   );
 };
