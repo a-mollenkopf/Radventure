@@ -15,8 +15,6 @@ import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { fade } from "@material-ui/core/styles/colorManipulator";
@@ -116,6 +114,7 @@ tripEx[id] = !tripEx[id]
         const tripEx = {...expanded};
         tripEx[el._id] = false;
         setExpanded(tripEx);
+        return el;
       }) 
     });
     document.removeEventListener("keyup", (x) => {
@@ -135,7 +134,7 @@ tripEx[id] = !tripEx[id]
         );
       }
     });
-  }, []);
+  }, [expanded]);
   const handleDelete = (id) => {
     API.deleteTrip(id)
       .then((_) => {
@@ -241,24 +240,3 @@ tripEx[id] = !tripEx[id]
 };
 
 export default PastTrip;
-
-{
-  /* <Button
-                id={trip._id}
-                onClick={() => handleOpen(trip._id)}
-                size="large"
-                style={styles.DeleteButtonStyle}
-              >
-                Delete
-              </Button>
-              <Button
-                size="large"
-                href={`/PastTrips/${trip._id}`}
-                style={styles.ButtonsStyle}
-              >
-                View Trip
-              </Button>
-              <ToastContainer />
-
-              <hr style={styles.hrStyle}></hr> */
-}

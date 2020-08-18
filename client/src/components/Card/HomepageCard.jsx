@@ -36,6 +36,7 @@ export default function SimpleCard() {
         <img
           src="https://i.imgur.com/AewRuxP.png"
           style={styles.img}
+          alt="Radventure Logo"
         ></img>
         <CardContent className={classes.root}>
           <Button
