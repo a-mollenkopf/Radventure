@@ -2,19 +2,24 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: { type: String },
-  password: { type: String },
+  username: {
+    type: String,
+    trim: true,
+    required: "Email address is required.",
+    unique: true,
+  },
+  password: { type: String, trim: true, required: "Password is required." },
 
   trips: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Trips",
+      ref: "Trip",
     },
   ],
 });
 
-userSchema.methods.validatePassword = function(pw) {
-    return (this.password === pw);
+userSchema.methods.validatePassword = function (pw) {
+  return this.password === pw;
 };
 
 const User = mongoose.model("User", userSchema);

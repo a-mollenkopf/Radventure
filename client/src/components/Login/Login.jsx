@@ -8,6 +8,27 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+
+const Login = () => {
+  return (
+    <div class="container">
+      <form action="/login" method="post">
+        <div>
+          <label>Email:</label>
+          <input type="text" name="username"/>
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" name="password"/>
+        </div>
+        <div>
+          <input type="submit" value="login"/>
+        </div>
+      </form>
+      <a href="/signup"><button>Sign Up</button></a>
+    </div>
+);
+
 import Container from "@material-ui/core/Container";
 import CardContent from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";

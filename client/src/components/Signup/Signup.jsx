@@ -8,10 +8,6 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
-import Container from "@material-ui/core/Container";
-import CardContent from "@material-ui/core/Card";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
 
 const styles = {
   ButtonsStyle: {
@@ -35,15 +31,12 @@ const styles = {
   },
 };
 
-const Signup = () => {
-    
+const Signup = () => {    
   return (
     <Container maxWidth="sm">
-
       <Card style={styles.Card}>
         <CardContent style={styles.CardContent}>
         <form  action="/signup" method="post" >
-
           <Typography>Email:</Typography>
           <TextField type="text" name="username" />
           <Typography>Password:</Typography>
@@ -56,7 +49,6 @@ const Signup = () => {
           </form>
         </CardContent>
       </Card>
-
     </Container>
   );
 };
