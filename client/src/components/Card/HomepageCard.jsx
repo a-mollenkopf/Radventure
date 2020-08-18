@@ -4,6 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
+import Radventure from "./assets/Radventure.gif";
 
 const useStyles = makeStyles({
   root: {
@@ -34,7 +35,7 @@ export default function SimpleCard() {
     <Container maxWidth="sm">
       <Card className={classes.root}>
         <img
-          src="https://i.imgur.com/AewRuxP.png"
+          src={Radventure}
           style={styles.img}
           alt="Radventure Logo"
         ></img>
