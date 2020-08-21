@@ -15,15 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/a-mollenkopf/Radventure.git"
+    "url": "git+https://github.com/Volodya1989/Radventure.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/a-mollenkopf/Radventure/issues"
+    "url": "https://github.com/Volodya1989/Radventure/issues"
   },
-  "homepage": "https://github.com/a-mollenkopf/Radventure#readme",
+  "homepage": "https://github.com/Volodya1989/Radventure#readme",
   "devDependencies": {
     "concurrently": "^5.3.0"
   },

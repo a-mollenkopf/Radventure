@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const tripSchema = new Schema({
-  // title:{type:String, required:true},
   startStreet: { type: String, trim: true },
   startCity: { type: String, trim: true },
   startState: { type: String, trim: true },
@@ -12,8 +11,8 @@ const tripSchema = new Schema({
   destinationState: { type: String, trim: true },
   destinationPostalCode: { type: String, trim: true },
   time: { type: String, trim: true },
+  tripDate: { type: String, trim: true },
   distance: { type: String, trim: true },
-  mapLink: { type: String, trim: true },
   totalTime: { type: Number },
   additionalStops: { type: Array },
   date: { type: Date, default: Date.now },

@@ -2,6 +2,8 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Container from "@material-ui/core/Container";
 import CardContent from "@material-ui/core/Card";
 import TextField from "@material-ui/core/TextField";
@@ -12,7 +14,7 @@ const styles = {
     background: "#ffc107",
     marginTop: 45,
     marginBottom: 10,
-    marginLeft: 50,
+    marginLeft: 50
   },
   Card: {
     backgroundColor: fade("#D2D6D6", 0.5),
@@ -22,17 +24,16 @@ const styles = {
     paddingTop: 10,
   },
   Typography: {
-    textAlign: "center",
+    textAlign: "center"
   },
   Button: {
-    color: "blue",
-  },
+    color: "blue"
+  }
 };
 
 const Login = () => {
   return (
     <Container maxWidth="sm">
-
       <Card style={styles.Card} >
         <CardContent style={styles.CardContent}>
           <form action="/login" method="post">
@@ -54,7 +55,6 @@ const Login = () => {
           </form>
         </CardContent>
       </Card>
-
     </Container>
   );
 };

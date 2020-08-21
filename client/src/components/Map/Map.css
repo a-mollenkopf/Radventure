@@ -1,5 +1,11 @@
 #map {
-  height: 625px;
+  height: 400px;
+}
+.makeStyles-root-7 > * {
+  max-width: 560px;
+  height: 560px auto;
+  margin: 16px auto;
+  overflow: auto;
 }
 
 .form {
@@ -24,4 +30,7 @@
 
 button {
   margin-left: 20px;
+}
+label{
+  color:white;
 }
