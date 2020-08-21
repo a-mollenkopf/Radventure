@@ -179,7 +179,7 @@ export default function EditTrip() {
         <div id="map"></div>
       </MyPaper>
       <div>
-        <label for="date">expected trip date:</label>
+        <label for="date">Expected Trip Date:</label>
         <br />
         <input
           type="date"

@@ -44,15 +44,15 @@ export default function SimpleCard() {
             href="/search"
             style={styles.ButtonsStyle}
           >
-            Get started without Account
+            Get started
           </Button>
-          <Button
+          {/* <Button
             size="large"
             href="/login"
             style={styles.ButtonsStyle}
           >
             Get started with Account
-          </Button>
+          </Button> */}
         </CardContent>
       </Card>
     </Container>
