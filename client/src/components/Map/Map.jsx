@@ -215,8 +215,8 @@ export default function Map() {
       <MyPaper>
         <div id="map"></div>
       </MyPaper>
-      <div>
-        <label for="date">expected trip date:</label>
+      <div id="dates">
+        <label for="date">Expected Trip Date:</label>
         <br />
         <input
           type="date"

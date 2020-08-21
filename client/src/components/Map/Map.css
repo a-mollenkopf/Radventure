@@ -32,5 +32,9 @@ button {
   margin-left: 20px;
 }
 label{
-  color:white;
+  color:rgb(238, 198, 23);
+  background-color: rgba(31, 28, 28, 0.541);
+  padding:10px 12px;
+
 }
+

@@ -12,6 +12,8 @@ import Container from "@material-ui/core/Container";
 import { CardContent } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "../Appbar/AppBar";
+import "./ViewOneTrip.css";
+
 
 const useStyles = makeStyles({
   root: {
@@ -76,7 +78,7 @@ const ViewOneTrip = () => {
       <Header />
 
       <Container maxWidth="sm">
-        <Card className={classes.root}>
+        <Card className={classes.root} id="OneTripInfo">
           <CardContent>
             <div>
               <div key={oneTripState._id}>
@@ -86,14 +88,14 @@ const ViewOneTrip = () => {
                       Details of Your Trip!
                     </h1>
 
-                    <h2> Start City Information</h2>
+                    <h2> Start City:</h2>
                     <h3>
                       {" "}
                       <strong>Address:</strong> {oneTripState.startStreet}{" "}
                       {oneTripState.startCity}, {oneTripState.startState},{" "}
                       {oneTripState.startPostalCode}
                     </h3>
-                    <h2> Destination City Information</h2>
+                    <h2> Destination City:</h2>
                     <h3>
                       {" "}
                       <strong>Address:</strong> {oneTripState.destinationStreet}{" "}
