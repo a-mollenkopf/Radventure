@@ -8,6 +8,8 @@ import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import "../Map/Map";
+import "./EditTrip.css";
+
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -178,8 +180,9 @@ export default function EditTrip() {
     <div>
       <Header />
       <div className={classes.root}>
-        <MyPaper>
-          <div id="map"></div>
+        <MyPaper >
+          <div id="map" ></div>
+        
         </MyPaper>
         <div>
           <label for="date">Expected Trip Date:</label>
@@ -193,6 +196,7 @@ export default function EditTrip() {
           />
         </div>
         <MyBox>
+        
           <MyFab
             disabled={double}
             variant="extended"

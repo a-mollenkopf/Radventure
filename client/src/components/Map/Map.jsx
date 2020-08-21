@@ -213,8 +213,8 @@ export default function Map() {
   return (
     <div  className={classes.root}>
 
-      <MyPaper>
-        <div id="map"></div>
+      <MyPaper >
+        <div id="map" ></div>
       </MyPaper>
       <div id="dates">
         <label for="date">Expected Trip Date:</label>
