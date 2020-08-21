@@ -10,6 +10,7 @@ import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import "./Map.css";
 
+
 import { set } from "mongoose";
 
 const useStyles = makeStyles((theme) => ({
@@ -117,41 +118,41 @@ export default function Map() {
     }
   };
 
-  const previousTrip = () => {
-    if (
-      document.getElementsByClassName("form-wrap")[0].children[0].children[0]
-        .value
-    ) {
-      localStorage.setItem(
-        "start",
-        document.getElementsByClassName("form-wrap")[0].children[0].children[0]
-          .value
-      );
-      localStorage.setItem(
-        "destination",
-        document.getElementsByClassName("form-wrap")[1].children[0].children[0]
-          .value
-      );
-    }
-  };
+  // const previousTrip = () => {
+  //   if (
+  //     document.getElementsByClassName("form-wrap")[0].children[0].children[0]
+  //       .value
+  //   ) {
+  //     localStorage.setItem(
+  //       "start",
+  //       document.getElementsByClassName("form-wrap")[0].children[0].children[0]
+  //         .value
+  //     );
+  //     localStorage.setItem(
+  //       "destination",
+  //       document.getElementsByClassName("form-wrap")[1].children[0].children[0]
+  //         .value
+  //     );
+  //   }
+  // };
 
   useEffect(() => {
-    document.addEventListener("keyup", (x) => {
-      if (
-        document.getElementsByClassName("form-wrap")[0].children[0].children[0]
-      ) {
-        localStorage.setItem(
-          "start",
-          document.getElementsByClassName("form-wrap")[0].children[0]
-            .children[0].value
-        );
-        localStorage.setItem(
-          "destination",
-          document.getElementsByClassName("form-wrap")[1].children[0]
-            .children[0].value
-        );
-      }
-    });
+    // document.addEventListener("keyup", (x) => {
+    //   if (
+    //     document.getElementsByClassName("form-wrap")[0].children[0].children[0]
+    //   ) {
+    //     localStorage.setItem(
+    //       "start",
+    //       document.getElementsByClassName("form-wrap")[0].children[0]
+    //         .children[0].value
+    //     );
+    //     localStorage.setItem(
+    //       "destination",
+    //       document.getElementsByClassName("form-wrap")[1].children[0]
+    //         .children[0].value
+    //     );
+    //   }
+    // });
 
     const mapquest = window.L.mapquest;
     mapquest.key = process.env.REACT_APP_API_KEY;
@@ -184,18 +185,18 @@ export default function Map() {
       })
       .addTo(map);
 
-    if (startingPoint && destinationPoint) {
-      window.L.mapquest.directions().route({
-        start: startingPoint,
-        end: destinationPoint,
-      });
-      document.getElementsByClassName(
-        "form-wrap"
-      )[0].children[0].children[0].value = startingPoint;
-      document.getElementsByClassName(
-        "form-wrap"
-      )[1].children[0].children[0].value = destinationPoint;
-    }
+    // if (startingPoint && destinationPoint) {
+    //   window.L.mapquest.directions().route({
+    //     start: startingPoint,
+    //     end: destinationPoint,
+    //   });
+    //   document.getElementsByClassName(
+    //     "form-wrap"
+    //   )[0].children[0].children[0].value = startingPoint;
+    //   document.getElementsByClassName(
+    //     "form-wrap"
+    //   )[1].children[0].children[0].value = destinationPoint;
+    // }
 
     mapquest.geocodingControl().addTo(map);
 
@@ -204,13 +205,13 @@ export default function Map() {
     setMap(map);
 
     //Return function
-    return () => {
-      window.removeEventListener("keyup", previousTrip);
-    };
+    // return () => {
+    //   window.removeEventListener("keyup", previousTrip);
+    // };
   }, []);
 
   return (
-    <div className={classes.root}>
+    <div  className={classes.root}>
 
       <MyPaper>
         <div id="map"></div>
