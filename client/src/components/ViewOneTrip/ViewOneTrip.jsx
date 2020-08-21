@@ -11,6 +11,9 @@ import ConfirmModal from "../ConfirmModal/ConfirmModal";
 import Container from "@material-ui/core/Container";
 import { CardContent } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Header from "../Appbar/AppBar";
+import "./ViewOneTrip.css";
+
 
 const useStyles = makeStyles({
   root: {
@@ -36,7 +39,7 @@ const styles = {
     marginLeft: "25px",
     marginTop: "15px",
     textDecoration: "none !important",
-  }
+  },
 };
 
 const ViewOneTrip = () => {
@@ -71,77 +74,84 @@ const ViewOneTrip = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Card className={classes.root}>
-        <CardContent>
-          <div>
-            <div key={oneTripState._id}>
-              <form>
-                <div className="container">
-                  <h1 className="text-center welcome">Details of Your Trip!</h1>
+    <div>
+      <Header />
 
-                  <h2> Start City Information</h2>
-                  <h3>
-                    {" "}
-                    <strong>Address:</strong> {oneTripState.startStreet}{" "}
-                    {oneTripState.startCity}, {oneTripState.startState},{" "}
-                    {oneTripState.startPostalCode}
-                  </h3>
-                  <h2> Destination City Information</h2>
-                  <h3>
-                    {" "}
-                    <strong>Address:</strong> {oneTripState.destinationStreet}{" "}
-                    {oneTripState.destinationCity},{" "}
-                    {oneTripState.destinationState},{" "}
-                    {oneTripState.destinationPostalCode}
-                  </h3>
-                  <h5>-------------------------------</h5>
-                  <h4>Estimated Distance: {oneTripState.distance} mi </h4>
-                  <h4>Estimated Time: {oneTripState.time} </h4>
+      <Container maxWidth="sm">
+        <Card className={classes.root} id="OneTripInfo">
+          <CardContent>
+            <div>
+              <div key={oneTripState._id}>
+                <form>
+                  <div className="container">
+                    <h1 className="text-center welcome">
+                      Details of Your Trip!
+                    </h1>
 
-                  <div>
-                    <Button
-                      id={oneTripState._id}
-                      onClick={() => handleOpen(oneTripState._id)}
-                      size="large"
-                      style={styles.DeleteButtonStyle}
-                    >
-                      Delete
-                    </Button>
+                    <h2> Start City:</h2>
+                    <h3>
+                      {" "}
+                      <strong>Address:</strong> {oneTripState.startStreet}{" "}
+                      {oneTripState.startCity}, {oneTripState.startState},{" "}
+                      {oneTripState.startPostalCode}
+                    </h3>
+                    <h2> Destination City:</h2>
+                    <h3>
+                      {" "}
+                      <strong>Address:</strong> {oneTripState.destinationStreet}{" "}
+                      {oneTripState.destinationCity},{" "}
+                      {oneTripState.destinationState},{" "}
+                      {oneTripState.destinationPostalCode}
+                    </h3>
+                    <h5>-------------------------------</h5>
+                    <h4>Expected Trip Date: {oneTripState.tripDate} </h4>
+                    <h4>Estimated Distance: {oneTripState.distance} mi </h4>
+                    <h4>Estimated Time: {oneTripState.time} </h4>
 
-                    <Link to={`/PastTrips/${oneTripState._id}/edit`}>
+                    <div>
                       <Button
                         id={oneTripState._id}
-                        type="submit"
+                        onClick={() => handleOpen(oneTripState._id)}
                         size="large"
-                        style={styles.UpdateButtonStyle}
+                        style={styles.DeleteButtonStyle}
                       >
-                        Update
+                        Delete
                       </Button>
-                    </Link>
-                    <Button
-                      size="large"
-                      href="/pasttrips"
-                      style={styles.ButtonsStyle}
-                    >
-                      Back to Trips
-                    </Button>
-                    <ToastContainer />
+
+                      <Link to={`/PastTrips/${oneTripState._id}/edit`}>
+                        <Button
+                          id={oneTripState._id}
+                          type="submit"
+                          size="large"
+                          style={styles.UpdateButtonStyle}
+                        >
+                          Update
+                        </Button>
+                      </Link>
+                      <Button
+                        size="large"
+                        href="/pasttrips"
+                        style={styles.ButtonsStyle}
+                      >
+                        Back to Trips
+                      </Button>
+                      <ToastContainer />
+                    </div>
+                    <ConfirmModal
+                      open={open}
+                      handleDelete={handleDelete}
+                      handleClose={handleClose}
+                      handleOpen={handleOpen}
+                      id={activeTrip}
+                    />
                   </div>
-                  <ConfirmModal
-                    open={open}
-                    handleDelete={handleDelete}
-                    handleClose={handleClose}
-                    handleOpen={handleOpen}
-                    id={activeTrip}
-                  />
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
-    </Container>
+          </CardContent>
+        </Card>
+      </Container>
+    </div>
   );
 };
 

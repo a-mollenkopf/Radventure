@@ -173,6 +173,7 @@ tripEx[id] = !tripEx[id]
             <CardHeader
               titleTypographyProps={{ variant: "h4" }}
               title={`${trip.startCity}, ${trip.startState} - ${trip.destinationCity}, ${trip.destinationState}`}
+
             />
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
@@ -206,7 +207,16 @@ tripEx[id] = !tripEx[id]
                   className="distance"
                   style={styles.distance}
                 >
-                  Estimated Distance: {trip.distance} mi{" "}
+                  Expected Trip Date: {trip.tripDate}
+
+                </Typography>
+                <Typography
+                  paragraph
+                  className="distance"
+                  style={styles.distance}
+                >
+                  Estimated Distance: {trip.distance} mi
+
                 </Typography>
               </CardContent>
               <Divider variant="inset" />
