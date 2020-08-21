@@ -8,9 +8,12 @@ import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import "../Map/Map";
+import "./EditTrip.css";
+
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header from "../Appbar/AppBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -174,45 +177,50 @@ export default function EditTrip() {
   };
 
   return (
-    <div className={classes.root}>
-      <MyPaper>
-        <div id="map"></div>
-      </MyPaper>
-      <div>
-        <label for="date">Expected Trip Date:</label>
-        <br />
-        <input
-          type="date"
-          name="date"
-          value={tripDate}
-          tripDate={tripDate}
-          onChange={handleChange}
-        />
+    <div>
+      <Header />
+      <div className={classes.root}>
+        <MyPaper >
+          <div id="map" ></div>
+        
+        </MyPaper>
+        <div>
+          <label for="date">Expected Trip Date:</label>
+          <br />
+          <input
+            type="date"
+            name="date"
+            value={tripDate}
+            tripDate={tripDate}
+            onChange={handleChange}
+          />
+        </div>
+        <MyBox>
+        
+          <MyFab
+            disabled={double}
+            variant="extended"
+            size="medium"
+            aria-label="add"
+            className={classes.margin}
+            onClick={(e) => updateTrip(e)}
+          >
+            <NavigationIcon />
+            Save Updates
+          </MyFab>
+          <MyFab
+            variant="extended"
+            size="medium"
+            aria-label="add"
+            className={classes.margin}
+            href="/PastTrips"
+          >
+            <NavigationIcon />
+            Cancel Updates
+          </MyFab>
+          <ToastContainer />
+        </MyBox>
       </div>
-      <MyBox>
-        <MyFab
-          disabled={double}
-          variant="extended"
-          size="medium"
-          aria-label="add"
-          className={classes.margin}
-          onClick={(e) => updateTrip(e)}
-        >
-          <NavigationIcon />
-          Save Updates
-        </MyFab>
-        <MyFab
-          variant="extended"
-          size="medium"
-          aria-label="add"
-          className={classes.margin}
-          href="/PastTrips"
-        >
-          <NavigationIcon />
-          Cancel Updates
-        </MyFab>
-        <ToastContainer />
-      </MyBox>
     </div>
   );
 }
