@@ -3,5 +3,6 @@
 }
 .specialTrip {
   margin-left: 5%;
-  width: 90%;
+  /* add media query later */
+  width: 50%;
 }

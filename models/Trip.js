@@ -11,6 +11,7 @@ const tripSchema = new Schema({
   destinationState: { type: String, trim: true },
   destinationPostalCode: { type: String, trim: true },
   time: { type: String, trim: true },
+  tripDate: { type: String, trim: true },
   distance: { type: String, trim: true },
   totalTime: { type: Number },
   additionalStops: { type: Array },

@@ -46,6 +46,8 @@ export default function EditTrip() {
   const [oneTripState, setOneTripState] = useState([]);
   const { id } = useParams();
   const [double, setDouble] = useState(false);
+  const [tripDate, setTripDate] = useState(null);
+
   const heandler = () => {
     setTimeout(() => setDouble(false), 5000);
     setDouble(true);
@@ -61,7 +63,7 @@ export default function EditTrip() {
     });
     API.getOneTrip(id).then((res) => {
       setOneTripState(res.data);
-      console.log(res.data);
+      setTripDate(res.data.tripDate);
       window.L.mapquest.directions().route({
         start: `${res.data.startCity} ${res.data.startState}`,
         end: `${res.data.destinationCity} ${res.data.destinationState}`,
@@ -97,12 +99,18 @@ export default function EditTrip() {
     setMap(map);
   }, []);
 
+  const handleChange = (e) => {
+    setTripDate(e.target.value);
+  };
   const updateTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
 
     if (address === undefined) {
       toast.error("You should enter at least two states with cities !");
-      heandler()
+      heandler();
+    } else if (tripDate === null) {
+      toast.error("You should enter your expected trip date !");
+      heandler();
     } else {
       const startStreet = address.locations[0].street;
       const startCity = address.locations[0].adminArea5;
@@ -118,9 +126,10 @@ export default function EditTrip() {
 
       API.getDirection(queryOne, queryTwo)
         .then((response) => {
-          const distance =Math.round( parseInt(response.data.route.distance));
+          const distance = Math.round(parseInt(response.data.route.distance));
           const time = response.data.route.formattedTime;
           setOneTripState(
+            tripDate,
             time,
             distance,
             startStreet,
@@ -134,6 +143,7 @@ export default function EditTrip() {
           );
           axios
             .put(`/api/trips/${id}`, {
+              tripDate,
               time,
               distance,
               startStreet,
@@ -151,12 +161,12 @@ export default function EditTrip() {
               setTimeout(() => window.location.replace("/PastTrips"), 2000);
             })
             .catch((err) => {
-              heandler()
+              heandler();
               console.log("this is error message  " + err);
             });
         })
         .catch((err) => {
-          heandler()
+          heandler();
           console.log("this is error message  " + err);
           toast.error("Sorry, error occurred! Try once more!");
         });
@@ -168,6 +178,17 @@ export default function EditTrip() {
       <MyPaper>
         <div id="map"></div>
       </MyPaper>
+      <div>
+        <label for="date">expected trip date:</label>
+        <br />
+        <input
+          type="date"
+          name="date"
+          value={tripDate}
+          tripDate={tripDate}
+          onChange={handleChange}
+        />
+      </div>
       <MyBox>
         <MyFab
           disabled={double}

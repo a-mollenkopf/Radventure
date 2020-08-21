@@ -10,6 +10,8 @@ import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import "./Map.css";
 
+import { set } from "mongoose";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -46,15 +48,22 @@ export default function Map() {
   const classes = useStyles();
   const { map, setMap } = useContext(MapContext);
   const [double, setDouble] = useState(false);
+  const [tripDate, setTripDate] = useState(null);
+
   const heandler = () => {
     setTimeout(() => setDouble(false), 5000);
     setDouble(true);
   };
+  const handleChange = (e) => {
+    setTripDate(e.target.value);
+  };
   const saveTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
-
     if (address === undefined) {
       toast.error("You should enter at least two states with cities !");
+      heandler();
+    } else if (tripDate === null) {
+      toast.error("You should enter your expected trip date !");
       heandler();
     } else {
       const startStreet = address.locations[0].street;
@@ -74,6 +83,7 @@ export default function Map() {
           const time = response.data.route.formattedTime;
 
           const savedTrip = {
+            tripDate: tripDate,
             time: time,
             distance: distance,
             startCity: startCity,
@@ -91,6 +101,7 @@ export default function Map() {
               toast.success("You trip is successfully saved !");
               setDouble(true);
               setTimeout(() => window.location.replace("/PastTrips"), 2000);
+              setTripDate(null);
             })
             .catch((err) => {
               console.log("this is error message  " + err);
@@ -200,9 +211,20 @@ export default function Map() {
 
   return (
     <div className={classes.root}>
+
       <MyPaper>
         <div id="map"></div>
       </MyPaper>
+      <div>
+        <label for="date">expected trip date:</label>
+        <br />
+        <input
+          type="date"
+          name="date"
+          tripDate={tripDate}
+          onChange={handleChange}
+        />
+      </div>
       <MyBox>
         <div>
           <MyFab
