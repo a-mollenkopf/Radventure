@@ -196,7 +196,6 @@ export default function EditTrip() {
           />
         </div>
         <MyBox>
-        
           <MyFab
             disabled={double}
             variant="extended"
