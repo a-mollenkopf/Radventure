@@ -23,13 +23,20 @@ const styles = {
     background: "#02361C",
     color: "white",
     justifyContent: "center",
+    marginLeft: "25px",
+    marginTop: "15px",
   },
   DeleteButtonStyle: {
     background: "red",
+    marginLeft: "25px",
+    marginTop: "15px",
   },
   UpdateButtonStyle: {
     background: "#FFC107",
-  },
+    marginLeft: "25px",
+    marginTop: "15px",
+    textDecoration: "none !important",
+  }
 };
 
 const ViewOneTrip = () => {
@@ -52,7 +59,7 @@ const ViewOneTrip = () => {
     API.getOneTrip(id).then((res) => {
       setOneTripState(res.data);
     });
-  }, [id]);
+  }, []);
   const handleDelete = (id) => {
     API.deleteTrip(id)
       .then((_) => {

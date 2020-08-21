@@ -43,7 +43,7 @@ const MyFab = styled(Fab)({
 export default function EditTrip() {
   const classes = useStyles();
   const { map, setMap } = useContext(MapContext);
-  const [setOneTripState] = useState([]);
+  const [oneTripState, setOneTripState] = useState([]);
   const { id } = useParams();
   const [double, setDouble] = useState(false);
   const heandler = () => {
@@ -52,7 +52,7 @@ export default function EditTrip() {
   };
   useEffect(() => {
     const mapquest = window.L.mapquest;
-    mapquest.key = "TzrDot8zE5IyvIXUg7RP0ZiSWDnzqxCZ";
+    mapquest.key = process.env.REACT_APP_API_KEY;
     var baseLayer = window.L.mapquest.tileLayer("map");
     var map = window.L.mapquest.map("map", {
       center: [33.753746, -84.38633],
@@ -95,7 +95,7 @@ export default function EditTrip() {
     map.addControl(mapquest.control());
 
     setMap(map);
-  }, [id, setMap, setOneTripState]);
+  }, []);
 
   const updateTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
@@ -119,9 +119,7 @@ export default function EditTrip() {
       API.getDirection(queryOne, queryTwo)
         .then((response) => {
           const distance =Math.round( parseInt(response.data.route.distance));
-          console.log(distance)
           const time = response.data.route.formattedTime;
-          console.log(distance, time);
           setOneTripState(
             time,
             distance,

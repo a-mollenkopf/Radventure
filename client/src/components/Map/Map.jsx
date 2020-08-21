@@ -71,7 +71,6 @@ export default function Map() {
       API.getDirection(queryOne, queryTwo)
         .then((response) => {
           const distance = Math.round(parseInt(response.data.route.distance));
-          console.log(distance);
           const time = response.data.route.formattedTime;
 
           const savedTrip = {
@@ -197,7 +196,7 @@ export default function Map() {
     return () => {
       window.removeEventListener("keyup", previousTrip);
     };
-  }, [setMap]);
+  }, []);
 
   return (
     <div className={classes.root}>
