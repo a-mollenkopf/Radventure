@@ -228,6 +228,7 @@ export default function Map() {
       </div>
       <MyBox>
         <div>
+          
           <MyFab
             disabled={double}
             variant="extended"
