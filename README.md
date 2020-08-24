@@ -23,7 +23,7 @@ This is MERN application  was created for people who want to keep truck of their
 When you go on vacation, you want to be able to enjoy the full experience including a few extra stops on the way(whether that be restaurants, gas stations, or local attractions). This app was made to handle the hard part. You simply type in the location of point A to point B, type in destinations you want to see in between, and just follow the map! It makes it easier to see all the amazing sights and top rated food that you’ve been wanting to see or eat! Our app will also display the total time and distance the trip is going to take from beginning to end. If you decide you want to sign up, you will be able to save your trips once they’re done so you’ll be able to see all of your past trips or upcoming trips. If you don’t want to sign up, that’s okay too! You can still use our app just for that particular trip!
 
 
-[Link to the Deployed Radventure App](https://radvan.herokuapp.com/)
+[Link to the Deployed Radventure App](https://radven.herokuapp.com/)
 
 
 

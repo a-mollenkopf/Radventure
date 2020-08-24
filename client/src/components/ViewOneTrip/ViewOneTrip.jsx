@@ -13,6 +13,9 @@ import { CardContent } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "../Appbar/AppBar";
 import "./ViewOneTrip.css";
+import AddToCalendar from "react-add-to-calendar";
+import "fa-icons";
+import Select from '@material-ui/core/Select';
 
 
 const useStyles = makeStyles({
@@ -44,6 +47,14 @@ const styles = {
 
 const ViewOneTrip = () => {
   const [oneTripState, setOneTripState] = useState([]);
+  const [event, setEvent] = React.useState({
+    title: ``,
+    description: ``,
+    location: "",
+    startTime: ``,
+    endTime: ``,
+  });
+
   const { id } = useParams();
   const [open, setOpen] = React.useState(false);
   const [activeTrip, setActiveTrip] = React.useState(null);
@@ -61,6 +72,15 @@ const ViewOneTrip = () => {
   useEffect(() => {
     API.getOneTrip(id).then((res) => {
       setOneTripState(res.data);
+      setEvent({
+        title: `Trip: ${res.data.startCity} ${res.data.startState} - ${res.data.destinationCity} ${res.data.destinationState}  `,
+        description: `Trip Datails!
+        Expected trip distance: ${res.data.distance} mi
+        Expected trip time: ${res.data.time}`,
+        location: `${res.data.startCity} ${res.data.startState}`,
+        startTime: `${res.data.tripDate}T20:15:00-04:00`,
+        endTime: `${res.data.tripDate}T21:15:00-04:00`,
+      });
     });
   }, []);
   const handleDelete = (id) => {
@@ -72,7 +92,14 @@ const ViewOneTrip = () => {
       })
       .catch((err) => console.log(err));
   };
-
+  let icon = { "calendar-plus-o": "left" };
+  let items = [
+    { google: "Google Calendar" },
+    { apple: "Apple Calendar" },
+    { outlook: "Outlook" },
+    { outlookcom: "Outlook.com" },
+    { yahoo: "Yahoo" },
+  ];
   return (
     <div>
       <Header />
@@ -84,10 +111,15 @@ const ViewOneTrip = () => {
               <div key={oneTripState._id}>
                 <form>
                   <div className="container">
+                    <AddToCalendar
+                      event={event}
+                      displayItemIcons={false}
+                      buttonTemplate={icon}
+                      listItems={items}
+                    />
                     <h1 className="text-center welcome">
                       Details of Your Trip!
                     </h1>
-
                     <h2> Start City:</h2>
                     <h3>
                       {" "}
@@ -107,7 +139,6 @@ const ViewOneTrip = () => {
                     <h4>Expected Trip Date: {oneTripState.tripDate} </h4>
                     <h4>Estimated Distance: {oneTripState.distance} mi </h4>
                     <h4>Estimated Time: {oneTripState.time} </h4>
-
                     <div>
                       <Button
                         id={oneTripState._id}

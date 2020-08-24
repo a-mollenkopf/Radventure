@@ -10,9 +10,6 @@ import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import "./Map.css";
 
-
-import { set } from "mongoose";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -58,6 +55,7 @@ export default function Map() {
   const handleChange = (e) => {
     setTripDate(e.target.value);
   };
+
   const saveTrip = () => {
     const address = map.directionsControl.directions.directionsRequest;
     if (address === undefined) {
@@ -77,7 +75,7 @@ export default function Map() {
       const destinationPostalCode = address.locations[1].postalCode;
       const queryOne = `${startCity},+${startState}`;
       const queryTwo = `${destinationCity},+${destinationState}`;
-
+   
       API.getDirection(queryOne, queryTwo)
         .then((response) => {
           const distance = Math.round(parseInt(response.data.route.distance));
@@ -217,7 +215,7 @@ export default function Map() {
         <div id="map" ></div>
       </MyPaper>
       <div id="dates">
-        <label for="date">Expected Trip Date:</label>
+        <label htmlFor="date">Expected Trip Date:</label>
         <br />
         <input
           type="date"
@@ -228,6 +226,7 @@ export default function Map() {
       </div>
       <MyBox>
         <div>
+          
           <MyFab
             disabled={double}
             variant="extended"

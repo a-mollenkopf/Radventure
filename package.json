@@ -33,10 +33,13 @@
     "connect-flash": "^0.1.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "fa-icons": "^0.2.0",
     "if-env": "^1.0.4",
+    "moment": "^2.27.0",
     "mongoose": "^5.9.28",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
+    "react-add-to-calendar": "^0.1.5",
     "react-toastify": "^6.0.8"
   }
 }
