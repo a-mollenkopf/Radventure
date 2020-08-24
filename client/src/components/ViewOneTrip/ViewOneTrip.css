@@ -1,3 +1,14 @@
 #OneTripInfo{
     margin-top:5%;
 }
+ul{
+    list-style: none;
+}
+.react-add-to-calendar__button{
+    background-color: azure;
+    padding: 7px 7px;
+    border-radius: 5px;
+}
+/* a{
+    color:red;
+} */
