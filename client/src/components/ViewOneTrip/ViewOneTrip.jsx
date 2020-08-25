@@ -15,8 +15,6 @@ import Header from "../Appbar/AppBar";
 import "./ViewOneTrip.css";
 import AddToCalendar from "react-add-to-calendar";
 import "fa-icons";
-import Select from '@material-ui/core/Select';
-
 
 const useStyles = makeStyles({
   root: {
@@ -118,27 +116,39 @@ const ViewOneTrip = () => {
                       listItems={items}
                     />
                     <h1 className="text-center welcome">
-                      Details of Your Trip!
+                      <strong>Details of Your Trip! </strong>
                     </h1>
-                    <h2> Start City:</h2>
-                    <h3>
+                    <h2>
                       {" "}
-                      <strong>Address:</strong> {oneTripState.startStreet}{" "}
-                      {oneTripState.startCity}, {oneTripState.startState},{" "}
-                      {oneTripState.startPostalCode}
+                      <strong>Start City:</strong>{" "}
+                    </h2>
+                    <h3>
+                      {oneTripState.startStreet} {oneTripState.startCity},{" "}
+                      {oneTripState.startState}, {oneTripState.startPostalCode}
                     </h3>
-                    <h2> Destination City:</h2>
-                    <h3>
+                    <h2>
                       {" "}
-                      <strong>Address:</strong> {oneTripState.destinationStreet}{" "}
+                      <strong>Destination City:</strong>{" "}
+                    </h2>
+                    <h3>
+                      {oneTripState.destinationStreet}{" "}
                       {oneTripState.destinationCity},{" "}
                       {oneTripState.destinationState},{" "}
                       {oneTripState.destinationPostalCode}
                     </h3>
-                    <h5>-------------------------------</h5>
-                    <h4>Expected Trip Date: {oneTripState.tripDate} </h4>
-                    <h4>Estimated Distance: {oneTripState.distance} mi </h4>
-                    <h4>Estimated Time: {oneTripState.time} </h4>
+                    <hr />
+                    <h4>
+                      {" "}
+                      <strong>Expected Trip Date: </strong>{" "}
+                      {oneTripState.tripDate}{" "}
+                    </h4>
+                    <h4>
+                      <strong>Estimated Distance: </strong>{" "}
+                      {oneTripState.distance} mi{" "}
+                    </h4>
+                    <h4>
+                      <strong> Estimated Time:</strong> {oneTripState.time}{" "}
+                    </h4>
                     <div>
                       <Button
                         id={oneTripState._id}

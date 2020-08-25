@@ -3,9 +3,29 @@
 }
 .specialTrip {
   margin-left: 25%;
+  margin-bottom: 3%;
   /* add media query later */
   width: 50%;
-  
+}
+.react-add-to-calendar__button:hover {
+  background-color: rgba(0, 195, 255, 0.932);
+}
+.react-add-to-calendar {
+  color: blue;
+  text-decoration: none;
+}
+a:link {
+  color: rgb(24, 95, 248);
+  text-decoration: none;
+}
+a:hover {
+  background-color: rgba(0, 195, 255, 0.932);
+  padding: 5px 5px;
+  border-radius: 5px;
+}
+li {
+  text-decoration: none;
+  margin-top: 7px;
 }
 
 @media all and (max-width: 768px) {
