@@ -45,7 +45,7 @@ const styles = {
   },
   Card: {
     backgroundColor: fade("#D2D6D6", 0.4),
-    marginTop: 10,
+    marginTop: 25,
   },
   Typography: {
     fontSize: 30,
@@ -163,7 +163,7 @@ const PastTrip = () => {
   ];
 
   return tripInfoState.length === 0 ? (
-    <Card className={classes.root}>
+    <Card  className={classes.root}>
       <CardHeader
         title="You have no saved trips yet!"
         subheader="Time to start planning your next trip!"
@@ -174,7 +174,7 @@ const PastTrip = () => {
     </Card>
   ) : (
     <div>
-      <Card className={classes.root}>
+      <Card  className={classes.root}>
         <CardHeader
           titleTypographyProps={{ variant: "h4" }}
           title="Your Saved Trips!"
@@ -183,7 +183,8 @@ const PastTrip = () => {
 
       {tripInfoState.map((trip) => {
         return (
-          <Card
+          <Card 
+          id="tripCard"
             key={trip._id}
             className="container specialTrip"
             style={styles.Card}
