@@ -19,9 +19,9 @@ a:link {
   text-decoration: none;
 }
 a:hover {
-  background-color: rgba(0, 195, 255, 0.932);
-  padding: 5px 5px;
-  border-radius: 5px;
+ color: rgba(13, 5, 126, 0.932);
+  /* padding: 5px 5px;
+  border-radius: 5px; */
 }
 li {
   text-decoration: none;
