@@ -1,5 +1,6 @@
 #OneTripInfo{
     margin-top:5%;
+    margin-bottom:15%;
 }
 ul{
     list-style: none;
@@ -9,6 +10,9 @@ ul{
     padding: 7px 7px;
     border-radius: 5px;
 }
-/* a{
-    color:red;
-} */
+hr{
+    border: none;
+    height: 3px;
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
+}
