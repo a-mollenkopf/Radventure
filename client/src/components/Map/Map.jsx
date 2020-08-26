@@ -100,6 +100,7 @@ export default function Map() {
           const time = response.data.route.formattedTime;
 
           const savedTrip = {
+            notes:notes,
             tripDate: tripDate,
             time: time,
             distance: distance,
