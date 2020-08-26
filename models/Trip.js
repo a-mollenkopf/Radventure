@@ -14,7 +14,7 @@ const tripSchema = new Schema({
   tripDate: { type: String, trim: true },
   distance: { type: String, trim: true },
   totalTime: { type: Number },
-  additionalStops: { type: Array },
+  notes: { type: Array },
   date: { type: Date, default: Date.now },
 });
 
