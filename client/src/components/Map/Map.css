@@ -42,6 +42,17 @@ label{
   /* padding:10px 12px; */
 
 }
+.listOfItems{
+  background-color:rgba(31, 28, 28, 0.541);
+  color:rgb(238, 198, 23);
+  text-align: center;
+  max-width: 300px;
+  border-radius: 5px;
+}
+.deleteItem{
+  color:rgb(91, 91, 117);
+
+}
 
 
 
