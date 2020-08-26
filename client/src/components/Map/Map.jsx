@@ -47,6 +47,8 @@ export default function Map() {
   const { map, setMap } = useContext(MapContext);
   const [double, setDouble] = useState(false);
   const [tripDate, setTripDate] = useState(null);
+  const [notes, setNotes] = useState([]);
+  const [itemName, setItemName] = useState("");
 
   const heandler = () => {
     setTimeout(() => setDouble(false), 5000);
@@ -54,6 +56,22 @@ export default function Map() {
   };
   const handleChange = (e) => {
     setTripDate(e.target.value);
+  };
+  const handleNotesSubmit = (e) => {
+    e.preventDefault();
+    setNotes([
+      ...notes,
+      {
+        id: notes.length,
+        name: itemName,
+      },
+    ]);
+    console.log(notes);
+    setItemName("");
+  };
+  const handleDeleteItem = (itemToDelete) => {
+    const newNotesArray = notes.filter((item) => item.id !== itemToDelete);
+    setNotes([...newNotesArray]);
   };
 
   const saveTrip = () => {
@@ -75,7 +93,7 @@ export default function Map() {
       const destinationPostalCode = address.locations[1].postalCode;
       const queryOne = `${startCity},+${startState}`;
       const queryTwo = `${destinationCity},+${destinationState}`;
-   
+
       API.getDirection(queryOne, queryTwo)
         .then((response) => {
           const distance = Math.round(parseInt(response.data.route.distance));
@@ -209,10 +227,9 @@ export default function Map() {
   }, []);
 
   return (
-    <div  className={classes.root}>
-
-      <MyPaper >
-        <div id="map" ></div>
+    <div className={classes.root}>
+      <MyPaper>
+        <div id="map"></div>
       </MyPaper>
       <div id="dates">
         <label htmlFor="date">Expected Trip Date:</label>
@@ -224,9 +241,32 @@ export default function Map() {
           onChange={handleChange}
         />
       </div>
+      <form onSubmit={handleNotesSubmit}>
+        <div id="notes">
+          <label htmlFor="notes">Enter Things you need for Trip:</label>
+          <br />
+          <input
+            type="text"
+            name="item"
+            value={itemName}
+            onChange={(e) => {
+              setItemName(e.target.value);
+            }}
+          />
+          <button className="btn btn-primary"> Add To Notes</button>
+        </div>
+      </form>
+      <ul>
+        {notes.map((item) => (
+          <div>
+            <li key={item.id}>{item.name} </li>
+            <button onClick={()=>handleDeleteItem(item.id)}>Delete</button>
+          </div>
+        ))}
+      </ul>
+
       <MyBox>
         <div>
-          
           <MyFab
             disabled={double}
             variant="extended"
