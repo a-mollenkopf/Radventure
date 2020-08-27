@@ -100,7 +100,7 @@ export default function Map() {
           const time = response.data.route.formattedTime;
 
           const savedTrip = {
-            notes:notes,
+            notes: notes,
             tripDate: tripDate,
             time: time,
             distance: distance,
@@ -229,56 +229,73 @@ export default function Map() {
 
   return (
     <div className={classes.root}>
-      <MyPaper>
-        <div id="map"></div>
-      </MyPaper>
-      <div id="dates">
-        <label htmlFor="date">Expected Trip Date:</label>
-        <br />
-        <input
-          type="date"
-          name="date"
-          tripDate={tripDate}
-          onChange={handleChange}
-        />
+      <div className="row">
+        <div className="col-sm-12">
+          <MyPaper id="map">
+            <div></div>
+          </MyPaper>
+        </div>
       </div>
-      <form onSubmit={handleNotesSubmit}>
-        <div id="notes">
-          <label htmlFor="notes">Enter Things you need for Trip:</label>
+
+      <div className="row justify-content-center">
+        <div id="tripInfor" className=" col-sm-4">
+          <label for="date">Expected Trip Date:</label>
           <br />
           <input
-            type="text"
-            name="item"
-            value={itemName}
-            onChange={(e) => {
-              setItemName(e.target.value);
-            }}
+            type="date"
+            name="date"
+            value={tripDate}
+            tripDate={tripDate}
+            onChange={handleChange}
           />
-          <button className="btn btn-primary"> Add Item</button>
         </div>
-      </form>
-      <div >
-      <ul>
-        {notes.map((item) => (
-          <div className="listOfItems">
-            <li key={item.id}>
-              {item.name}{" "}
-              <span onClick={() => handleDeleteItem(item.id)}>
-                <svg
-                  className=" deleteItem MuiSvgIcon-root"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"></path>
-                </svg>
-              </span>{" "}
-            </li>
-          </div>
-        ))}
-      </ul>
+        <div className="col-sm-4">
+          <form onSubmit={handleNotesSubmit}>
+            <div id="notes">
+              <label htmlFor="notes">Enter Things you need for Trip:</label>
+              <br />
+              <input
+                type="text"
+                name="item"
+                value={itemName}
+                onChange={(e) => {
+                  setItemName(e.target.value);
+                }}
+              />
+              <button
+                disabled={double}
+                id="deleteBtn"
+                className="btn btn-primary"
+              >
+                {" "}
+                Add Item
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div className="col-sm-4">
+          <ul>
+            {notes.map((item) => (
+              <div className="listOfItems">
+                <li key={item.id}>
+                  {item.name}{" "}
+                  <span onClick={() => handleDeleteItem(item.id)}>
+                    <svg
+                      className=" deleteItem MuiSvgIcon-root"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"></path>
+                    </svg>
+                  </span>{" "}
+                </li>
+              </div>
+            ))}
+          </ul>
+        </div>
       </div>
-    
 
       <MyBox>
         <div>
