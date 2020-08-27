@@ -258,6 +258,7 @@ export default function Map() {
                 type="text"
                 name="item"
                 value={itemName}
+                maxLength="40"
                 onChange={(e) => {
                   setItemName(e.target.value);
                 }}
