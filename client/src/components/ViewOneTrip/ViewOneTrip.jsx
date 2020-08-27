@@ -58,6 +58,27 @@ const ViewOneTrip = () => {
   const [open, setOpen] = React.useState(false);
   const [activeTrip, setActiveTrip] = React.useState(null);
   const classes = useStyles();
+  const [crossedOut, setCrossedOut] = useState(); // extra state variable
+  // const clickHandler = () => {
+
+  //   if (crossedOut == false) {
+  //     setCrossedOut(true);
+  //   } else {
+  //     setCrossedOut(false);
+  //   }
+  //   console.log(crossedOut);
+  // };
+  const clickHandler = (event) => {
+       if (crossedOut == false) {
+      setCrossedOut(true);
+      event.currentTarget.style.textDecorationLine = "line-through";
+
+    } else {
+      setCrossedOut(false);
+      event.currentTarget.style.textDecorationLine = "none";
+
+    }
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -162,7 +183,18 @@ const ViewOneTrip = () => {
 
                         {notes &&
                           notes.map((name, id) => {
-                            return <li key={id._id}>{name.name} </li>;
+                            return (
+                              <div key={id._id}>
+                                <li
+                                  className={crossedOut ? "lineThr" : ""}
+                                  onClick={(e)=>clickHandler(e)}
+                                  key={id._id}
+                                >
+                                  {name.name}{" "}
+                                </li>
+                                {/* <button className="btn btn-primary" > Click</button> */}
+                              </div>
+                            );
                           })}
                       </ul>
                     </div>
