@@ -225,6 +225,7 @@ export default function EditTrip() {
                 type="text"
                 name="item"
                 value={itemName}
+                placeholder="Enter item you need"
                 maxLength="40"
                 onChange={(e) => {
                   setItemName(e.target.value);

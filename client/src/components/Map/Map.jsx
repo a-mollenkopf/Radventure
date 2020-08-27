@@ -256,6 +256,7 @@ export default function Map() {
               <br />
               <input
                 type="text"
+                placeholder="Enter item you need"
                 name="item"
                 value={itemName}
                 maxLength="40"
