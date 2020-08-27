@@ -47,6 +47,8 @@ export default function Map() {
   const { map, setMap } = useContext(MapContext);
   const [double, setDouble] = useState(false);
   const [tripDate, setTripDate] = useState(null);
+  const [notes, setNotes] = useState([]);
+  const [itemName, setItemName] = useState("");
 
   const heandler = () => {
     setTimeout(() => setDouble(false), 5000);
@@ -54,6 +56,22 @@ export default function Map() {
   };
   const handleChange = (e) => {
     setTripDate(e.target.value);
+  };
+  const handleNotesSubmit = (e) => {
+    e.preventDefault();
+    setNotes([
+      ...notes,
+      {
+        id: notes.length,
+        name: itemName,
+      },
+    ]);
+    console.log(notes);
+    setItemName("");
+  };
+  const handleDeleteItem = (itemToDelete) => {
+    const newNotesArray = notes.filter((item) => item.id !== itemToDelete);
+    setNotes([...newNotesArray]);
   };
 
   const saveTrip = () => {
@@ -75,13 +93,14 @@ export default function Map() {
       const destinationPostalCode = address.locations[1].postalCode;
       const queryOne = `${startCity},+${startState}`;
       const queryTwo = `${destinationCity},+${destinationState}`;
-   
+
       API.getDirection(queryOne, queryTwo)
         .then((response) => {
           const distance = Math.round(parseInt(response.data.route.distance));
           const time = response.data.route.formattedTime;
 
           const savedTrip = {
+            notes: notes,
             tripDate: tripDate,
             time: time,
             distance: distance,
@@ -209,24 +228,77 @@ export default function Map() {
   }, []);
 
   return (
-    <div  className={classes.root}>
-
-      <MyPaper >
-        <div id="map" ></div>
-      </MyPaper>
-      <div id="dates">
-        <label htmlFor="date">Expected Trip Date:</label>
-        <br />
-        <input
-          type="date"
-          name="date"
-          tripDate={tripDate}
-          onChange={handleChange}
-        />
+    <div className={classes.root}>
+      <div className="row">
+        <div className="col-sm-12">
+          <MyPaper id="map">
+            <div></div>
+          </MyPaper>
+        </div>
       </div>
+
+      <div className="row justify-content-center">
+        <div id="tripInfor" className=" col-sm-4">
+          <label for="date">Expected Trip Date:</label>
+          <br />
+          <input
+            type="date"
+            name="date"
+            value={tripDate}
+            tripDate={tripDate}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-sm-4">
+          <form onSubmit={handleNotesSubmit}>
+            <div id="notes">
+              <label htmlFor="notes">Enter Things you need for Trip:</label>
+              <br />
+              <input
+                type="text"
+                name="item"
+                value={itemName}
+                onChange={(e) => {
+                  setItemName(e.target.value);
+                }}
+              />
+              <button
+                disabled={double}
+                id="deleteBtn"
+                className="btn btn-primary"
+              >
+                {" "}
+                Add Item
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div className="col-sm-4">
+          <ul>
+            {notes.map((item) => (
+              <div className="listOfItems">
+                <li key={item.id}>
+                  {item.name}{" "}
+                  <span onClick={() => handleDeleteItem(item.id)}>
+                    <svg
+                      className=" deleteItem MuiSvgIcon-root"
+                      focusable="false"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"></path>
+                    </svg>
+                  </span>{" "}
+                </li>
+              </div>
+            ))}
+          </ul>
+        </div>
+      </div>
+
       <MyBox>
         <div>
-          
           <MyFab
             disabled={double}
             variant="extended"

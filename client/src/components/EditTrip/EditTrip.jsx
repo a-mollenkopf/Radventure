@@ -50,10 +50,28 @@ export default function EditTrip() {
   const { id } = useParams();
   const [double, setDouble] = useState(false);
   const [tripDate, setTripDate] = useState(null);
+  const [notes, setNotes] = useState([]);
+  const [itemName, setItemName] = useState("");
 
   const heandler = () => {
     setTimeout(() => setDouble(false), 5000);
     setDouble(true);
+  };
+  const handleNotesSubmit = (e) => {
+    e.preventDefault();
+    setNotes([
+      ...notes,
+      {
+        id: notes.length,
+        name: itemName,
+      },
+    ]);
+    console.log(notes);
+    setItemName("");
+  };
+  const handleDeleteItem = (itemToDelete) => {
+    const newNotesArray = notes.filter((item) => item.id !== itemToDelete);
+    setNotes([...newNotesArray]);
   };
   useEffect(() => {
     const mapquest = window.L.mapquest;
@@ -67,6 +85,8 @@ export default function EditTrip() {
     API.getOneTrip(id).then((res) => {
       setOneTripState(res.data);
       setTripDate(res.data.tripDate);
+      setNotes(res.data.notes);
+      
       window.L.mapquest.directions().route({
         start: `${res.data.startCity} ${res.data.startState}`,
         end: `${res.data.destinationCity} ${res.data.destinationState}`,
@@ -132,6 +152,7 @@ export default function EditTrip() {
           const distance = Math.round(parseInt(response.data.route.distance));
           const time = response.data.route.formattedTime;
           setOneTripState(
+            notes,
             tripDate,
             time,
             distance,
@@ -146,6 +167,7 @@ export default function EditTrip() {
           );
           axios
             .put(`/api/trips/${id}`, {
+              notes,
               tripDate,
               time,
               distance,
@@ -180,21 +202,66 @@ export default function EditTrip() {
     <div>
       <Header />
       <div className={classes.root}>
-        <MyPaper >
-          <div id="map" ></div>
-        
+        <MyPaper>
+          <div id="map"></div>
         </MyPaper>
-        <div>
-          <label for="date">Expected Trip Date:</label>
-          <br />
-          <input
-            type="date"
-            name="date"
-            value={tripDate}
-            tripDate={tripDate}
-            onChange={handleChange}
-          />
+        <div id="tripInfor" className="row justify-content-center">
+          <div className="col-sm-4">
+            <label for="date">Expected Trip Date:</label>
+            <br />
+            <input
+              type="date"
+              name="date"
+              value={tripDate}
+              tripDate={tripDate}
+              onChange={handleChange}
+            />
+          </div>
+          <form className="col-sm-4" onSubmit={handleNotesSubmit}>
+            <div id="notes">
+              <label htmlFor="notes">Enter Things you need for Trip:</label>
+              <br />
+              <input
+                type="text"
+                name="item"
+                value={itemName}
+                onChange={(e) => {
+                  setItemName(e.target.value);
+                }}
+              />
+              <button
+                disabled={double}
+                id="deleteBtn"
+                className="btn btn-primary"
+              >
+                {" "}
+                Add Item
+              </button>
+            </div>
+          </form>
+          <div className="col-sm-4">
+            <ul>
+              {notes.map((item) => (
+                <div className="listOfItems">
+                  <li key={item.id}>
+                    {item.name}{" "}
+                    <span onClick={() => handleDeleteItem(item.id)}>
+                      <svg
+                        className=" deleteItem MuiSvgIcon-root"
+                        focusable="false"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z"></path>
+                      </svg>
+                    </span>{" "}
+                  </li>
+                </div>
+              ))}
+            </ul>
+          </div>
         </div>
+
         <MyBox>
           <MyFab
             disabled={double}

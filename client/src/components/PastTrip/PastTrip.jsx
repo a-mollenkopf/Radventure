@@ -20,6 +20,8 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import PageviewIcon from "@material-ui/icons/Pageview";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import AddToCalendar from "react-add-to-calendar";
+
 import "./PastTrip.css";
 
 // ALERTS IMPORTS
@@ -43,7 +45,7 @@ const styles = {
   },
   Card: {
     backgroundColor: fade("#D2D6D6", 0.4),
-    marginTop: 10,
+    marginTop: 25,
   },
   Typography: {
     fontSize: 30,
@@ -92,9 +94,17 @@ const PastTrip = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
+  const [event, setEvent] = React.useState({
+    title: ``,
+    description: ``,
+    location: "",
+    startTime: ``,
+    endTime: ``,
+  });
+
   const handleExpandClick = (id) => {
-    const tripEx = {...expanded};
-tripEx[id] = !tripEx[id]
+    const tripEx = { ...expanded };
+    tripEx[id] = !tripEx[id];
     setExpanded(tripEx);
   };
 
@@ -110,29 +120,29 @@ tripEx[id] = !tripEx[id]
   useEffect(() => {
     API.getAllTrips().then((res) => {
       setTripInfoState(res.data);
-      res.data.map(el => {
-        const tripEx = {...expanded};
+      res.data.map((el) => {
+        const tripEx = { ...expanded };
         tripEx[el._id] = false;
         setExpanded(tripEx);
-      }) 
+      });
     });
-    document.removeEventListener("keyup", (x) => {
-      if (
-        document.getElementsByClassName("form-wrap")[0].children[0]
-          .children[0]
-      ) {
-        localStorage.setItem(
-          "start",
-          document.getElementsByClassName("form-wrap")[0].children[0]
-            .children[0].value
-        );
-        localStorage.setItem(
-          "destination",
-          document.getElementsByClassName("form-wrap")[1].children[0]
-            .children[0].value
-        );
-      }
-    });
+    // document.removeEventListener("keyup", (x) => {
+    //   if (
+    //     document.getElementsByClassName("form-wrap")[0].children[0]
+    //       .children[0]
+    //   ) {
+    //     localStorage.setItem(
+    //       "start",
+    //       document.getElementsByClassName("form-wrap")[0].children[0]
+    //         .children[0].value
+    //     );
+    //     localStorage.setItem(
+    //       "destination",
+    //       document.getElementsByClassName("form-wrap")[1].children[0]
+    //         .children[0].value
+    //     );
+    //   }
+    // });
   }, []);
   const handleDelete = (id) => {
     API.deleteTrip(id)
@@ -144,6 +154,14 @@ tripEx[id] = !tripEx[id]
       .catch((err) => console.log(err));
   };
 
+  // let icon = { "calendar-plus-o": "left" };
+  let items = [
+    { google: "Google Calendar" },
+    { apple: "Apple Calendar" },
+    // { outlook: "Outlook" },
+    // { outlookcom: "Outlook.com" },
+    // { yahoo: "Yahoo" },
+  ];
   return tripInfoState.length === 0 ? (
     <Card className={classes.root}>
       <CardHeader
@@ -166,33 +184,45 @@ tripEx[id] = !tripEx[id]
       {tripInfoState.map((trip) => {
         return (
           <Card
+            id="tripCard"
             key={trip._id}
             className="container specialTrip"
             style={styles.Card}
           >
+            {/* Items Needed: ${trip.notes.map((item) => (
+                          <div className="listOfItems">
+                            <h6 key={item.id}>{item.name}</h6>
+                          </div>
+                        ))} */}
+            <AddToCalendar
+              event={{
+                title: `Trip: ${trip.startCity} ${trip.startState} - ${trip.destinationCity} ${trip.destinationState}  `,
+                description: `Trip Datails!
+                        Expected trip distance: ${trip.distance} mi
+                        Expected trip time: ${trip.time}`,
+                location: `${trip.startCity} ${trip.startState}`,
+                startTime: `${trip.tripDate}T20:15:00-04:00`,
+                endTime: `${trip.tripDate}T21:15:00-04:00`,
+              }}
+              displayItemIcons={false}
+              listItems={items}
+            />
             <CardHeader
               titleTypographyProps={{ variant: "h4" }}
               title={`${trip.startCity}, ${trip.startState} - ${trip.destinationCity}, ${trip.destinationState}`}
-
             />
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
-                <FavoriteIcon
-                  style={styles.FavoriteIcon}
-                  fontSize="large"
-                />
+                <FavoriteIcon style={styles.FavoriteIcon} fontSize="large" />
               </IconButton>
               <IconButton aria-label="share">
-                <ShareIcon
-                  style={styles.ShareIcon}
-                  fontSize="large"
-                />
+                <ShareIcon style={styles.ShareIcon} fontSize="large" />
               </IconButton>
               <IconButton
                 className={clsx(classes.expand, {
                   [classes.expandOpen]: expanded[trip._id],
                 })}
-                onClick= {() => handleExpandClick(trip._id)}
+                onClick={() => handleExpandClick(trip._id)}
                 aria-expanded={expanded[trip._id]}
                 aria-label="show more"
               >
@@ -207,24 +237,19 @@ tripEx[id] = !tripEx[id]
                   className="distance"
                   style={styles.distance}
                 >
-                  Expected Trip Date: {trip.tripDate}
-
+                  <strong>Expected Trip Date: </strong> {trip.tripDate}
                 </Typography>
                 <Typography
                   paragraph
                   className="distance"
                   style={styles.distance}
                 >
-                  Estimated Distance: {trip.distance} mi
-
+                  <strong>Estimated Distance: </strong> {trip.distance} mi
                 </Typography>
               </CardContent>
               <Divider variant="inset" />
               <CardActions disableSpacing>
-                <IconButton
-                  id={trip._id}
-                  onClick={() => handleOpen(trip._id)}
-                >
+                <IconButton id={trip._id} onClick={() => handleOpen(trip._id)}>
                   {" "}
                   <DeleteForeverIcon />
                 </IconButton>
@@ -249,7 +274,3 @@ tripEx[id] = !tripEx[id]
 };
 
 export default PastTrip;
-
-
-
-

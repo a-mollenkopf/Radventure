@@ -1,5 +1,6 @@
 #map {
-  height: 400px;
+  height: 600px;
+  width:100%
 }
 @media all and (max-width: 768px) {
   #map {
@@ -7,8 +8,8 @@
   }
 }
 .makeStyles-root-7 > * {
-  max-width: 560px;
-  /* height: 560px auto; */
+  max-width:90%;
+  height: 560px auto;
   margin: 16px auto;
   overflow: auto;
 }
@@ -42,6 +43,20 @@ label{
   /* padding:10px 12px; */
 
 }
+.listOfItems{
+  background-color:rgba(31, 28, 28, 0.541);
+  color:rgb(238, 198, 23);
+  text-align: center;
+  max-width: 300px;
+  border-radius: 5px;
+}
+.deleteItem{
+  color:rgb(91, 91, 117);
+
+}
+/* #tripInfor{
+  padding-left:1px;
+} */
 
 
 
