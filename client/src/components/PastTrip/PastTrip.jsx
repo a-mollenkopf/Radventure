@@ -93,6 +93,7 @@ const PastTrip = () => {
   const [activeTrip, setActiveTrip] = React.useState(null);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
   const [event, setEvent] = React.useState({
     title: ``,
     description: ``,
@@ -161,9 +162,8 @@ const PastTrip = () => {
     // { outlookcom: "Outlook.com" },
     // { yahoo: "Yahoo" },
   ];
-
   return tripInfoState.length === 0 ? (
-    <Card  className={classes.root}>
+    <Card className={classes.root}>
       <CardHeader
         title="You have no saved trips yet!"
         subheader="Time to start planning your next trip!"
@@ -174,7 +174,7 @@ const PastTrip = () => {
     </Card>
   ) : (
     <div>
-      <Card  className={classes.root}>
+      <Card className={classes.root}>
         <CardHeader
           titleTypographyProps={{ variant: "h4" }}
           title="Your Saved Trips!"
@@ -183,12 +183,17 @@ const PastTrip = () => {
 
       {tripInfoState.map((trip) => {
         return (
-          <Card 
-          id="tripCard"
+          <Card
+            id="tripCard"
             key={trip._id}
             className="container specialTrip"
             style={styles.Card}
           >
+            {/* Items Needed: ${trip.notes.map((item) => (
+                          <div className="listOfItems">
+                            <h6 key={item.id}>{item.name}</h6>
+                          </div>
+                        ))} */}
             <AddToCalendar
               event={{
                 title: `Trip: ${trip.startCity} ${trip.startState} - ${trip.destinationCity} ${trip.destinationState}  `,
@@ -200,7 +205,6 @@ const PastTrip = () => {
                 endTime: `${trip.tripDate}T21:15:00-04:00`,
               }}
               displayItemIcons={false}
-              // buttonTemplate={icon}
               listItems={items}
             />
             <CardHeader

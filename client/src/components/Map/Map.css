@@ -1,5 +1,6 @@
 #map {
-  height: 400px;
+  height: 600px;
+  width:100%
 }
 @media all and (max-width: 768px) {
   #map {
@@ -7,8 +8,8 @@
   }
 }
 .makeStyles-root-7 > * {
-  max-width: 560px;
-  /* height: 560px auto; */
+  max-width:90%;
+  height: 560px auto;
   margin: 16px auto;
   overflow: auto;
 }
@@ -53,6 +54,9 @@ label{
   color:rgb(91, 91, 117);
 
 }
+/* #tripInfor{
+  padding-left:1px;
+} */
 
 
 

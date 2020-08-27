@@ -9,3 +9,25 @@
     margin: 16px auto;
     overflow: auto;
   }
+  #notes{
+    margin-left:100px;
+  
+  }
+  #deleteBtn{
+    margin-top:10px;
+  }
+ 
+
+  @media all and (max-width: 768px) {
+    #notes{
+      margin-left:1px;
+      margin-top:10px;
+      margin-bottom:10px;
+    }
+    /* #tripInfor{
+      margin-left:5%
+    } */
+    #deleteBtn{
+      margin-top:10px;
+    }
+  }
