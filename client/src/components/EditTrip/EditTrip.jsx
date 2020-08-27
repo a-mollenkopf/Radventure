@@ -86,7 +86,7 @@ export default function EditTrip() {
       setOneTripState(res.data);
       setTripDate(res.data.tripDate);
       setNotes(res.data.notes);
-      
+
       window.L.mapquest.directions().route({
         start: `${res.data.startCity} ${res.data.startState}`,
         end: `${res.data.destinationCity} ${res.data.destinationState}`,
@@ -225,6 +225,7 @@ export default function EditTrip() {
                 type="text"
                 name="item"
                 value={itemName}
+                maxLength="40"
                 onChange={(e) => {
                   setItemName(e.target.value);
                 }}
