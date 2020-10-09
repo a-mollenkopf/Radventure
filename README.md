@@ -41,7 +41,7 @@ This app was created by  Alexis Mollenkopf, Chad DuBay, James Holding and Volody
 
 ## MIT License 
 
-Copyright (c) [2020] [Volodymyr Petrytsya]
+Copyright (c) [2020] [James Holding]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
